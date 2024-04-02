@@ -7,8 +7,10 @@ public interface IServices <T>{
 
     public void modifier(T t) throws SQLException;
 
-    public void supprimer(int id) throws SQLException;
+    public void supprimer(T t) throws SQLException;
 
     public List<T> afficher() throws SQLException;
+
+    T afficher(T t) throws  SQLException;
 
 }
