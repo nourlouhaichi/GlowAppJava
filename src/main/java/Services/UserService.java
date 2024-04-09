@@ -57,6 +57,11 @@ public class UserService implements IServices<User> {
     }
 
     @Override
+    public void supprimer(int id) throws SQLException {
+
+    }
+
+    @Override
     public List<User> afficher() throws SQLException {
         String sql = "SELECT * FROM user";
         Statement statement = connection.createStatement();
