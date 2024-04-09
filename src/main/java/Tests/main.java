@@ -38,7 +38,7 @@ public class main extends Object {
             us.modifier(user);
             System.out.println(us.afficher());
             System.out.println(us.afficher(user));
-            //us.supprimer(user);
+            us.supprimer(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

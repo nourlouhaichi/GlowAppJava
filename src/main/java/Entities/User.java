@@ -78,8 +78,9 @@ public class User {
     }
 
     public void setPassword(String password) {
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        this.password = hashedPassword;
+        //String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        //this.password = hashedPassword;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt(13));
         //this.password = password;
     }
 

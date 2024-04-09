@@ -1,7 +1,10 @@
 package Controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,6 +18,8 @@ import java.sql.*;
 import java.util.ResourceBundle;
 import java.net.URL;
 import java.io.File;
+
+import javafx.stage.StageStyle;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class loginController implements Initializable {
@@ -43,7 +48,7 @@ public class loginController implements Initializable {
     }
 
     public void loginButtonOnAction(ActionEvent event) {
-        if (emailTextField.getText().isBlank() == false && enterPasswordTextField.getText().isBlank() == false) {
+        if (!emailTextField.getText().isBlank() && !enterPasswordTextField.getText().isBlank()) {
             validateLogin();
         } else {
             loginMessageLabel.setText("Enter email and password!");
@@ -53,6 +58,10 @@ public class loginController implements Initializable {
     public void exitButtonAction(ActionEvent event) {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void registerButtonOnAction(ActionEvent event) {
+        createAccountForm();
     }
 
     public void validateLogin() {
@@ -75,12 +84,21 @@ public class loginController implements Initializable {
                 loginMessageLabel.setText("User not found!");
             }
 
-            /*resultSet.close();
-            statement.close();
-            connectDB.close();*/
-
         } catch (SQLException e) {
             // Handle database errors
+            e.printStackTrace();
+        }
+    }
+
+    public void createAccountForm() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/registerGUI.fxml"));
+            Stage registerStage = new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            registerStage.setScene(new Scene(root,550,600));
+            registerStage.show();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
