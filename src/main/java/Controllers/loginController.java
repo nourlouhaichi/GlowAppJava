@@ -12,19 +12,22 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.StageStyle;
 
-import Utils.MyDatabase;
 import java.sql.*;
 import java.util.ResourceBundle;
 import java.net.URL;
 import java.io.File;
-
-import javafx.stage.StageStyle;
+import Utils.MyDatabase;
 import org.mindrot.jbcrypt.BCrypt;
+import Services.Session;
+
 
 public class loginController implements Initializable {
     @FXML
     private Button exitButton;
+    @FXML
+    private Button loginButton;
     @FXML
     private Label loginMessageLabel;
     @FXML
@@ -35,6 +38,7 @@ public class loginController implements Initializable {
     private TextField emailTextField;
     @FXML
     private TextField enterPasswordTextField;
+    private Session session;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,6 +49,8 @@ public class loginController implements Initializable {
         File logoFile = new File("images/logoglowapp.png");
         Image logoImage = new Image(logoFile.toURI().toString());
         logoImageView.setImage(logoImage);
+
+        session = Session.getInstance();
     }
 
     public void loginButtonOnAction(ActionEvent event) {
@@ -69,7 +75,7 @@ public class loginController implements Initializable {
             MyDatabase bd = MyDatabase.getInstance();
             Connection connectDB = bd.getConnection();
 
-            String query = "SELECT password FROM User WHERE email = ?";
+            String query = "SELECT * FROM User WHERE email = ?";
             PreparedStatement statement = connectDB.prepareStatement(query);
             statement.setString(1, emailTextField.getText());
             ResultSet resultSet = statement.executeQuery();
@@ -77,6 +83,24 @@ public class loginController implements Initializable {
                 String hashedPassword = resultSet.getString("password");
                 if (BCrypt.checkpw(enterPasswordTextField.getText(), hashedPassword)) {
                     loginMessageLabel.setText("Welcome!");
+
+                    session.getUserSession().put("cin", resultSet.getString("cin"));
+                    session.getUserSession().put("email",resultSet.getString("email"));
+                    session.getUserSession().put("roles", resultSet.getString("roles"));
+                    session.getUserSession().put("password", resultSet.getString("password"));
+                    session.getUserSession().put("lastname", resultSet.getString("lastname"));
+                    session.getUserSession().put("firstname", resultSet.getString("firstname"));
+                    session.getUserSession().put("gender", resultSet.getString("gender"));
+                    session.getUserSession().put("datebirth",  resultSet.getDate("datebirth"));
+                    session.getUserSession().put("phone", resultSet.getString("phone"));
+                    session.getUserSession().put("created_at", resultSet.getTimestamp("created_at"));
+                    session.getUserSession().put("is_banned", resultSet.getBoolean("is_banned"));
+                    session.getUserSession().put("profile_picture", resultSet.getString("profile_picture"));
+                    session.getUserSession().put("is_verified", resultSet.getBoolean("is_verified"));
+                    session.getUserSession().put("auth_code", resultSet.getString("auth_code"));
+
+                    loadHomeScene();
+
                 } else {
                     loginMessageLabel.setText("Invalid Password!");
                 }
@@ -97,6 +121,21 @@ public class loginController implements Initializable {
             registerStage.initStyle(StageStyle.UNDECORATED);
             registerStage.setScene(new Scene(root,550,600));
             registerStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadHomeScene() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/homeGUI.fxml"));
+            Stage homeStage = new Stage();
+            homeStage.initStyle(StageStyle.UNDECORATED);
+            homeStage.setScene(new Scene(root,1024,576));
+            homeStage.show();
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.close();
 
         } catch (Exception e) {
             e.printStackTrace();
