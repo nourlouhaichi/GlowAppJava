@@ -1,7 +1,6 @@
 package Entities;
 import java.sql.Date;
 import java.sql.Timestamp;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class User {
     private String email;
@@ -23,7 +22,7 @@ public class User {
     public User(String email, String roles, String password, String cin, String lastname, String firstname, String gender, Date datebirth, String phone, Timestamp created_at, Boolean is_banned, String profile_picture, Boolean is_verified, String auth_code) {
         this.email = email;
         this.roles = roles;
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        this.password = password;
         this.cin = cin;
         this.lastname = lastname;
         this.firstname = firstname;
@@ -78,9 +77,8 @@ public class User {
     }
 
     public void setPassword(String password) {
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        this.password = hashedPassword;
-        //this.password = password;
+
+        this.password = password;
     }
 
     public String getCin() {

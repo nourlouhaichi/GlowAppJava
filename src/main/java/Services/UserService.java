@@ -1,5 +1,6 @@
 package Services;
 
+import Entities.Publication;
 import Entities.User;
 import Utils.MyDatabase;
 import java.sql.*;
@@ -58,6 +59,11 @@ public class UserService implements IServices<User> {
 
     @Override
     public void supprimer(int id) throws SQLException {
+
+    }
+
+    @Override
+    public void supprimer(Publication publication) throws SQLException {
 
     }
 
