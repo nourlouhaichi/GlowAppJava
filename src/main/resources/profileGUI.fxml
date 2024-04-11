@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.profileController">
+   <children>
+      <SplitPane dividerPositions="0.29584168336673344" focusTraversable="true" prefHeight="600.0" prefWidth="800.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="264.0" style="-fx-background-color: #ffb524;">
+               <children>
+                  <VBox layoutX="17.0" layoutY="20.0" prefHeight="234.0" prefWidth="207.0" spacing="10.0">
+                     <children>
+                        <Pane prefHeight="234.0" prefWidth="197.0" style="-fx-padding: 10px; -fx-border-radius: 5px;">
+                           <children>
+                              <VBox prefHeight="409.0" prefWidth="200.0" spacing="10.0">
+                                 <ImageView fx:id="profilePicture" fitHeight="209.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../../../images/Mprofile.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="197.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="John Doe" textAlignment="CENTER">
+                                    <font>
+                                       <Font name="Arial Rounded MT Bold" size="24.0" />
+                                    </font>
+                                 </Label>
+                                 <Label fx:id="roleLabel" alignment="CENTER" prefHeight="27.0" prefWidth="199.0" style="-fx-font-size: 14px;" text="Full Stack Developer" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                       <Font name="Arial Rounded MT Bold" size="18.0" />
+                                    </font></Label>
+                                 <Label fx:id="createdAtLabel" alignment="CENTER" prefHeight="20.0" prefWidth="210.0" style="-fx-font-size: 14px;" text="Bay Area, San Francisco, CA" textFill="#615d57">
+                                    <font>
+                                       <Font name="Arial Rounded MT Bold" size="14.0" />
+                                    </font></Label>
+                                 <HBox alignment="CENTER" spacing="10.0" />
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="564.0" prefWidth="559.0">
+               <children>
+                  <VBox layoutX="17.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Pane style="-fx-background-color: #f4f4f4; -fx-padding: 10px; -fx-border-radius: 5px;" />
+                        <Pane prefHeight="97.0" prefWidth="100.0" style="-fx-background-color: #f4f4f4; -fx-padding: 10px; -fx-border-radius: 5px;" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="339.0" layoutY="299.0" prefHeight="302.0" prefWidth="213.0" spacing="10.0">
+                     <Label text="Web Design" />
+                     <ProgressBar prefWidth="200.0" progress="0.8" />
+                     <Label text="Website Markup" />
+                     <ProgressBar prefWidth="200.0" progress="0.72" />
+                     <Label text="One Page" />
+                     <ProgressBar prefWidth="200.0" progress="0.89" />
+                     <Label text="Mobile Template" />
+                     <ProgressBar prefWidth="200.0" progress="0.55" style="-fx-background-color: #ffb524;" />
+                     <Label text="Backend API" />
+                     <ProgressBar prefWidth="200.0" progress="0.66" />
+                  </VBox>
+                  <VBox layoutX="24.0" layoutY="39.0" prefHeight="426.0" prefWidth="255.0" spacing="10.0">
+                     <Label text="Lastname">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font></Label>
+                     <TextField fx:id="lastnameTextField" style="-fx-border-color: #ffb524;">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font></TextField>
+                     <Label text="Firstname">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font></Label>
+                     <TextField fx:id="firstnameTextField" style="-fx-border-color: #ffb524;">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font></TextField>
+                     <Label text="Email">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font></Label>
+                     <TextField fx:id="emailTextField" style="-fx-border-color: #ffb524;">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font></TextField>
+                     <Label text="phone">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font></Label>
+                     <TextField fx:id="phoneTextField" style="-fx-border-color: #ffb524;">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font></TextField>
+                     <Label text="New Password">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font></Label>
+                     <PasswordField fx:id="newPasswordTextField" promptText="new password" style="-fx-border-color: #ffb524;" />
+                     <Label text="Confirm Password">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font>
+                     </Label>
+                     <PasswordField fx:id="confirmPasswordTextField1" promptText="confirm password" style="-fx-border-color: #ffb524;" />
+                  </VBox>
+                  <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="470.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #ffb524; -fx-text-fill: white;" text="Cancel" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="469.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #81c408; -fx-text-fill: white;" text="Save Changes" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
