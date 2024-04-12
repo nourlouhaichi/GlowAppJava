@@ -84,11 +84,10 @@ public class UserService implements IServices<User> {
         return users;
     }
 
-    @Override
-    public User afficher(User user) throws SQLException {
+    public User getUser(String cin) throws SQLException {
         String sql = "SELECT * FROM user WHERE `cin` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, user.getCin());
+        preparedStatement.setString(1, cin);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
@@ -106,11 +105,33 @@ public class UserService implements IServices<User> {
             boolean is_verified = resultSet.getBoolean("is_verified");
             String auth_code = resultSet.getString("auth_code");
 
-            return new User(email, roles, password, user.getCin(), lastname, firstname, gender, datebirth, phone, created_at, is_banned, profile_picture, is_verified, auth_code);
+            return new User(email, roles, password, cin, lastname, firstname, gender, datebirth, phone, created_at, is_banned, profile_picture, is_verified, auth_code);
         } else {
             // Handle the case when no matching record is found
             return null;
         }
 
+    }
+
+    public void modifierSansMdp(User user) throws SQLException {
+        String sql = "UPDATE `user` SET `email`= ?,`roles`=?,`cin`=?,`lastname`=?,`firstname`=?,`gender`=?,`datebirth`=?,`phone`=?,`created_at`=?,`is_banned`=?,`profile_picture`=?,`is_verified`=?,`auth_code`=? WHERE cin = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, user.getEmail());
+        preparedStatement.setString(2, user.getRoles());
+        preparedStatement.setString(3, user.getCin());
+        preparedStatement.setString(4, user.getLastname());
+        preparedStatement.setString(5, user.getFirstname());
+        preparedStatement.setString(6, user.getGender());
+        preparedStatement.setDate(7, user.getDatebirth());
+        preparedStatement.setString(8, user.getPhone());
+        preparedStatement.setTimestamp(9, user.getCreated_at());
+        preparedStatement.setBoolean(10, user.getIs_banned());
+        preparedStatement.setString(11, user.getProfile_picture());
+        preparedStatement.setBoolean(12, user.getIs_verified());
+        preparedStatement.setString(13, user.getAuth_code());
+        preparedStatement.setString(14, user.getCin());
+
+        preparedStatement.executeUpdate();
     }
 }

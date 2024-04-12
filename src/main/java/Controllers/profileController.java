@@ -1,8 +1,12 @@
 package Controllers;
 
+import Services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,10 +15,17 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import Services.Session;
 import javafx.stage.Stage;
+import Entities.User;
+import javax.swing.*;
+
+import javafx.stage.StageStyle;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class profileController implements Initializable {
 
@@ -23,11 +34,17 @@ public class profileController implements Initializable {
     @FXML
     private Button cancelButton;
     @FXML
+    private Button modifyButton;
+    @FXML
     private Label usernameLabel;
     @FXML
     private Label roleLabel;
     @FXML
     private Label createdAtLabel;
+    @FXML
+    private Label errorLabel;
+    @FXML
+    private TextField cinTextField;
     @FXML
     private TextField lastnameTextField;
     @FXML
@@ -36,6 +53,10 @@ public class profileController implements Initializable {
     private TextField emailTextField;
     @FXML
     private TextField phoneTextField;
+    @FXML
+    private TextField newPasswordTextField;
+    @FXML
+    private TextField confirmPasswordTextField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,6 +68,10 @@ public class profileController implements Initializable {
         Map<String, Object> userSession = session.getUserSession();
         usernameLabel.setText(userSession.get("firstname") + " " + userSession.get("lastname"));
 
+        cinTextField.setText(userSession.get("cin").toString());
+        cinTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
+        cinTextField.setDisable(true);
+
         lastnameTextField.setText(userSession.get("lastname").toString());
         lastnameTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
 
@@ -54,7 +79,7 @@ public class profileController implements Initializable {
         firstnameTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
 
         roleLabel.setText(userSession.get("roles").toString());
-        roleLabel.setStyle("-fx-text-fill: #ffffff");
+        roleLabel.setStyle("-fx-text-fill: #ffb524");
 
         createdAtLabel.setText(userSession.get("created_at").toString());
 
@@ -69,5 +94,85 @@ public class profileController implements Initializable {
     public void cancelButtonAction(ActionEvent event) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void modifyButtonAction(ActionEvent event) {
+
+        if (!lastnameTextField.getText().isBlank()
+                && !firstnameTextField.getText().isBlank()
+                && !emailTextField.getText().isBlank()
+                && !phoneTextField.getText().isBlank()) {
+
+            if (newPasswordTextField.getText().isBlank() && confirmPasswordTextField.getText().isBlank()) {
+                userUpdate();
+                JOptionPane.showMessageDialog(null, "Profile updated!", "Success", JOptionPane.PLAIN_MESSAGE);
+                Stage stage = (Stage) modifyButton.getScene().getWindow();
+                stage.close();
+            }
+            else {
+                if (Objects.equals(newPasswordTextField.getText(), confirmPasswordTextField.getText()))  {
+                    userUpdatePassword();
+                    JOptionPane.showMessageDialog(null, "Profile updated!", "Success", JOptionPane.PLAIN_MESSAGE);
+                    Stage stage = (Stage) modifyButton.getScene().getWindow();
+                    stage.close();
+                }
+                else {
+                    errorLabel.setText("Passwords are not the same!");
+                }
+            }
+        }
+        else {
+            errorLabel.setText("Enter all fields!");
+        }
+    }
+
+    public void userUpdate() {
+        UserService us = new UserService();
+        Session session = Session.getInstance();
+
+        try {
+            User user = us.getUser(cinTextField.getText());
+            user.setLastname(lastnameTextField.getText());
+            user.setFirstname(firstnameTextField.getText());
+            user.setEmail(emailTextField.getText());
+            user.setPhone(phoneTextField.getText());
+
+            session.getUserSession().put("lastname", lastnameTextField.getText());
+            session.getUserSession().put("firstname", firstnameTextField.getText());
+            session.getUserSession().put("email", emailTextField.getText());
+            session.getUserSession().put("phone", phoneTextField.getText());
+
+            us.modifierSansMdp(user);
+
+        } catch (SQLException e) {
+            // Handle database errors
+            e.printStackTrace();
+        }
+    }
+
+    public void userUpdatePassword() {
+        UserService us = new UserService();
+        Session session = Session.getInstance();
+
+        try {
+            User user = us.getUser(cinTextField.getText());
+            user.setLastname(lastnameTextField.getText());
+            user.setFirstname(firstnameTextField.getText());
+            user.setEmail(emailTextField.getText());
+            user.setPhone(phoneTextField.getText());
+            user.setPassword(BCrypt.hashpw(newPasswordTextField.getText(), BCrypt.gensalt()));
+
+            session.getUserSession().put("lastname", lastnameTextField.getText());
+            session.getUserSession().put("firstname", firstnameTextField.getText());
+            session.getUserSession().put("email", emailTextField.getText());
+            session.getUserSession().put("phone", phoneTextField.getText());
+            session.getUserSession().put("password", BCrypt.hashpw(newPasswordTextField.getText(), BCrypt.gensalt()));
+
+            us.modifier(user);
+
+        } catch (SQLException e) {
+            // Handle database errors
+            e.printStackTrace();
+        }
     }
 }

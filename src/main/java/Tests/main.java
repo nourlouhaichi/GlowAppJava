@@ -37,7 +37,6 @@ public class main extends Object {
             user.setEmail("foulen@gmail.com");
             us.modifier(user);
             System.out.println(us.afficher());
-            System.out.println(us.afficher(user));
             us.supprimer(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);

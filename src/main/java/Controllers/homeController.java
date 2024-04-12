@@ -31,7 +31,7 @@ public class homeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Session session = Session.getInstance();
+        /*Session session = Session.getInstance();
         Map<String, Object> userSession = session.getUserSession();
         StringBuilder userDetailsText = new StringBuilder();
         for (Map.Entry<String, Object> entry : userSession.entrySet()) {
@@ -40,7 +40,7 @@ public class homeController implements Initializable {
             userDetailsText.append(key).append(": ").append(value).append(" ");
         }
 
-        userLabel.setText(userDetailsText.toString());
+        userLabel.setText(userDetailsText.toString());*/
 
         File homeFile = new File("images/home.png");
         Image homeImage = new Image(homeFile.toURI().toString());
@@ -58,6 +58,7 @@ public class homeController implements Initializable {
     }
 
     public void profileButtonOnAction(ActionEvent event) {
+
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/profileGUI.fxml"));
             Stage profileStage = new Stage();

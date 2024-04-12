@@ -18,7 +18,7 @@
    <children>
       <SplitPane dividerPositions="0.29584168336673344" focusTraversable="true" prefHeight="600.0" prefWidth="800.0">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="264.0" style="-fx-background-color: #ffb524;">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="264.0" style="-fx-background-color: #e9e9e9;">
                <children>
                   <VBox layoutX="17.0" layoutY="20.0" prefHeight="234.0" prefWidth="207.0" spacing="10.0">
                      <children>
@@ -35,7 +35,7 @@
                                        <Font name="Arial Rounded MT Bold" size="24.0" />
                                     </font>
                                  </Label>
-                                 <Label fx:id="roleLabel" alignment="CENTER" prefHeight="27.0" prefWidth="199.0" style="-fx-font-size: 14px;" text="Full Stack Developer" textAlignment="CENTER" textFill="WHITE">
+                                 <Label fx:id="roleLabel" alignment="CENTER" prefHeight="27.0" prefWidth="199.0" style="-fx-font-size: 14px;" text="Full Stack Developer" textAlignment="CENTER" textFill="#ffb524">
                                     <font>
                                        <Font name="Arial Rounded MT Bold" size="18.0" />
                                     </font></Label>
@@ -71,7 +71,17 @@
                      <Label text="Backend API" />
                      <ProgressBar prefWidth="200.0" progress="0.66" />
                   </VBox>
-                  <VBox layoutX="24.0" layoutY="39.0" prefHeight="426.0" prefWidth="255.0" spacing="10.0">
+                  <VBox layoutX="24.0" layoutY="21.0" prefHeight="534.0" prefWidth="255.0" spacing="10.0">
+                     <Label text="Cin">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="cinTextField" style="-fx-border-color: #ffb524;">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font>
+                     </TextField>
                      <Label text="Lastname">
                         <font>
                            <Font name="Arial Rounded MT Bold" size="14.0" />
@@ -108,20 +118,25 @@
                         <font>
                            <Font name="Arial Rounded MT Bold" size="14.0" />
                         </font></Label>
-                     <PasswordField fx:id="newPasswordTextField" promptText="new password" style="-fx-border-color: #ffb524;" />
+                     <PasswordField fx:id="newPasswordTextField" prefHeight="29.0" prefWidth="255.0" promptText="new password" style="-fx-border-color: #ffb524;" />
                      <Label text="Confirm Password">
                         <font>
                            <Font name="Arial Rounded MT Bold" size="14.0" />
                         </font>
                      </Label>
-                     <PasswordField fx:id="confirmPasswordTextField1" promptText="confirm password" style="-fx-border-color: #ffb524;" />
+                     <PasswordField fx:id="confirmPasswordTextField" prefHeight="29.0" prefWidth="255.0" promptText="confirm password" style="-fx-border-color: #ffb524;" />
+                     <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="252.0" textAlignment="CENTER" textFill="#ff0909">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="14.0" />
+                        </font>
+                     </Label>
                   </VBox>
-                  <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="470.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #ffb524; -fx-text-fill: white;" text="Cancel" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="544.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #ffb524; -fx-text-fill: white;" text="Cancel" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="469.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #81c408; -fx-text-fill: white;" text="Save Changes" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="modifyButton" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="543.0" mnemonicParsing="false" onAction="#modifyButtonAction" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #81c408; -fx-text-fill: white;" text="Save Changes" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>

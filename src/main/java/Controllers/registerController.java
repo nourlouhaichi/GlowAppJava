@@ -21,6 +21,7 @@ import java.sql.Timestamp;
 import Services.UserService;
 import Entities.User;
 import org.mindrot.jbcrypt.BCrypt;
+import javax.swing.JOptionPane;
 
 public class registerController implements Initializable {
 
@@ -103,6 +104,7 @@ public class registerController implements Initializable {
                 }
                 else {
                     registerUser();
+                    JOptionPane.showMessageDialog(null, "You are registered!", "Success", JOptionPane.PLAIN_MESSAGE);
                     Stage stage = (Stage) registerButton.getScene().getWindow();
                     stage.close();
                 }
@@ -129,7 +131,7 @@ public class registerController implements Initializable {
         User user = new User(
                 emailTextField.getText(),
                 "USER",
-                passwordTextField.getText(),
+                BCrypt.hashpw(passwordTextField.getText(), BCrypt.gensalt()),
                 cinTextField.getText(),
                 lastnameTextField.getText(),
                 firstnameTextField.getText(),
