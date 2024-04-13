@@ -55,6 +55,17 @@ public class homeController implements Initializable {
         Session.getInstance().logout();
         Stage stage = (Stage) logoutButton.getScene().getWindow();
         stage.close();
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/loginGUI.fxml"));
+            Stage loginStage = new Stage();
+            loginStage.initStyle(StageStyle.UNDECORATED);
+            loginStage.setScene(new Scene(root,520,400));
+            loginStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void profileButtonOnAction(ActionEvent event) {

@@ -121,10 +121,11 @@ public class registerController implements Initializable {
     public void registerUser() {
         UserService us = new UserService();
 
-        String gender;
-        if (maleRadioButton.isSelected()) {
+        String gender = null;
+
+        if ((maleRadioButton.isSelected()) && (!femaleRadioButton.isSelected())) {
             gender = "male";
-        } else {
+        } else if ((!maleRadioButton.isSelected()) && (femaleRadioButton.isSelected())){
             gender = "female";
         }
 

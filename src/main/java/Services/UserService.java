@@ -134,4 +134,30 @@ public class UserService implements IServices<User> {
 
         preparedStatement.executeUpdate();
     }
+
+    public List<User> afficherBack(String cin) throws SQLException {
+        String sql = "SELECT cin, email, lastname, firstname, gender, is_banned, is_verified, roles  FROM user WHERE `cin` != ? ORDER BY email";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, cin);
+        ResultSet rs = preparedStatement.executeQuery();
+
+        /*Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);*/
+        List<User> users = new ArrayList<>();
+        while (rs.next()) {
+            User u = new User();
+            u.setEmail(rs.getString("email"));
+            u.setRoles(rs.getString("roles"));
+            u.setCin(rs.getString("cin"));
+            u.setLastname(rs.getString("lastname"));
+            u.setFirstname(rs.getString("firstname"));
+            u.setGender(rs.getString("gender"));
+            u.setIs_banned(rs.getBoolean("is_banned"));
+            u.setIs_verified(rs.getBoolean("is_verified"));
+
+            users.add(u);
+        }
+        return users;
+    }
 }

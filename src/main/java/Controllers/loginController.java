@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.StageStyle;
 
 import java.sql.*;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.net.URL;
 import java.io.File;
@@ -99,7 +100,12 @@ public class loginController implements Initializable {
                     session.getUserSession().put("is_verified", resultSet.getBoolean("is_verified"));
                     session.getUserSession().put("auth_code", resultSet.getString("auth_code"));
 
-                    loadHomeScene();
+                    if (Objects.equals(resultSet.getString("roles"), "ADMIN")) {
+                        loadAdminHomeScene();
+                    }
+                    else {
+                        loadHomeScene();
+                    }
 
                 } else {
                     loginMessageLabel.setText("Invalid Password!");
@@ -134,6 +140,21 @@ public class loginController implements Initializable {
             homeStage.initStyle(StageStyle.UNDECORATED);
             homeStage.setScene(new Scene(root,1024,576));
             homeStage.show();
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadAdminHomeScene() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/backHomeGUI.fxml"));
+            Stage backStage = new Stage();
+            backStage.initStyle(StageStyle.UNDECORATED);
+            backStage.setScene(new Scene(root,1100,600));
+            backStage.show();
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.close();
 
