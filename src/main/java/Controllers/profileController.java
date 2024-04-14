@@ -3,10 +3,7 @@ package Controllers;
 import Services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -24,7 +21,6 @@ import javafx.stage.Stage;
 import Entities.User;
 import javax.swing.*;
 
-import javafx.stage.StageStyle;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class profileController implements Initializable {
