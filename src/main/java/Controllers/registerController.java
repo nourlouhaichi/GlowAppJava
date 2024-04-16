@@ -22,6 +22,8 @@ import Services.UserService;
 import Entities.User;
 import org.mindrot.jbcrypt.BCrypt;
 import javax.swing.JOptionPane;
+import java.util.regex.Pattern;
+import java.time.LocalDate;
 
 public class registerController implements Initializable {
 
@@ -73,44 +75,46 @@ public class registerController implements Initializable {
                 && !passwordTextField.getText().isBlank()
                 && (maleRadioButton.isSelected() || femaleRadioButton.isSelected())
                 && dobDatePicker.getValue() != null) {
-            try {
-                MyDatabase bd = MyDatabase.getInstance();
-                Connection connectDB = bd.getConnection();
+            if (verifyInputs()) {
+                try {
+                    MyDatabase bd = MyDatabase.getInstance();
+                    Connection connectDB = bd.getConnection();
 
-                // Check if the email already exists
-                String emailQuery = "SELECT email FROM User WHERE email = ?";
-                PreparedStatement emailStatement = connectDB.prepareStatement(emailQuery);
-                emailStatement.setString(1, emailTextField.getText());
-                ResultSet emailResultSet = emailStatement.executeQuery();
+                    // Check if the email already exists
+                    String emailQuery = "SELECT email FROM User WHERE email = ?";
+                    PreparedStatement emailStatement = connectDB.prepareStatement(emailQuery);
+                    emailStatement.setString(1, emailTextField.getText());
+                    ResultSet emailResultSet = emailStatement.executeQuery();
 
-                // Check if the cin already exists
-                String cinQuery = "SELECT cin FROM User WHERE cin = ?";
-                PreparedStatement cinStatement = connectDB.prepareStatement(cinQuery);
-                cinStatement.setString(1, cinTextField.getText());
-                ResultSet cinResultSet = cinStatement.executeQuery();
+                    // Check if the cin already exists
+                    String cinQuery = "SELECT cin FROM User WHERE cin = ?";
+                    PreparedStatement cinStatement = connectDB.prepareStatement(cinQuery);
+                    cinStatement.setString(1, cinTextField.getText());
+                    ResultSet cinResultSet = cinStatement.executeQuery();
 
-                // Check if the phone already exists
-                String phoneQuery = "SELECT phone FROM User WHERE phone = ?";
-                PreparedStatement phoneStatement = connectDB.prepareStatement(phoneQuery);
-                phoneStatement.setString(1, phoneTextField.getText());
-                ResultSet phoneResultSet = phoneStatement.executeQuery();
+                    // Check if the phone already exists
+                    String phoneQuery = "SELECT phone FROM User WHERE phone = ?";
+                    PreparedStatement phoneStatement = connectDB.prepareStatement(phoneQuery);
+                    phoneStatement.setString(1, phoneTextField.getText());
+                    ResultSet phoneResultSet = phoneStatement.executeQuery();
 
-                if (emailResultSet.next()) {
-                    registerMessageLabel.setText("Email already exists!");
-                } else if (cinResultSet.next()) {
-                    registerMessageLabel.setText("CIN already exists!");
-                } else if (phoneResultSet.next()) {
-                    registerMessageLabel.setText("Phone number already exists!");
+                    if (emailResultSet.next()) {
+                        registerMessageLabel.setText("Email already exists!");
+                    } else if (cinResultSet.next()) {
+                        registerMessageLabel.setText("CIN already exists!");
+                    } else if (phoneResultSet.next()) {
+                        registerMessageLabel.setText("Phone number already exists!");
+                    }
+                    else {
+                        registerUser();
+                        JOptionPane.showMessageDialog(null, "You are registered!", "Success", JOptionPane.PLAIN_MESSAGE);
+                        Stage stage = (Stage) registerButton.getScene().getWindow();
+                        stage.close();
+                    }
+                } catch (SQLException e) {
+                    // Handle database errors
+                    e.printStackTrace();
                 }
-                else {
-                    registerUser();
-                    JOptionPane.showMessageDialog(null, "You are registered!", "Success", JOptionPane.PLAIN_MESSAGE);
-                    Stage stage = (Stage) registerButton.getScene().getWindow();
-                    stage.close();
-                }
-            } catch (SQLException e) {
-                // Handle database errors
-                e.printStackTrace();
             }
         }
         else {
@@ -120,8 +124,7 @@ public class registerController implements Initializable {
 
     public void registerUser() {
         UserService us = new UserService();
-
-        String gender = null;
+        String gender = "male";
 
         if ((maleRadioButton.isSelected()) && (!femaleRadioButton.isSelected())) {
             gender = "male";
@@ -152,4 +155,37 @@ public class registerController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public boolean verifyInputs() {
+        Pattern digitsPattern = Pattern.compile("\\d{8}");
+        Pattern lettersPattern = Pattern.compile("\\p{L}+");
+        Pattern emailPattern = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+        Pattern passwordPattern = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}");
+
+        if (!digitsPattern.matcher(cinTextField.getText()).matches()) {
+            registerMessageLabel.setText("CIN must contain only 8 digits!");
+            return false;
+        } else if (!lettersPattern.matcher(lastnameTextField.getText()).matches()) {
+            registerMessageLabel.setText("Lastname must contain only letters!");
+            return false;
+        } else if (!lettersPattern.matcher(firstnameTextField.getText()).matches()) {
+            registerMessageLabel.setText("Firstname must contain only letters!");
+            return false;
+        } else if (dobDatePicker.getValue().isAfter(LocalDate.now().minusYears(18))) {
+            registerMessageLabel.setText("You must be over 18 years old!");
+            return false;
+        } else if (!digitsPattern.matcher(phoneTextField.getText()).matches()) {
+            registerMessageLabel.setText("Phone must contain only 8 digits!");
+            return false;
+        } else if (!emailPattern.matcher(emailTextField.getText()).matches()) {
+            registerMessageLabel.setText("Invalid email address!");
+            return false;
+        } else if (!passwordPattern.matcher(passwordTextField.getText()).matches()) {
+            registerMessageLabel.setText("Password must contain digits, uppercase and lowercase letters, and be at least 8 characters long!");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

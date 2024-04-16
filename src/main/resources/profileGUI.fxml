@@ -18,7 +18,7 @@
    <children>
       <SplitPane dividerPositions="0.29584168336673344" focusTraversable="true" prefHeight="600.0" prefWidth="800.0">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="264.0" style="-fx-background-color: #e9e9e9;">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="264.0" style="-fx-background-color: #ffb524;">
                <children>
                   <VBox layoutX="17.0" layoutY="20.0" prefHeight="234.0" prefWidth="207.0" spacing="10.0">
                      <children>
@@ -35,7 +35,7 @@
                                        <Font name="Arial Rounded MT Bold" size="24.0" />
                                     </font>
                                  </Label>
-                                 <Label fx:id="roleLabel" alignment="CENTER" prefHeight="27.0" prefWidth="199.0" style="-fx-font-size: 14px;" text="Full Stack Developer" textAlignment="CENTER" textFill="#ffb524">
+                                 <Label fx:id="roleLabel" alignment="CENTER" prefHeight="27.0" prefWidth="199.0" style="-fx-font-size: 14px;" text="Full Stack Developer" textAlignment="CENTER" textFill="WHITE">
                                     <font>
                                        <Font name="Arial Rounded MT Bold" size="18.0" />
                                     </font></Label>
@@ -60,15 +60,30 @@
                      </children>
                   </VBox>
                   <VBox layoutX="339.0" layoutY="299.0" prefHeight="302.0" prefWidth="213.0" spacing="10.0">
-                     <Label text="Web Design" />
-                     <ProgressBar prefWidth="200.0" progress="0.8" />
-                     <Label text="Website Markup" />
+                     <Label text="Web Design" textFill="#898989">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="13.0" />
+                        </font></Label>
+                     <ProgressBar prefWidth="200.0" progress="0.24" />
+                     <Label text="Website Markup" textFill="#898989">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="13.0" />
+                        </font></Label>
                      <ProgressBar prefWidth="200.0" progress="0.72" />
-                     <Label text="One Page" />
+                     <Label text="One Page" textFill="#898989">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="13.0" />
+                        </font></Label>
                      <ProgressBar prefWidth="200.0" progress="0.89" />
-                     <Label text="Mobile Template" />
+                     <Label text="Mobile Template" textFill="#898989">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="13.0" />
+                        </font></Label>
                      <ProgressBar prefWidth="200.0" progress="0.55" style="-fx-background-color: #ffb524;" />
-                     <Label text="Backend API" />
+                     <Label text="Backend API" textFill="#898989">
+                        <font>
+                           <Font name="Arial Rounded MT Bold" size="13.0" />
+                        </font></Label>
                      <ProgressBar prefWidth="200.0" progress="0.66" />
                   </VBox>
                   <VBox layoutX="24.0" layoutY="21.0" prefHeight="534.0" prefWidth="255.0" spacing="10.0">

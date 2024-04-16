@@ -16,11 +16,11 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import Services.Session;
 import javafx.stage.Stage;
 import Entities.User;
 import javax.swing.*;
-
 import org.mindrot.jbcrypt.BCrypt;
 
 public class profileController implements Initializable {
@@ -81,6 +81,7 @@ public class profileController implements Initializable {
 
         emailTextField.setText(userSession.get("email").toString());
         emailTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
+        emailTextField.setDisable(true);
 
         phoneTextField.setText(userSession.get("phone").toString());
         phoneTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
@@ -100,17 +101,21 @@ public class profileController implements Initializable {
                 && !phoneTextField.getText().isBlank()) {
 
             if (newPasswordTextField.getText().isBlank() && confirmPasswordTextField.getText().isBlank()) {
-                userUpdate();
-                JOptionPane.showMessageDialog(null, "Profile updated!", "Success", JOptionPane.PLAIN_MESSAGE);
-                Stage stage = (Stage) modifyButton.getScene().getWindow();
-                stage.close();
-            }
-            else {
-                if (Objects.equals(newPasswordTextField.getText(), confirmPasswordTextField.getText()))  {
-                    userUpdatePassword();
+                if (verifyInputsWithoutPassword()) {
+                    userUpdate();
                     JOptionPane.showMessageDialog(null, "Profile updated!", "Success", JOptionPane.PLAIN_MESSAGE);
                     Stage stage = (Stage) modifyButton.getScene().getWindow();
                     stage.close();
+                }
+            }
+            else {
+                if (Objects.equals(newPasswordTextField.getText(), confirmPasswordTextField.getText()))  {
+                    if (verifyInputsWithPassword()) {
+                        userUpdatePassword();
+                        JOptionPane.showMessageDialog(null, "Profile updated!", "Success", JOptionPane.PLAIN_MESSAGE);
+                        Stage stage = (Stage) modifyButton.getScene().getWindow();
+                        stage.close();
+                    }
                 }
                 else {
                     errorLabel.setText("Passwords are not the same!");
@@ -169,6 +174,46 @@ public class profileController implements Initializable {
         } catch (SQLException e) {
             // Handle database errors
             e.printStackTrace();
+        }
+    }
+
+    public boolean verifyInputsWithPassword() {
+        Pattern digitsPattern = Pattern.compile("\\d{8}");
+        Pattern lettersPattern = Pattern.compile("\\p{L}+");
+        Pattern passwordPattern = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}");
+
+        if (!lettersPattern.matcher(lastnameTextField.getText()).matches()) {
+            errorLabel.setText("Lastname must contain only letters!");
+            return false;
+        } else if (!lettersPattern.matcher(firstnameTextField.getText()).matches()) {
+            errorLabel.setText("Firstname must contain only letters!");
+            return false;
+        } else if (!digitsPattern.matcher(phoneTextField.getText()).matches()) {
+            errorLabel.setText("Phone must contain only 8 digits!");
+            return false;
+        } else if (!passwordPattern.matcher(newPasswordTextField.getText()).matches()) {
+            errorLabel.setText("Password must contain digits, uppercase and lowercase letters, and be at least 8 characters long!");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean verifyInputsWithoutPassword() {
+        Pattern digitsPattern = Pattern.compile("\\d{8}");
+        Pattern lettersPattern = Pattern.compile("\\p{L}+");
+
+        if (!lettersPattern.matcher(lastnameTextField.getText()).matches()) {
+            errorLabel.setText("Lastname must contain only letters!");
+            return false;
+        } else if (!lettersPattern.matcher(firstnameTextField.getText()).matches()) {
+            errorLabel.setText("Firstname must contain only letters!");
+            return false;
+        } else if (!digitsPattern.matcher(phoneTextField.getText()).matches()) {
+            errorLabel.setText("Phone must contain only 8 digits!");
+            return false;
+        } else {
+            return true;
         }
     }
 }

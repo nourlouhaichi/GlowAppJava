@@ -28,10 +28,12 @@ import javax.swing.*;
 import java.io.File;
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class backUserController implements Initializable {
 
@@ -75,7 +77,6 @@ public class backUserController implements Initializable {
     private DatePicker dobDatePicker;
     @FXML
     private TableView<User> userTable;
-
     @FXML
     private TableColumn<User, Boolean> bannedColumn;
     @FXML
@@ -208,41 +209,43 @@ public class backUserController implements Initializable {
                 && (maleRadioButton.isSelected() || femaleRadioButton.isSelected())
                 && (adminRadioButton.isSelected() || userRadioButton.isSelected() || coachRadioButton.isSelected() || nutRadioButton.isSelected())
                 && dobDatePicker.getValue() != null) {
-            try {
-                MyDatabase bd = MyDatabase.getInstance();
-                Connection connectDB = bd.getConnection();
+            if (verifyInputs()) {
+                try {
+                    MyDatabase bd = MyDatabase.getInstance();
+                    Connection connectDB = bd.getConnection();
 
-                // Check if the email already exists
-                String emailQuery = "SELECT email FROM User WHERE email = ?";
-                PreparedStatement emailStatement = connectDB.prepareStatement(emailQuery);
-                emailStatement.setString(1, emailTextField.getText());
-                ResultSet emailResultSet = emailStatement.executeQuery();
+                    // Check if the email already exists
+                    String emailQuery = "SELECT email FROM User WHERE email = ?";
+                    PreparedStatement emailStatement = connectDB.prepareStatement(emailQuery);
+                    emailStatement.setString(1, emailTextField.getText());
+                    ResultSet emailResultSet = emailStatement.executeQuery();
 
-                // Check if the cin already exists
-                String cinQuery = "SELECT cin FROM User WHERE cin = ?";
-                PreparedStatement cinStatement = connectDB.prepareStatement(cinQuery);
-                cinStatement.setString(1, cinTextField.getText());
-                ResultSet cinResultSet = cinStatement.executeQuery();
+                    // Check if the cin already exists
+                    String cinQuery = "SELECT cin FROM User WHERE cin = ?";
+                    PreparedStatement cinStatement = connectDB.prepareStatement(cinQuery);
+                    cinStatement.setString(1, cinTextField.getText());
+                    ResultSet cinResultSet = cinStatement.executeQuery();
 
-                // Check if the phone already exists
-                String phoneQuery = "SELECT phone FROM User WHERE phone = ?";
-                PreparedStatement phoneStatement = connectDB.prepareStatement(phoneQuery);
-                phoneStatement.setString(1, phoneTextField.getText());
-                ResultSet phoneResultSet = phoneStatement.executeQuery();
+                    // Check if the phone already exists
+                    String phoneQuery = "SELECT phone FROM User WHERE phone = ?";
+                    PreparedStatement phoneStatement = connectDB.prepareStatement(phoneQuery);
+                    phoneStatement.setString(1, phoneTextField.getText());
+                    ResultSet phoneResultSet = phoneStatement.executeQuery();
 
-                if (emailResultSet.next()) {
-                    JOptionPane.showMessageDialog(null, "Email already exists!", "Error", JOptionPane.PLAIN_MESSAGE);
-                } else if (cinResultSet.next()) {
-                    JOptionPane.showMessageDialog(null, "CIN already exists!", "Error", JOptionPane.PLAIN_MESSAGE);
-                } else if (phoneResultSet.next()) {
-                    JOptionPane.showMessageDialog(null, "Phone number already exists!", "Error", JOptionPane.PLAIN_MESSAGE);
+                    if (emailResultSet.next()) {
+                        JOptionPane.showMessageDialog(null, "Email already exists!", "Error", JOptionPane.PLAIN_MESSAGE);
+                    } else if (cinResultSet.next()) {
+                        JOptionPane.showMessageDialog(null, "CIN already exists!", "Error", JOptionPane.PLAIN_MESSAGE);
+                    } else if (phoneResultSet.next()) {
+                        JOptionPane.showMessageDialog(null, "Phone number already exists!", "Error", JOptionPane.PLAIN_MESSAGE);
+                    }
+                    else {
+                        addUser();
+                    }
+                } catch (SQLException e) {
+                    // Handle database errors
+                    e.printStackTrace();
                 }
-                else {
-                    addUser();
-                }
-            } catch (SQLException e) {
-                // Handle database errors
-                e.printStackTrace();
             }
         }
         else {
@@ -277,15 +280,15 @@ public class backUserController implements Initializable {
     }
 
     public void updateButtonOnAction(ActionEvent event) {
-        if (!cinTextField.getText().isBlank()
-                && !lastnameTextField.getText().isBlank()
+        if (!lastnameTextField.getText().isBlank()
                 && !firstnameTextField.getText().isBlank()
                 && !phoneTextField.getText().isBlank()
-                && !emailTextField.getText().isBlank()
                 && (maleRadioButton.isSelected() || femaleRadioButton.isSelected())
                 && (adminRadioButton.isSelected() || userRadioButton.isSelected() || coachRadioButton.isSelected() || nutRadioButton.isSelected())
                 && dobDatePicker.getValue() != null) {
-            updateUser();
+            if (verifyUpdateInputs()) {
+                updateUser();
+            }
         }
         else {
             JOptionPane.showMessageDialog(null, "Enter all fields!!", "Error", JOptionPane.PLAIN_MESSAGE);
@@ -295,7 +298,7 @@ public class backUserController implements Initializable {
     public void updateUser() {
         UserService us = new UserService();
 
-        String gender = null;
+        String gender = "male";
         if ((maleRadioButton.isSelected()) && (!femaleRadioButton.isSelected())) {
             gender = "male";
         } else if ((!maleRadioButton.isSelected()) && (femaleRadioButton.isSelected())){
@@ -346,13 +349,12 @@ public class backUserController implements Initializable {
 
         userTable.refresh();
         clear();
-
     }
 
     public void addUser() {
         UserService us = new UserService();
 
-        String gender = null;
+        String gender = "male";
         if ((maleRadioButton.isSelected()) && (!femaleRadioButton.isSelected())) {
             gender = "male";
         } else if ((!maleRadioButton.isSelected()) && (femaleRadioButton.isSelected())){
@@ -399,20 +401,8 @@ public class backUserController implements Initializable {
                 null
         );
 
-        Session session = Session.getInstance();
-        Map<String, Object> userSession = session.getUserSession();
         try {
             us.ajouter(user);
-
-            cinColumn.setCellValueFactory(new PropertyValueFactory<>("cin"));
-            emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-            lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
-            firstnameColumn.setCellValueFactory(new PropertyValueFactory<>("firstname"));
-            genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
-            bannedColumn.setCellValueFactory(new PropertyValueFactory<>("is_banned"));
-            verifiedColumn.setCellValueFactory(new PropertyValueFactory<>("is_verified"));
-            roleColumn.setCellValueFactory(new PropertyValueFactory<>("roles"));
-
             userTable.getItems().addAll(user);
 
         } catch (SQLException e) {
@@ -505,5 +495,58 @@ public class backUserController implements Initializable {
         cinTextField.setDisable(true);
         passwordTextField.setDisable(true);
         emailTextField.setDisable(true);
+    }
+
+    public boolean verifyInputs() {
+        Pattern digitsPattern = Pattern.compile("\\d{8}");
+        Pattern lettersPattern = Pattern.compile("\\p{L}+");
+        Pattern emailPattern = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+        Pattern passwordPattern = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}");
+
+        if (!digitsPattern.matcher(cinTextField.getText()).matches()) {
+            JOptionPane.showMessageDialog(null, "CIN must contain only 8 digits!", "Error", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        } else if (!emailPattern.matcher(emailTextField.getText()).matches()) {
+            JOptionPane.showMessageDialog(null, "Invalid email address!", "Error", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        } else if (!passwordPattern.matcher(passwordTextField.getText()).matches()) {
+            JOptionPane.showMessageDialog(null, "Password must contain digits, uppercase and lowercase letters, and be at least 8 characters long!", "Error", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        } else if (!lettersPattern.matcher(lastnameTextField.getText()).matches()) {
+            JOptionPane.showMessageDialog(null, "Lastname must contain only letters!", "Error", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        } else if (!lettersPattern.matcher(firstnameTextField.getText()).matches()) {
+            JOptionPane.showMessageDialog(null, "Firstname must contain only letters!", "Error", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        } else if (!digitsPattern.matcher(phoneTextField.getText()).matches()) {
+            JOptionPane.showMessageDialog(null, "Phone must contain only 8 digits!", "Error", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        } else if (dobDatePicker.getValue().isAfter(LocalDate.now().minusYears(18))) {
+            JOptionPane.showMessageDialog(null, "Person must be over 18 years old!", "Error", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean verifyUpdateInputs() {
+        Pattern digitsPattern = Pattern.compile("\\d{8}");
+        Pattern lettersPattern = Pattern.compile("\\p{L}+");
+
+        if (!lettersPattern.matcher(lastnameTextField.getText()).matches()) {
+            JOptionPane.showMessageDialog(null, "Lastname must contain only letters!", "Error", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        } else if (!lettersPattern.matcher(firstnameTextField.getText()).matches()) {
+            JOptionPane.showMessageDialog(null, "Firstname must contain only letters!", "Error", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        } else if (!digitsPattern.matcher(phoneTextField.getText()).matches()) {
+            JOptionPane.showMessageDialog(null, "Phone must contain only 8 digits!", "Error", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        } else if (dobDatePicker.getValue().isAfter(LocalDate.now().minusYears(18))) {
+            JOptionPane.showMessageDialog(null, "Person must be over 18 years old!", "Error", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        } else {
+            return true;
+        }
     }
 }
