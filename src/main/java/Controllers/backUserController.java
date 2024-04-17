@@ -78,8 +78,6 @@ public class backUserController implements Initializable {
     @FXML
     private TableView<User> userTable;
     @FXML
-    private TableColumn<User, Boolean> bannedColumn;
-    @FXML
     private TableColumn<User, String> cinColumn;
     @FXML
     private TableColumn<User, String> emailColumn;
@@ -109,7 +107,6 @@ public class backUserController implements Initializable {
         lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         firstnameColumn.setCellValueFactory(new PropertyValueFactory<>("firstname"));
         genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
-        bannedColumn.setCellValueFactory(new PropertyValueFactory<>("is_banned"));
         verifiedColumn.setCellValueFactory(new PropertyValueFactory<>("is_verified"));
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("roles"));
 
@@ -466,6 +463,7 @@ public class backUserController implements Initializable {
         cinTextField.setDisable(false);
         passwordTextField.setDisable(false);
         emailTextField.setDisable(false);
+        userTable.refresh();
     }
 
     public void getUser() {

@@ -136,7 +136,7 @@
                                 <Font name="Arial Rounded MT Bold" size="14.0" />
                             </font>
                         </Button>
-                        <Button fx:id="banButton" alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="479.0" mnemonicParsing="false" onAction="#banButtonAction" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #ff3547; -fx-text-fill: white;" text="Ban" textAlignment="CENTER">
+                        <Button fx:id="banButton" alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="479.0" mnemonicParsing="false" onAction="#banButtonAction" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #ff3547; -fx-text-fill: white;" text="Ban" textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font name="Arial Rounded MT Bold" size="14.0" />
                             </font>

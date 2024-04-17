@@ -1,9 +1,12 @@
 package Controllers;
 
 import Entities.User;
+import Services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,6 +16,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class profiledetailsController implements Initializable {
@@ -62,6 +67,24 @@ public class profiledetailsController implements Initializable {
     }
 
     public void banButtonAction(ActionEvent event) {
+        UserService us = new UserService();
+        try {
+            if (Objects.equals(banButton.getText(), "Ban")) {
+                us.banUser(cinTextField.getText());
+                banTextField.setText("true");
+                banButton.setText("Unban");
+                banButton.setStyle("-fx-background-color:   #81c408;");
+            }
+            else {
+                us.unbanUser(cinTextField.getText());
+                banTextField.setText("false");
+                banButton.setText("Ban");
+                banButton.setStyle("-fx-background-color:  #ff3547;");
+            }
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -93,6 +116,15 @@ public class profiledetailsController implements Initializable {
 
         banTextField.setText(user.getIs_banned().toString());
         banTextField.setDisable(true);
+
+        if (banTextField.getText().equals("true")) {
+            banButton.setText("Unban");
+            banButton.setStyle("-fx-background-color:   #81c408;");
+        }
+        else {
+            banButton.setText("Ban");
+            banButton.setStyle("-fx-background-color:  #ff3547;");
+        }
 
         verifyTextField.setText(user.getIs_verified().toString());
         verifyTextField.setDisable(true);

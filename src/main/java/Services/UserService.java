@@ -136,7 +136,7 @@ public class UserService implements IServices<User> {
     }
 
     public List<User> afficherBack(String cin) throws SQLException {
-        String sql = "SELECT cin, email, lastname, firstname, gender, is_banned, is_verified, roles  FROM user WHERE `cin` != ? ORDER BY email";
+        String sql = "SELECT cin, email, lastname, firstname, gender, is_verified, roles  FROM user WHERE `cin` != ? ORDER BY email";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, cin);
@@ -153,11 +153,30 @@ public class UserService implements IServices<User> {
             u.setLastname(rs.getString("lastname"));
             u.setFirstname(rs.getString("firstname"));
             u.setGender(rs.getString("gender"));
-            u.setIs_banned(rs.getBoolean("is_banned"));
             u.setIs_verified(rs.getBoolean("is_verified"));
 
             users.add(u);
         }
         return users;
     }
+
+    public void banUser(String cin) throws SQLException {
+        String sql = "UPDATE `user` SET `is_banned`=? WHERE cin = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setBoolean(1, true);
+        preparedStatement.setString(2, cin);
+
+        preparedStatement.executeUpdate();
+    }
+    public void unbanUser(String cin) throws SQLException {
+        String sql = "UPDATE `user` SET `is_banned`=? WHERE cin = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setBoolean(1, false);
+        preparedStatement.setString(2, cin);
+
+        preparedStatement.executeUpdate();
+    }
+
 }

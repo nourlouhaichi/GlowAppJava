@@ -120,14 +120,13 @@
                                             <children>
                                     <TableView fx:id="userTable" layoutX="15.0" layoutY="68.0" onMouseClicked="#getUser" prefHeight="232.0" prefWidth="833.0">
                                       <columns>
-                                        <TableColumn fx:id="cinColumn" prefWidth="88.79997634887695" text="CIN" />
-                                        <TableColumn fx:id="emailColumn" minWidth="0.800018310546875" prefWidth="122.4000244140625" text="EMAIL" />
-                                          <TableColumn fx:id="lastnameColumn" prefWidth="118.39994812011719" text="LASTNAME" />
-                                          <TableColumn fx:id="firstnameColumn" prefWidth="108.0" text="FIRSTNAME" />
-                                          <TableColumn fx:id="genderColumn" prefWidth="106.39996337890625" text="GENDER" />
-                                          <TableColumn fx:id="bannedColumn" prefWidth="88.00006103515625" text="BANNED" />
-                                          <TableColumn fx:id="verifiedColumn" prefWidth="83.99993896484375" text="VERIFIED" />
-                                          <TableColumn fx:id="roleColumn" minWidth="0.800018310546875" prefWidth="120.80007324218752" text="ROLE" />
+                                        <TableColumn fx:id="cinColumn" prefWidth="128.79997634887695" text="CIN" />
+                                        <TableColumn fx:id="emailColumn" minWidth="0.800018310546875" prefWidth="143.99998474121094" text="EMAIL" />
+                                          <TableColumn fx:id="lastnameColumn" prefWidth="136.0" text="LASTNAME" />
+                                          <TableColumn fx:id="firstnameColumn" prefWidth="128.79998779296875" text="FIRSTNAME" />
+                                          <TableColumn fx:id="genderColumn" prefWidth="95.20001220703125" text="GENDER" />
+                                          <TableColumn fx:id="verifiedColumn" prefWidth="78.39996337890625" text="VERIFIED" />
+                                          <TableColumn fx:id="roleColumn" minWidth="0.800018310546875" prefWidth="127.20013427734375" text="ROLE" />
                                       </columns>
                                     </TableView>
                                     <Label alignment="CENTER" layoutX="335.0" layoutY="26.0" prefHeight="23.0" prefWidth="194.0" text="TABLE OF USERS" textFill="#797979">
