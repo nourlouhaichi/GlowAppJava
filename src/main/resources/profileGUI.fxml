@@ -9,7 +9,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -43,7 +42,6 @@
                                     <font>
                                        <Font name="Arial Rounded MT Bold" size="14.0" />
                                     </font></Label>
-                                 <HBox alignment="CENTER" spacing="10.0" />
                               </VBox>
                            </children>
                         </Pane>
@@ -53,12 +51,6 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="564.0" prefWidth="559.0">
                <children>
-                  <VBox layoutX="17.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-                     <children>
-                        <Pane style="-fx-background-color: #f4f4f4; -fx-padding: 10px; -fx-border-radius: 5px;" />
-                        <Pane prefHeight="97.0" prefWidth="100.0" style="-fx-background-color: #f4f4f4; -fx-padding: 10px; -fx-border-radius: 5px;" />
-                     </children>
-                  </VBox>
                   <VBox layoutX="339.0" layoutY="299.0" prefHeight="302.0" prefWidth="213.0" spacing="10.0">
                      <Label text="Web Design" textFill="#898989">
                         <font>

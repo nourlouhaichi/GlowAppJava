@@ -75,7 +75,6 @@ public class profileController implements Initializable {
         firstnameTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
 
         roleLabel.setText(userSession.get("roles").toString());
-        roleLabel.setStyle("-fx-text-fill: #ffb524");
 
         createdAtLabel.setText(userSession.get("created_at").toString());
 

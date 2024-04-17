@@ -279,6 +279,38 @@ public class backUserController implements Initializable {
         }
     }
 
+    public void showButtonOnAction(ActionEvent event) {
+        UserService us = new UserService();
+        if (!cinTextField.getText().isBlank()
+                && !lastnameTextField.getText().isBlank()
+                && !firstnameTextField.getText().isBlank()
+                && !phoneTextField.getText().isBlank()
+                && !emailTextField.getText().isBlank()
+                && (maleRadioButton.isSelected() || femaleRadioButton.isSelected())
+                && (adminRadioButton.isSelected() || userRadioButton.isSelected() || coachRadioButton.isSelected() || nutRadioButton.isSelected())
+                && dobDatePicker.getValue() != null) {
+            try {
+                User user = us.getUser(cinTextField.getText());
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/profiledetailsGUI.fxml"));
+                Parent root = loader.load();
+
+                profiledetailsController controller = loader.getController();
+                controller.initData(user);
+
+                Stage profileStage = new Stage();
+                profileStage.initStyle(StageStyle.UNDECORATED);
+                profileStage.setScene(new Scene(root,800,540));
+                profileStage.show();
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Select User!", "Success", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+
     public void updateButtonOnAction(ActionEvent event) {
         if (!lastnameTextField.getText().isBlank()
                 && !firstnameTextField.getText().isBlank()
