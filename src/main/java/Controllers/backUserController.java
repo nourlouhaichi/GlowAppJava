@@ -4,6 +4,10 @@ import Entities.User;
 import Services.Session;
 import Services.UserService;
 import Utils.MyDatabase;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,6 +78,8 @@ public class backUserController implements Initializable {
     @FXML
     private TextField phoneTextField;
     @FXML
+    private TextField searchTextField;
+    @FXML
     private DatePicker dobDatePicker;
     @FXML
     private TableView<User> userTable;
@@ -91,6 +97,8 @@ public class backUserController implements Initializable {
     private TableColumn<User, Boolean> verifiedColumn;
     @FXML
     private TableColumn<User, String> roleColumn;
+
+    private ObservableList<User> userObservableList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -113,7 +121,30 @@ public class backUserController implements Initializable {
         UserService us = new UserService();
         try {
             List<User> users = us.afficherBack(userSession.get("cin").toString());
-            userTable.getItems().addAll(users);
+            userObservableList.addAll(users);
+            userTable.setItems(userObservableList);
+
+            FilteredList<User> filteredData = new FilteredList<>(userObservableList, b -> true);
+            SortedList<User> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(userTable.comparatorProperty());
+            userTable.setItems(sortedData);
+
+            searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(user -> {
+                    if (newValue == null || newValue.isEmpty() || newValue.isBlank()) {
+                        return true;
+                    }
+
+                    String searchKeyword = newValue.toLowerCase();
+                    return user.getCin().toLowerCase().contains(searchKeyword)
+                            || user.getEmail().toLowerCase().contains(searchKeyword)
+                            || user.getLastname().toLowerCase().contains(searchKeyword)
+                            || user.getFirstname().toLowerCase().contains(searchKeyword)
+                            || user.getGender().toLowerCase().contains(searchKeyword)
+                            || String.valueOf(user.getIs_verified()).toLowerCase().contains(searchKeyword)
+                            || user.getRoles().toLowerCase().contains(searchKeyword);
+                });
+            });
         } catch (SQLException e) {
             e.printStackTrace();
         }
