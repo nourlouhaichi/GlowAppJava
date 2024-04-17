@@ -33,7 +33,7 @@ public class PublicationController {
     private URL location;
 
     @FXML
-    private TextField contentf;
+    private TextField contentfx;
 
     @FXML
     private DatePicker datefx;
@@ -49,12 +49,13 @@ public class PublicationController {
 
     ServicePublication Servicepublication = new ServicePublication();
 
+
     @FXML
     void addpub(ActionEvent event) throws SQLException {
         Publication publication = new Publication();
-        publication.settitrep(titlefx.getText());
-        publication.settypep(typefx.getText());
-        //publication.setcontent(contentf.getText());
+        publication.setTitrep(titlefx.getText());
+        publication.setTypep(typefx.getText());
+        publication.setContentp(contentfx.getText());
         //publication.setDatecrp(Date.from(datefx.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         Servicepublication.ajouter(publication);
 
@@ -71,7 +72,7 @@ public class PublicationController {
 
     @FXML
     void initialize() {
-        assert contentf != null : "fx:id=\"contentfx\" was not injected: check your FXML file 'Publication.fxml'.";
+        assert contentfx != null : "fx:id=\"contentfx\" was not injected: check your FXML file 'Publication.fxml'.";
         assert datefx != null : "fx:id=\"datefx\" was not injected: check your FXML file 'Publication.fxml'.";
         assert titlefx != null : "fx:id=\"titlefx\" was not injected: check your FXML file 'Publication.fxml'.";
         assert editbtn != null : "fx:id=\"editbtn\" was not injected: check your FXML file 'Publication.fxml'.";

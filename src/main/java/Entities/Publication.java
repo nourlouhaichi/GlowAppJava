@@ -1,31 +1,25 @@
 package Entities;
 
-import java.util.*;
+import java.util.Date;
 
 public class Publication {
     private int id;
-    private  String titrep;
-    private  String typep;
-    private  String contentp;
+    private String titrep;
+    private String typep;
+    private String contentp;
     private Date datecrp;
     private String imagename;
     private Date updated;
     private String usercin;
 
-    public Publication(){
+    public Publication() {}
 
-    }
-
-
-    public Publication(int id, String titrep, String typep, String contentp ) {
+    public Publication(int id, String titrep, String typep, String contentp) {
         this.id = id;
         this.titrep = titrep;
         this.typep = typep;
         this.contentp = contentp;
     }
-
-
-
 
     public int getId() {
         return id;
@@ -34,49 +28,65 @@ public class Publication {
     public void setId(int id) {
         this.id = id;
     }
-    public String gettitrep() {
+
+    public String getTitrep() {
         return titrep;
     }
 
-    public void settitrep(String titrep) {
+    public void setTitrep(String titrep) {
         this.titrep = titrep;
     }
 
-    public String gettypep() {
+    public String getTypep() {
         return typep;
     }
 
-    public void settypep(String typep) {
+    public void setTypep(String typep) {
         this.typep = typep;
     }
 
-    public String getcontentp() {
+    public String getContentp() {
         return contentp;
     }
 
-    public void setcontent(String typep) {
-        this.typep = typep;
+    public void setContentp(String contentp) {
+        this.contentp = contentp;
     }
 
     public Date getDatecrp() {
         return datecrp;
     }
 
-    public String getImagename() {return imagename;}
+    public String getImagename() {
+        return imagename;
+    }
 
-    public String getUsercin(){return usercin;}
+    public String getUsercin() {
+        return usercin;
+    }
 
-    public Date getUpdated(){return  updated;}
+    public Date getUpdated() {
+        return updated;
+    }
 
-    public void setDatecrp(Date datecrp){this.datecrp=datecrp;}
+    public void setDatecrp(Date datecrp) {
+        this.datecrp = datecrp;
+    }
 
-    public void setUpdated(Date updated){this.updated=updated;}
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 
-    public void setImagename(String imagename){this.imagename=imagename;}
+    public void setImagename(String imagename) {
+        this.imagename = imagename;
+    }
 
-    public void  setUsercin(String usercin){this.usercin=usercin;}
+    public void setUsercin(String usercin) {
+        this.usercin = usercin;
+    }
+
     @Override
     public String toString() {
-        return "Publication : "+id+" "+typep+" "+contentp+" "+titrep+" "+updated+" "+datecrp+" "+usercin+" "+imagename;
+        return "Publication : " + id + " " + typep + " " + contentp + " " + titrep + " " + updated + " " + datecrp + " " + usercin + " " + imagename;
     }
 }

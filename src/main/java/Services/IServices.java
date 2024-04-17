@@ -20,4 +20,5 @@ public interface IServices <T>{
 
     T afficher(T t) throws  SQLException;
 
+    Publication afficher(int id) throws SQLException;
 }

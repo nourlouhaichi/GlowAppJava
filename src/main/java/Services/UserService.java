@@ -124,4 +124,9 @@ public class UserService implements IServices<User> {
         }
 
     }
+
+    @Override
+    public Publication afficher(int id) throws SQLException {
+        return null;
+    }
 }

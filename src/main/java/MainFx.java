@@ -1,3 +1,4 @@
+import Utils.MyDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,10 +15,11 @@ public class MainFx extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Publication.fxml"));
+        MyDatabase bd= MyDatabase.getInstance();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("tableview.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
-        primaryStage.setTitle("Publication");
+        primaryStage.setTitle("Admin");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

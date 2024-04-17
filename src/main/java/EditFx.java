@@ -1,3 +1,4 @@
+import Utils.MyDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +15,8 @@ public class EditFx extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditPublication.fxml"));
+        MyDatabase bd= MyDatabase.getInstance();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("backhome.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setTitle("Edit Publication");
