@@ -84,6 +84,10 @@ public class UserService implements IServices<User> {
         return users;
     }
 
+
+
+
+
     @Override
     public User afficher(User user) throws SQLException {
         String sql = "SELECT * FROM user WHERE `cin` = ?";
@@ -112,5 +116,32 @@ public class UserService implements IServices<User> {
             return null;
         }
 
+    }
+    public User getUserByCin(String cin) throws SQLException {
+        String sql = "SELECT * FROM user WHERE cin = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, cin);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            String email = resultSet.getString("email");
+            String roles = resultSet.getString("roles");
+            String password = resultSet.getString("password");
+            String lastname = resultSet.getString("lastname");
+            String firstname = resultSet.getString("firstname");
+            String gender = resultSet.getString("gender");
+            Date datebirth = resultSet.getDate("datebirth");
+            String phone = resultSet.getString("phone");
+            Timestamp created_at = resultSet.getTimestamp("created_at");
+            boolean is_banned = resultSet.getBoolean("is_banned");
+            String profile_picture = resultSet.getString("profile_picture");
+            boolean is_verified = resultSet.getBoolean("is_verified");
+            String auth_code = resultSet.getString("auth_code");
+
+            return new User(email, roles, password, cin, lastname, firstname, gender, datebirth, phone, created_at, is_banned, profile_picture, is_verified, auth_code);
+        } else {
+            // Handle the case when no matching record is found
+            return null;
+        }
     }
 }
