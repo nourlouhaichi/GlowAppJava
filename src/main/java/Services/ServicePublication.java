@@ -9,9 +9,11 @@ import java.util.List;
 
 public class ServicePublication implements IServices<Publication> {
     Connection connection;
-    public ServicePublication(){
-        connection= MyDatabase.getInstance().getConnection();
+
+    public ServicePublication() {
+        connection = MyDatabase.getInstance().getConnection();
     }
+
     @Override
     public void ajouter(Publication Publication) throws SQLException {
         String sql = "INSERT INTO publication(titre_p, type_p,contenue_p) VALUES (?, ?, ?)";
@@ -36,7 +38,6 @@ public class ServicePublication implements IServices<Publication> {
         preparedStatement.executeUpdate();
         System.out.println("Publication modifiée");
     }
-
 
 
     @Override
@@ -101,5 +102,5 @@ public class ServicePublication implements IServices<Publication> {
             return null; // Publication not found
         }
 
-}
+    }
 }

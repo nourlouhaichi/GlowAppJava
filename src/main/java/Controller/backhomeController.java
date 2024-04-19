@@ -3,6 +3,7 @@ package Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -62,19 +63,21 @@ public class backhomeController {
     @FXML
     void PublicationButtonOnAction(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditPublication.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tableview.fxml"));
             Parent newPage = loader.load();
-            EditPublicationController controller = loader.getController();
-            AnchorPane homeForm = (AnchorPane) home_form.getParent();
-
-            homeForm.getChildren().setAll(newPage);
+            tableviewController controller = loader.getController();
+            AnchorPane.setTopAnchor(newPage, 10.0);
+            AnchorPane.setLeftAnchor(newPage, 40.0);
+            AnchorPane.setRightAnchor(newPage, 10.0);
+            AnchorPane.setBottomAnchor(newPage, 10.0);
+            home_form.getChildren().setAll(newPage);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-}
+    }
+
 
 
 

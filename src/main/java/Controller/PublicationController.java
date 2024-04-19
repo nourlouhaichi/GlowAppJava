@@ -21,6 +21,7 @@ import javafx.scene.control.DatePicker;
 
 import javafx.scene.control.TextField;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
@@ -45,6 +46,8 @@ public class PublicationController {
     private TextField typefx;
     @FXML
     private Button editbtn;
+    @FXML
+    private AnchorPane rootPane;
 
 
     ServicePublication Servicepublication = new ServicePublication();
@@ -80,4 +83,7 @@ public class PublicationController {
 
     }
 
+    public void exitbutton(ActionEvent actionEvent) {
+
+    }
 }
