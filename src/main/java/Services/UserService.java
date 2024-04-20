@@ -169,6 +169,7 @@ public class UserService implements IServices<User> {
 
         preparedStatement.executeUpdate();
     }
+
     public void unbanUser(String cin) throws SQLException {
         String sql = "UPDATE `user` SET `is_banned`=? WHERE cin = ?";
 

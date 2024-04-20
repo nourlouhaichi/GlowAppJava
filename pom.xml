@@ -34,9 +34,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.mindrot</groupId>
+            <groupId>de.svws-nrw.ext</groupId>
             <artifactId>jbcrypt</artifactId>
-            <version>0.4</version>
+            <version>0.4.7</version>
         </dependency>
     </dependencies>
 

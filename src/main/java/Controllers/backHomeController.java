@@ -42,7 +42,7 @@ public class backHomeController implements Initializable {
 
         Session session = Session.getInstance();
         Map<String, Object> userSession = session.getUserSession();
-        usernameLabel.setText(userSession.get("firstname") + " " + userSession.get("lastname"));
+        usernameLabel.setText(userSession.get("email").toString());
     }
 
     public void logoutButtonOnAction(ActionEvent event) {

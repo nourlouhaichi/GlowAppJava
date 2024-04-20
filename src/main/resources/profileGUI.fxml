@@ -42,6 +42,11 @@
                                     <font>
                                        <Font name="Arial Rounded MT Bold" size="14.0" />
                                     </font></Label>
+                                 <Button fx:id="pictureButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#pictureButtonOnAction" prefHeight="30.0" prefWidth="210.0" style="-fx-background-color: white;" text="Change Profile Picture" textAlignment="CENTER" textFill="#81c408">
+                                    <font>
+                                       <Font name="Arial Rounded MT Bold" size="12.0" />
+                                    </font>
+                                 </Button>
                               </VBox>
                            </children>
                         </Pane>

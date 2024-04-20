@@ -27,7 +27,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 
-import org.mindrot.jbcrypt.BCrypt;
+import de.svws_nrw.ext.jbcrypt.BCrypt;
 import javax.swing.*;
 import java.io.File;
 import java.net.URL;
@@ -108,7 +108,7 @@ public class backUserController implements Initializable {
 
         Session session = Session.getInstance();
         Map<String, Object> userSession = session.getUserSession();
-        usernameLabel.setText(userSession.get("firstname") + " " + userSession.get("lastname"));
+        usernameLabel.setText(userSession.get("email").toString());
 
         cinColumn.setCellValueFactory(new PropertyValueFactory<>("cin"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -296,7 +296,7 @@ public class backUserController implements Initializable {
                 User user = us.getUser(cinTextField.getText());
                 us.supprimer(user);
                 int index = userTable.getSelectionModel().getSelectedIndex();
-                userTable.getItems().remove(index);
+                userObservableList.remove(index);
                 JOptionPane.showMessageDialog(null, "User removed!", "Success", JOptionPane.PLAIN_MESSAGE);
                 clear();
             } catch (SQLException e) {
@@ -415,10 +415,13 @@ public class backUserController implements Initializable {
         UserService us = new UserService();
 
         String gender = "male";
+        String image = "Mprofile.png";
         if ((maleRadioButton.isSelected()) && (!femaleRadioButton.isSelected())) {
             gender = "male";
+            image = "Mprofile.png";
         } else if ((!maleRadioButton.isSelected()) && (femaleRadioButton.isSelected())){
             gender = "female";
+            image = "Fprofile.png";
         }
 
         String role = "USER";
@@ -447,7 +450,7 @@ public class backUserController implements Initializable {
         User user = new User(
                 emailTextField.getText(),
                 role,
-                BCrypt.hashpw(passwordTextField.getText(), BCrypt.gensalt()),
+                BCrypt.hashpw(passwordTextField.getText(), BCrypt.gensalt(13)),
                 cinTextField.getText(),
                 lastnameTextField.getText(),
                 firstnameTextField.getText(),
@@ -456,14 +459,14 @@ public class backUserController implements Initializable {
                 phoneTextField.getText(),
                 new Timestamp(System.currentTimeMillis()),
                 false,
-                null,
+                image,
                 false,
                 null
         );
 
         try {
             us.ajouter(user);
-            userTable.getItems().addAll(user);
+            userObservableList.addAll(user);
 
         } catch (SQLException e) {
             // Handle database errors
@@ -494,68 +497,73 @@ public class backUserController implements Initializable {
         cinTextField.setDisable(false);
         passwordTextField.setDisable(false);
         emailTextField.setDisable(false);
+        lastnameTextField.setDisable(false);
+        firstnameTextField.setDisable(false);
+        phoneTextField.setDisable(false);
+        dobDatePicker.setDisable(false);
         userTable.refresh();
     }
 
     public void getUser() {
         User user = userTable.getSelectionModel().getSelectedItem();
-        cinTextField.setText(user.getCin());
-        emailTextField.setText(user.getEmail());
-        lastnameTextField.setText(user.getLastname());
-        firstnameTextField.setText(user.getFirstname());
+        if (user != null) {
+            cinTextField.setText(user.getCin());
+            emailTextField.setText(user.getEmail());
+            lastnameTextField.setText(user.getLastname());
+            firstnameTextField.setText(user.getFirstname());
 
-        if (Objects.equals(user.getRoles(), "ADMIN")) {
-            adminRadioButton.setSelected(true);
-            coachRadioButton.setSelected(false);
-            nutRadioButton.setSelected(false);
-            userRadioButton.setSelected(false);
-        }
-        else if (Objects.equals(user.getRoles(), "USER")) {
-            userRadioButton.setSelected(true);
-            coachRadioButton.setSelected(false);
-            nutRadioButton.setSelected(false);
-            adminRadioButton.setSelected(false);
-        }
-        else if (Objects.equals(user.getRoles(), "COACH")) {
-            coachRadioButton.setSelected(true);
-            nutRadioButton.setSelected(false);
-            userRadioButton.setSelected(false);
-            adminRadioButton.setSelected(false);
-        }
-        else if (Objects.equals(user.getRoles(), "NUTRITIONIST")) {
-            nutRadioButton.setSelected(true);
-            coachRadioButton.setSelected(false);
-            userRadioButton.setSelected(false);
-            adminRadioButton.setSelected(false);
-        }
-        else {
-            userRadioButton.setSelected(true);
-            coachRadioButton.setSelected(false);
-            nutRadioButton.setSelected(false);
-            adminRadioButton.setSelected(false);
-        }
+            if (Objects.equals(user.getRoles(), "ADMIN")) {
+                adminRadioButton.setSelected(true);
+                coachRadioButton.setSelected(false);
+                nutRadioButton.setSelected(false);
+                userRadioButton.setSelected(false);
+            } else if (Objects.equals(user.getRoles(), "USER")) {
+                userRadioButton.setSelected(true);
+                coachRadioButton.setSelected(false);
+                nutRadioButton.setSelected(false);
+                adminRadioButton.setSelected(false);
+            } else if (Objects.equals(user.getRoles(), "COACH")) {
+                coachRadioButton.setSelected(true);
+                nutRadioButton.setSelected(false);
+                userRadioButton.setSelected(false);
+                adminRadioButton.setSelected(false);
+            } else if (Objects.equals(user.getRoles(), "NUTRITIONIST")) {
+                nutRadioButton.setSelected(true);
+                coachRadioButton.setSelected(false);
+                userRadioButton.setSelected(false);
+                adminRadioButton.setSelected(false);
+            } else {
+                userRadioButton.setSelected(true);
+                coachRadioButton.setSelected(false);
+                nutRadioButton.setSelected(false);
+                adminRadioButton.setSelected(false);
+            }
 
-        if (Objects.equals(user.getGender(), "male")) {
-            maleRadioButton.setSelected(true);
-            femaleRadioButton.setSelected(false);
-        }
-        else if (Objects.equals(user.getRoles(), "female")) {
-            maleRadioButton.setSelected(false);
-            femaleRadioButton.setSelected(true);
-        }
+            if (Objects.equals(user.getGender(), "male")) {
+                maleRadioButton.setSelected(true);
+                femaleRadioButton.setSelected(false);
+            } else if (Objects.equals(user.getRoles(), "female")) {
+                maleRadioButton.setSelected(false);
+                femaleRadioButton.setSelected(true);
+            }
 
-        UserService us = new UserService();
-        try {
-            User user2 = us.getUser(user.getCin());
-            phoneTextField.setText(user2.getPhone());
-            dobDatePicker.setValue(user2.getDatebirth().toLocalDate());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+            UserService us = new UserService();
+            try {
+                User user2 = us.getUser(user.getCin());
+                phoneTextField.setText(user2.getPhone());
+                dobDatePicker.setValue(user2.getDatebirth().toLocalDate());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
-        cinTextField.setDisable(true);
-        passwordTextField.setDisable(true);
-        emailTextField.setDisable(true);
+            cinTextField.setDisable(true);
+            passwordTextField.setDisable(true);
+            emailTextField.setDisable(true);
+            lastnameTextField.setDisable(true);
+            firstnameTextField.setDisable(true);
+            phoneTextField.setDisable(true);
+            dobDatePicker.setDisable(true);
+        }
     }
 
     public boolean verifyInputs() {

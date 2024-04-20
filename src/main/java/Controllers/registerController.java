@@ -20,7 +20,7 @@ import java.io.File;
 import java.sql.Timestamp;
 import Services.UserService;
 import Entities.User;
-import org.mindrot.jbcrypt.BCrypt;
+import de.svws_nrw.ext.jbcrypt.BCrypt;
 import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
 import java.time.LocalDate;
@@ -125,17 +125,21 @@ public class registerController implements Initializable {
     public void registerUser() {
         UserService us = new UserService();
         String gender = "male";
+        String image = "Mprofile.png";
 
         if ((maleRadioButton.isSelected()) && (!femaleRadioButton.isSelected())) {
             gender = "male";
+            image = "Mprofile.png";
+
         } else if ((!maleRadioButton.isSelected()) && (femaleRadioButton.isSelected())){
             gender = "female";
+            image = "Fprofile.png";
         }
 
         User user = new User(
                 emailTextField.getText(),
                 "USER",
-                BCrypt.hashpw(passwordTextField.getText(), BCrypt.gensalt()),
+                BCrypt.hashpw(passwordTextField.getText(), BCrypt.gensalt(13)),
                 cinTextField.getText(),
                 lastnameTextField.getText(),
                 firstnameTextField.getText(),
@@ -144,7 +148,7 @@ public class registerController implements Initializable {
                 phoneTextField.getText(),
                 new Timestamp(System.currentTimeMillis()),
                 false,
-                null,
+                image,
                 false,
                 null
         );

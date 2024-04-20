@@ -6,22 +6,30 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 import Services.Session;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import Entities.User;
 import javax.swing.*;
-import org.mindrot.jbcrypt.BCrypt;
+import de.svws_nrw.ext.jbcrypt.BCrypt;
 
 public class profileController implements Initializable {
 
@@ -54,14 +62,21 @@ public class profileController implements Initializable {
     @FXML
     private TextField confirmPasswordTextField;
 
+    String url = null;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        File profilePictureFile = new File("images/Mprofile.png");
-        Image profilePictureImage = new Image(profilePictureFile.toURI().toString());
-        profilePicture.setImage(profilePictureImage);
-
         Session session = Session.getInstance();
         Map<String, Object> userSession = session.getUserSession();
+
+        profilePicture.setFitWidth(200);
+        profilePicture.setFitHeight(200);
+
+        File pictureFile = new File("images/" + userSession.get("profile_picture").toString());
+        Image profilePictureImage = new Image(pictureFile.toURI().toString());
+        profilePicture.setImage(profilePictureImage);
+
+
         usernameLabel.setText(userSession.get("firstname") + " " + userSession.get("lastname"));
 
         cinTextField.setText(userSession.get("cin").toString());
@@ -136,11 +151,17 @@ public class profileController implements Initializable {
             user.setFirstname(firstnameTextField.getText());
             user.setEmail(emailTextField.getText());
             user.setPhone(phoneTextField.getText());
+            user.setProfile_picture(url);
 
             session.getUserSession().put("lastname", lastnameTextField.getText());
             session.getUserSession().put("firstname", firstnameTextField.getText());
             session.getUserSession().put("email", emailTextField.getText());
             session.getUserSession().put("phone", phoneTextField.getText());
+            if (url != null) {
+                session.getUserSession().put("profile_picture",url);
+                user.setProfile_picture(url);
+            }
+
 
             us.modifierSansMdp(user);
 
@@ -160,13 +181,17 @@ public class profileController implements Initializable {
             user.setFirstname(firstnameTextField.getText());
             user.setEmail(emailTextField.getText());
             user.setPhone(phoneTextField.getText());
-            user.setPassword(BCrypt.hashpw(newPasswordTextField.getText(), BCrypt.gensalt()));
+            user.setPassword(BCrypt.hashpw(newPasswordTextField.getText(), BCrypt.gensalt(13)));
 
             session.getUserSession().put("lastname", lastnameTextField.getText());
             session.getUserSession().put("firstname", firstnameTextField.getText());
             session.getUserSession().put("email", emailTextField.getText());
             session.getUserSession().put("phone", phoneTextField.getText());
             session.getUserSession().put("password", BCrypt.hashpw(newPasswordTextField.getText(), BCrypt.gensalt()));
+            if (url != null) {
+                session.getUserSession().put("profile_picture",url);
+                user.setProfile_picture(url);
+            }
 
             us.modifier(user);
 
@@ -213,6 +238,42 @@ public class profileController implements Initializable {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public void pictureButtonOnAction(ActionEvent event) {
+        url = getProfilePicturePath();
+        System.out.println(url);
+        File pictureFile = new File("images/" + url);
+        Image profilePictureImage = new Image(pictureFile.toURI().toString());
+        profilePicture.setFitWidth(200);
+        profilePicture.setFitHeight(200);
+        profilePicture.setImage(profilePictureImage);
+    }
+
+    private String getProfilePicturePath() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose your profile picture");
+
+        File initialDirectory = new File("images");
+        fileChooser.setInitialDirectory(initialDirectory);
+
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        if (selectedFile != null) {
+            try {
+                Files.copy(selectedFile.toPath(), new File(initialDirectory, selectedFile.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+                String url = initialDirectory.toURI().resolve(selectedFile.getName()).toString();
+                String motCle = "images/";
+                int debutIndex = url.indexOf(motCle);
+                debutIndex += motCle.length();
+                return url.substring(debutIndex);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        } else {
+            return null;
         }
     }
 }

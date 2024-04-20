@@ -1,12 +1,11 @@
 package Controllers;
 
 import Entities.User;
+import Services.Session;
 import Services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,7 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.SQLException;
+import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -56,9 +55,7 @@ public class profiledetailsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        File profilePictureFile = new File("images/Mprofile.png");
-        Image profilePictureImage = new Image(profilePictureFile.toURI().toString());
-        profilePicture.setImage(profilePictureImage);
+
     }
 
     public void cancelButtonAction(ActionEvent event) {
@@ -128,6 +125,14 @@ public class profiledetailsController implements Initializable {
 
         verifyTextField.setText(user.getIs_verified().toString());
         verifyTextField.setDisable(true);
+
+        profilePicture.setFitWidth(200);
+        profilePicture.setFitHeight(200);
+
+        File pictureFile = new File("images/" + user.getProfile_picture());
+        Image profilePictureImage = new Image(pictureFile.toURI().toString());
+        profilePicture.setImage(profilePictureImage);
+
     }
 
 }

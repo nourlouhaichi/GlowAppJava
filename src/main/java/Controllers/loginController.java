@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 import java.net.URL;
 import java.io.File;
 import Utils.MyDatabase;
-import org.mindrot.jbcrypt.BCrypt;
+import de.svws_nrw.ext.jbcrypt.BCrypt;
 import Services.Session;
 
 
@@ -83,7 +83,6 @@ public class loginController implements Initializable {
             if (resultSet.next()) {
                 String hashedPassword = resultSet.getString("password");
                 if (BCrypt.checkpw(enterPasswordTextField.getText(), hashedPassword)) {
-                    loginMessageLabel.setText("Welcome!");
 
                     session.getUserSession().put("cin", resultSet.getString("cin"));
                     session.getUserSession().put("email",resultSet.getString("email"));
@@ -100,12 +99,16 @@ public class loginController implements Initializable {
                     session.getUserSession().put("is_verified", resultSet.getBoolean("is_verified"));
                     session.getUserSession().put("auth_code", resultSet.getString("auth_code"));
 
-                    if (Objects.equals(resultSet.getString("roles"), "ADMIN")) {
+                    if (!Objects.equals(resultSet.getString("roles"), "ADMIN")) {
+                        if (Objects.equals(resultSet.getString("is_banned"), "1")) {
+                            loginMessageLabel.setText("You are banned!");
+                        } else {
+                            loadHomeScene();
+                        }
+                    } else {
                         loadAdminHomeScene();
                     }
-                    else {
-                        loadHomeScene();
-                    }
+
 
                 } else {
                     loginMessageLabel.setText("Invalid Password!");

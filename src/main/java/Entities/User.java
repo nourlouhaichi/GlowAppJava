@@ -1,7 +1,6 @@
 package Entities;
 import java.sql.Date;
 import java.sql.Timestamp;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class User {
     private String email;
