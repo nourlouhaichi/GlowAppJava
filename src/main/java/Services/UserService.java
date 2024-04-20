@@ -180,4 +180,14 @@ public class UserService implements IServices<User> {
         preparedStatement.executeUpdate();
     }
 
+    public void modifierBack(User user) throws SQLException {
+        String sql = "UPDATE `user` SET `roles` = ? WHERE cin = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, user.getRoles());
+        preparedStatement.setString(2, user.getCin());
+
+        preparedStatement.executeUpdate();
+    }
+
 }

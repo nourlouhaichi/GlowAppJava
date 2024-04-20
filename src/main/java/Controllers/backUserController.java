@@ -340,15 +340,14 @@ public class backUserController implements Initializable {
     }
 
     public void updateButtonOnAction(ActionEvent event) {
-        if (!lastnameTextField.getText().isBlank()
-                && !firstnameTextField.getText().isBlank()
-                && !phoneTextField.getText().isBlank()
-                && (maleRadioButton.isSelected() || femaleRadioButton.isSelected())
-                && (adminRadioButton.isSelected() || userRadioButton.isSelected() || coachRadioButton.isSelected() || nutRadioButton.isSelected())
-                && dobDatePicker.getValue() != null) {
-            if (verifyUpdateInputs()) {
+        if (cinTextField.isDisable()
+            && passwordTextField.isDisable()
+            && emailTextField.isDisable()
+            && lastnameTextField.isDisable()
+            && firstnameTextField.isDisable()
+            && phoneTextField.isDisable()
+            && dobDatePicker.isDisable()) {
                 updateUser();
-            }
         }
         else {
             JOptionPane.showMessageDialog(null, "Enter all fields!!", "Error", JOptionPane.PLAIN_MESSAGE);
@@ -358,48 +357,33 @@ public class backUserController implements Initializable {
     public void updateUser() {
         UserService us = new UserService();
 
-        String gender = "male";
-        if ((maleRadioButton.isSelected()) && (!femaleRadioButton.isSelected())) {
-            gender = "male";
-        } else if ((!maleRadioButton.isSelected()) && (femaleRadioButton.isSelected())){
-            gender = "female";
-        }
-
-        String role = "USER";
+        String jsonRoles = "[\"ROLE_USER\"]";
         if ((adminRadioButton.isSelected())
                 && (!userRadioButton.isSelected())
                 && (!coachRadioButton.isSelected())
                 && (!nutRadioButton.isSelected())) {
-            role = "ADMIN";
+            jsonRoles = "[\"ROLE_ADMIN\"]";
         } else if ((!adminRadioButton.isSelected())
                 && (userRadioButton.isSelected())
                 && (!coachRadioButton.isSelected())
                 && (!nutRadioButton.isSelected())) {
-            role = "USER";
+            jsonRoles = "[\"ROLE_USER\"]";
         }else if ((!adminRadioButton.isSelected())
                 && (!userRadioButton.isSelected())
                 && (coachRadioButton.isSelected())
                 && (!nutRadioButton.isSelected())) {
-            role = "COACH";
+            jsonRoles = "[\"ROLE_COACH\"]";
         }else if ((!adminRadioButton.isSelected())
                 && (!userRadioButton.isSelected())
                 && (!coachRadioButton.isSelected())
                 && (nutRadioButton.isSelected())) {
-            role = "NUTRITIONIST";
+            jsonRoles = "[\"ROLE_NUTRITIONIST\"]";
         }
 
         try {
             User user = userTable.getSelectionModel().getSelectedItem();
-
-            user.setCin(cinTextField.getText());
-            user.setEmail(emailTextField.getText());
-            user.setLastname(lastnameTextField.getText());
-            user.setFirstname(firstnameTextField.getText());
-            user.setPhone(phoneTextField.getText());
-            user.setDatebirth(Date.valueOf(dobDatePicker.getValue()));
-            user.setGender(gender);
-            user.setRoles(role);
-            us.modifierSansMdp(user);
+            user.setRoles(jsonRoles);
+            us.modifierBack(user);
             JOptionPane.showMessageDialog(null, "User Updated!", "Success", JOptionPane.PLAIN_MESSAGE);
 
         } catch (SQLException e) {
@@ -424,32 +408,32 @@ public class backUserController implements Initializable {
             image = "Fprofile.png";
         }
 
-        String role = "USER";
+        String jsonRoles = "[\"ROLE_USER\"]";
         if ((adminRadioButton.isSelected())
                 && (!userRadioButton.isSelected())
                 && (!coachRadioButton.isSelected())
                 && (!nutRadioButton.isSelected())) {
-            role = "ADMIN";
+            jsonRoles = "[\"ROLE_ADMIN\"]";
         } else if ((!adminRadioButton.isSelected())
                 && (userRadioButton.isSelected())
                 && (!coachRadioButton.isSelected())
                 && (!nutRadioButton.isSelected())) {
-            role = "USER";
+            jsonRoles = "[\"ROLE_USER\"]";
         }else if ((!adminRadioButton.isSelected())
                 && (!userRadioButton.isSelected())
                 && (coachRadioButton.isSelected())
                 && (!nutRadioButton.isSelected())) {
-            role = "COACH";
+            jsonRoles = "[\"ROLE_COACH\"]";
         }else if ((!adminRadioButton.isSelected())
                 && (!userRadioButton.isSelected())
                 && (!coachRadioButton.isSelected())
                 && (nutRadioButton.isSelected())) {
-            role = "NUTRITIONIST";
+            jsonRoles = "[\"ROLE_NUTRITIONIST\"]";
         }
 
         User user = new User(
                 emailTextField.getText(),
-                role,
+                jsonRoles,
                 BCrypt.hashpw(passwordTextField.getText(), BCrypt.gensalt(13)),
                 cinTextField.getText(),
                 lastnameTextField.getText(),
@@ -512,22 +496,22 @@ public class backUserController implements Initializable {
             lastnameTextField.setText(user.getLastname());
             firstnameTextField.setText(user.getFirstname());
 
-            if (Objects.equals(user.getRoles(), "ADMIN")) {
+            if (Objects.equals(user.getRoles(), "[\"ROLE_ADMIN\"]")) {
                 adminRadioButton.setSelected(true);
                 coachRadioButton.setSelected(false);
                 nutRadioButton.setSelected(false);
                 userRadioButton.setSelected(false);
-            } else if (Objects.equals(user.getRoles(), "USER")) {
+            } else if (Objects.equals(user.getRoles(), "[\"ROLE_USER\"]")) {
                 userRadioButton.setSelected(true);
                 coachRadioButton.setSelected(false);
                 nutRadioButton.setSelected(false);
                 adminRadioButton.setSelected(false);
-            } else if (Objects.equals(user.getRoles(), "COACH")) {
+            } else if (Objects.equals(user.getRoles(), "[\"ROLE_COACH\"]")) {
                 coachRadioButton.setSelected(true);
                 nutRadioButton.setSelected(false);
                 userRadioButton.setSelected(false);
                 adminRadioButton.setSelected(false);
-            } else if (Objects.equals(user.getRoles(), "NUTRITIONIST")) {
+            } else if (Objects.equals(user.getRoles(), "[\"ROLE_NUTRITIONIST\"]")) {
                 nutRadioButton.setSelected(true);
                 coachRadioButton.setSelected(false);
                 userRadioButton.setSelected(false);
@@ -542,7 +526,7 @@ public class backUserController implements Initializable {
             if (Objects.equals(user.getGender(), "male")) {
                 maleRadioButton.setSelected(true);
                 femaleRadioButton.setSelected(false);
-            } else if (Objects.equals(user.getRoles(), "female")) {
+            } else if (Objects.equals(user.getGender(), "female")) {
                 maleRadioButton.setSelected(false);
                 femaleRadioButton.setSelected(true);
             }
@@ -598,24 +582,4 @@ public class backUserController implements Initializable {
         }
     }
 
-    public boolean verifyUpdateInputs() {
-        Pattern digitsPattern = Pattern.compile("\\d{8}");
-        Pattern lettersPattern = Pattern.compile("\\p{L}+");
-
-        if (!lettersPattern.matcher(lastnameTextField.getText()).matches()) {
-            JOptionPane.showMessageDialog(null, "Lastname must contain only letters!", "Error", JOptionPane.PLAIN_MESSAGE);
-            return false;
-        } else if (!lettersPattern.matcher(firstnameTextField.getText()).matches()) {
-            JOptionPane.showMessageDialog(null, "Firstname must contain only letters!", "Error", JOptionPane.PLAIN_MESSAGE);
-            return false;
-        } else if (!digitsPattern.matcher(phoneTextField.getText()).matches()) {
-            JOptionPane.showMessageDialog(null, "Phone must contain only 8 digits!", "Error", JOptionPane.PLAIN_MESSAGE);
-            return false;
-        } else if (dobDatePicker.getValue().isAfter(LocalDate.now().minusYears(18))) {
-            JOptionPane.showMessageDialog(null, "Person must be over 18 years old!", "Error", JOptionPane.PLAIN_MESSAGE);
-            return false;
-        } else {
-            return true;
-        }
-    }
 }

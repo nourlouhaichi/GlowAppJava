@@ -99,7 +99,7 @@ public class loginController implements Initializable {
                     session.getUserSession().put("is_verified", resultSet.getBoolean("is_verified"));
                     session.getUserSession().put("auth_code", resultSet.getString("auth_code"));
 
-                    if (!Objects.equals(resultSet.getString("roles"), "ADMIN")) {
+                    if (!Objects.equals(resultSet.getString("roles"),"[\"ROLE_ADMIN\"]")) {
                         if (Objects.equals(resultSet.getString("is_banned"), "1")) {
                             loginMessageLabel.setText("You are banned!");
                         } else {

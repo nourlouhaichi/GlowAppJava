@@ -114,7 +114,7 @@ public class registerController implements Initializable {
 
                         try {
                             GMailer mail = new GMailer();
-                            mail.sendHtmlMail("Banned from GlowApp", """
+                            mail.sendHtmlMail("Welcome To GlowApp", """
                             <!DOCTYPE html>
                                    <html lang="en">
                                    <head>
@@ -188,9 +188,10 @@ public class registerController implements Initializable {
             image = "Fprofile.png";
         }
 
+        String jsonRoles = "[\"ROLE_USER\"]";
         User user = new User(
                 emailTextField.getText(),
-                "USER",
+                jsonRoles,
                 BCrypt.hashpw(passwordTextField.getText(), BCrypt.gensalt(13)),
                 cinTextField.getText(),
                 lastnameTextField.getText(),
