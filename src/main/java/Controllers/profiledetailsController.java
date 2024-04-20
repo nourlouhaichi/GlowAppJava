@@ -1,7 +1,7 @@
 package Controllers;
 
 import Entities.User;
-import Services.Session;
+import Services.GMailer;
 import Services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -71,6 +70,60 @@ public class profiledetailsController implements Initializable {
                 banTextField.setText("true");
                 banButton.setText("Unban");
                 banButton.setStyle("-fx-background-color:   #81c408;");
+
+                try {
+                    GMailer mail = new GMailer();
+                    mail.sendHtmlMail("Banned from GlowApp", """
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Banned from GlowApp</title>
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                                background-color: #f4f4f4;
+                                margin: 0;
+                                padding: 0;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                height: 100vh;
+                                text-align: center;
+                            }
+                            .container {
+                                background-color: #fff;
+                                padding: 20px;
+                                border-radius: 8px;
+                                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            }
+                            h1 {
+                                color: #FF0000;
+                                margin-bottom: 20px;
+                            }
+                            p {
+                                color: #333;
+                                font-size: 16px;
+                                line-height: 1.6;
+                                margin-bottom: 20px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <img src="https://i.ibb.co/FqtPjbH/logoglowapp.png" style="max-width: 300px; height: auto;" alt="GlowApp Logo">
+                            <h1>You have been banned from GlowApp</h1>
+                            <p>We regret to inform you that your account has been banned due to inappropriate behavior.</p>
+                            <p>If you believe this ban is a mistake, please contact our support team at <a href="mailto:support@glowapp.com">support@glowapp.com</a>.</p>
+                        </div>
+                    </body>
+                    </html>
+                    """);
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
             else {
                 us.unbanUser(cinTextField.getText());

@@ -1,5 +1,6 @@
 package Controllers;
 
+import Services.GMailer;
 import Utils.MyDatabase;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -110,6 +111,57 @@ public class registerController implements Initializable {
                         JOptionPane.showMessageDialog(null, "You are registered!", "Success", JOptionPane.PLAIN_MESSAGE);
                         Stage stage = (Stage) registerButton.getScene().getWindow();
                         stage.close();
+
+                        try {
+                            GMailer mail = new GMailer();
+                            mail.sendHtmlMail("Banned from GlowApp", """
+                            <!DOCTYPE html>
+                                   <html lang="en">
+                                   <head>
+                                       <meta charset="UTF-8">
+                                       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                       <title>Welcome to GlowApp!</title>
+                                       <style>
+                                           body {
+                                               font-family: Arial, sans-serif;
+                                               background-color: #f4f4f4;
+                                               margin: 0;
+                                               padding: 0;
+                                               display: flex;
+                                               justify-content: center;
+                                               align-items: center;
+                                               height: 100vh;
+                                               text-align: center;
+                                           }
+                                           .container {
+                                               background-color: #fff;
+                                               padding: 20px;
+                                               border-radius: 8px;
+                                               box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                                           }
+                                           h1 {
+                                               color: #81C408;
+                                           }
+                                           p {
+                                               color: #FFB524;
+                                           }
+                                       </style>
+                                   </head>
+                                   <body>
+                                       <div class="container">
+                                           <img src="https://i.ibb.co/FqtPjbH/logoglowapp.png" style="max-width: 300px; height: auto;" alt="GlowApp Logo">
+                                           <h1>Welcome to our website GlowApp!</h1>
+                                           <p>You are successfully registered.</p>
+                                           <p class="black-text">Explore our features and start enjoying the benefits!</p>
+                                           <img src="https://i.ibb.co/dL4QbrY/arrangement-vue-dessus-halteres-espace-copie.jpg" style="max-width: 500px; height: auto;" alt="GlowApp Logo">
+                                       </div>
+                                   </body>
+                                   </html>
+                                    """);
+
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 } catch (SQLException e) {
                     // Handle database errors
