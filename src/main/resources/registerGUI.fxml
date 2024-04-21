@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="600.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.registerController">
+   <center>
+      <AnchorPane prefHeight="600.0" prefWidth="400.0">
+         <children>
+            <TextField fx:id="cinTextField" layoutX="159.0" layoutY="112.0" promptText="cin" />
+            <Label layoutX="43.0" layoutY="112.0" text="Cin" textFill="#8c8372">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="43.0" layoutY="148.0" text="Lastname" textFill="#8c8372">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="188.0" text="Firstname" textFill="#8c8372">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="230.0" text="Gender" textFill="#8c8372">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="269.0" text="Date of birth" textFill="#8c8372">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="309.0" text="Phone" textFill="#8c8372">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="349.0" text="Email" textFill="#8c8372">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="391.0" text="Password" textFill="#8c8372">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="firstnameTextField" layoutX="159.0" layoutY="188.0" promptText="firstname" />
+            <TextField fx:id="lastnameTextField" layoutX="159.0" layoutY="148.0" promptText="lastname" />
+            <TextField fx:id="emailTextField" layoutX="159.0" layoutY="345.0" promptText="email address" />
+            <TextField fx:id="phoneTextField" layoutX="159.0" layoutY="305.0" promptText="phone" />
+            <PasswordField fx:id="passwordTextField" layoutX="159.0" layoutY="387.0" promptText="password" />
+            <Button fx:id="registerButton" layoutX="34.0" layoutY="537.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="34.0" prefWidth="131.0" style="-fx-background-color: #81c408;" text="Register" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="cancelButton" layoutX="182.0" layoutY="537.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="34.0" prefWidth="131.0" style="-fx-background-color: ffb524;" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <RadioButton fx:id="femaleRadioButton" layoutX="237.0" layoutY="231.0" mnemonicParsing="false" text="Female" textFill="#615b5b" />
+            <RadioButton fx:id="maleRadioButton" layoutX="166.0" layoutY="230.0" mnemonicParsing="false" text="Male" textFill="#615b5b" />
+            <DatePicker fx:id="dobDatePicker" layoutX="158.0" layoutY="265.0" prefHeight="26.0" prefWidth="150.0" />
+            <AnchorPane layoutY="-1.0" prefHeight="88.0" prefWidth="350.0" style="-fx-background-color: #ffb524;">
+               <children>
+                  <Text fill="WHITE" layoutX="72.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="50.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <Label fx:id="registerMessageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="498.0" prefHeight="18.0" prefWidth="277.0" textFill="#f44405">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="captchaTextField" layoutX="141.0" layoutY="443.0" prefHeight="36.0" prefWidth="167.0" promptText="Enter the characters you see" />
+            <Label fx:id="captchaLabel" layoutX="29.0" layoutY="438.0" prefHeight="40.0" prefWidth="126.0" textFill="#81c408">
+               <font>
+                  <Font name="Bell MT Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="attemptsLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="140.0" layoutY="425.0" prefHeight="17.0" prefWidth="169.0" text="You have 3 attempts" textFill="#9a9a9a">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+   <right>
+      <AnchorPane prefHeight="602.0" prefWidth="190.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="brandingImageView" fitHeight="715.0" fitWidth="248.0" layoutX="-13.0" layoutY="-113.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/registerpic.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

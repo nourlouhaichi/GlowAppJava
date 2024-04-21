@@ -11,6 +11,4 @@ public interface IServices <T>{
 
     public List<T> afficher() throws SQLException;
 
-    T afficher(T t) throws  SQLException;
-
 }

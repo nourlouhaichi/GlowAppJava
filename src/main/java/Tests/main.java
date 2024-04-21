@@ -2,6 +2,8 @@ package Tests;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+
+import Services.GMailer;
 import Services.UserService;
 import java.sql.SQLException;
 
@@ -11,9 +13,6 @@ import Entities.User;
 public class main extends Object {
 
     public static void main(String[] args) {
-
-        MyDatabase bd = MyDatabase.getInstance();
-        UserService us = new UserService();
 
         User user = new User(
                 "test@gmail.com",
@@ -32,17 +31,26 @@ public class main extends Object {
                 null
         );
 
+        MyDatabase bd = MyDatabase.getInstance();
+        UserService us = new UserService();
+
         try {
-            us.ajouter(user);
+            GMailer mail = new GMailer();
+            /*mail.sendMail("A new message", """
+                    Dear reader,
+                                    
+                    Hello world.
+                                    
+                    Best regards,
+                    myself
+                    """);*/
+            //us.ajouter(user);
             user.setEmail("foulen@gmail.com");
-            us.modifier(user);
+            //us.modifier(user);
             System.out.println(us.afficher());
-            System.out.println(us.afficher(user));
-            us.supprimer(user);
-        } catch (SQLException e) {
+            //us.supprimer(user);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }
