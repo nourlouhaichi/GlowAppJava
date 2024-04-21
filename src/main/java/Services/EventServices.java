@@ -63,17 +63,19 @@ public class EventServices  {
                     event.setTitle(rs.getString("title"));
                     event.setDescription(rs.getString("description"));
                     event.setLocation(rs.getString("location"));
+                    event.setImageUrl(rs.getString("image"));
                     event.setDate(rs.getTimestamp("date").toLocalDateTime());
                     event.setNbP(rs.getInt("nb_p"));
                     String cin = String.valueOf(rs.getInt("user_cin"));
                     int categoryId = rs.getInt("category_id");
-                    UserService userService = new UserService();
+                    User user= new User();
+                    user.setFirstname(rs.getString("firstname"));
+                    user.setLastname(rs.getString("lastname"));
                     CategoryServices categoryServices = new CategoryServices();
                     Category category = categoryServices.getCategoryById(categoryId);
-                    User user = userService.getUserByCin(cin);
+
                     event.setUserId(user);
                     event.setCategoryId(category);
-                    System.out.println(event);
                 }
             }
         }
@@ -108,7 +110,7 @@ public class EventServices  {
                 e.setDate(rs.getTimestamp("date").toLocalDateTime()); // Convertir Timestamp en LocalDateTime
                 e.setNbP(rs.getInt("nb_p"));
                 e.setImageUrl(rs.getString("image"));
-
+                System.out.println(e.getImageUrl());
                 // Retrieve the cin from the result set
                 String cin = String.valueOf(rs.getInt("user_cin"));
                 int id_cat = (rs.getInt("category_id"));
@@ -116,7 +118,7 @@ public class EventServices  {
                 CategoryServices catus = new CategoryServices();
                 Category cat = catus.getCategoryById(id_cat);
                 // Retrieve the User object associated with the cin
-                User user = userService.getUserByCin(cin);
+                User user = userService.getUser(cin);
                 // Check if the User object is null
                 e.setUserId(user);
                 e.setCategoryId(cat);
@@ -130,7 +132,7 @@ public class EventServices  {
 
         return events;
     }
-    }
+}
 
 
 

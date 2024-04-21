@@ -49,3 +49,28 @@
     -fx-background-color: #FFFFFF;
         -fx-background-radius: 30;
 }
+.navbar {
+    -fx-background-color: #81c408; /* Background color of the navbar */
+
+
+
+    -fx-border-color:  #ffb524; /* Add border color */
+    -fx-border-width: 1px; /* Set border width */
+    -fx-border-radius: 5px; /* Optionally round the corners of the container */
+    -fx-background-radius: 5px; /* Optionally round the corners of the container background */
+}
+
+
+.nav-button {
+    -fx-background-color: white; /* Change this to the desired color */
+    -fx-text-fill: black; /* Change text color to improve readability */
+    -fx-font-size: 8px; /* Adjust font size as needed */
+    -fx-font-weight: bold; /* Optionally make the text bold */
+    -fx-font-family: "Arial", sans-serif; /* Use a good font type */
+
+    -fx-background-radius: 5px; /* Optionally round the button corners */
+}
+
+.nav-button:hover {
+    -fx-background-color: #303F9F; /* Change hover color as desired */
+}

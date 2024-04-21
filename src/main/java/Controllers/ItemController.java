@@ -37,9 +37,9 @@ public class ItemController {
 
     }
     // Method to set location information in the UI
-    public void setLocation(String name, double price, Image image) {
+    public void setLocation(String name, Image image) {
         nameLabel.setText(name);
-        priceLable.setText(String.valueOf(price)); // Format price with two decimal places
+
         img.setImage(image);
     }
 

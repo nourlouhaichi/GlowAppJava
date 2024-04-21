@@ -117,8 +117,9 @@ public class UserService implements IServices<User> {
         }
 
     }
-    public User getUserByCin(String cin) throws SQLException {
-        String sql = "SELECT * FROM user WHERE cin = ?";
+
+    public User getUser(String cin) throws SQLException {
+        String sql = "SELECT * FROM user WHERE `cin` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, cin);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -143,5 +144,7 @@ public class UserService implements IServices<User> {
             // Handle the case when no matching record is found
             return null;
         }
+
     }
+
 }

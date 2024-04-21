@@ -4,6 +4,7 @@ import Entities.Event;
 import Utils.MyDatabase;
 import Entities.Reservation;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +17,18 @@ public class ReservationServices  {
 
 
     public void ajouter(Reservation reservation) throws SQLException {
-        String req = "INSERT INTO reservation (created_at) VALUES (?, ?)";
+        String req = "INSERT INTO reservation (create_at, user_cin, qr_code, event_id) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stm = connection.prepareStatement(req)) {
-            stm.setTimestamp(1, Timestamp.valueOf(reservation.getCreatedAt()));
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            stm.setTimestamp(1, Timestamp.valueOf(currentDateTime));
+            stm.setString(2, reservation.getUser().getCin());
+            stm.setString(3, "testqr"); // Assuming qr_code is a fixed value for now
+            stm.setInt(4, reservation.getEvent().getId());
             stm.executeUpdate();
         }
         System.out.println("Reservation ajoutée");
     }
+
 
 
 
@@ -64,7 +70,7 @@ public class ReservationServices  {
                 EventServices x = new EventServices();
                 r.setEvent(x.getEventById(Event));
                 UserService y = new UserService();
-                r.setUser(y.getUserByCin(User));
+                r.setUser(y.getUser(User));
 
                 // Ajouter la réservation à la liste
                 reservations.add(r);
