@@ -1,5 +1,6 @@
 package Services;
 
+import Entities.Comment;
 import Entities.Publication;
 import Entities.User;
 import Utils.MyDatabase;
@@ -68,6 +69,11 @@ public class UserService implements IServices<User> {
     }
 
     @Override
+    public void supprimer(Comment comment) throws SQLException {
+
+    }
+
+    @Override
     public List<User> afficher() throws SQLException {
         String sql = "SELECT * FROM user";
         Statement statement = connection.createStatement();
@@ -93,6 +99,11 @@ public class UserService implements IServices<User> {
             users.add(u);
         }
         return users;
+    }
+
+    @Override
+    public List<User> affiche(int publication_id) throws SQLException {
+        return List.of();
     }
 
     @Override
@@ -126,7 +137,7 @@ public class UserService implements IServices<User> {
     }
 
     @Override
-    public Publication afficher(int id) throws SQLException {
+    public List<Comment> afficher(int id) throws SQLException {
         return null;
     }
 }

@@ -1,6 +1,7 @@
 package Entities;
 
 import java.util.Date;
+import java.util.List;
 
 public class Publication {
     private int id;
@@ -11,6 +12,7 @@ public class Publication {
     private String imagename;
     private Date updated;
     private String usercin;
+    private List<Comment> comments;
 
     public Publication() {}
 
@@ -19,6 +21,15 @@ public class Publication {
         this.titrep = titrep;
         this.typep = typep;
         this.contentp = contentp;
+    }
+
+    public void addComment(Comment comment) {
+        comment.setPublication_id(this.id);
+        comments.add(comment);
+    }
+
+    public List<Comment> getComments() {
+        return comments;
     }
 
     public int getId() {

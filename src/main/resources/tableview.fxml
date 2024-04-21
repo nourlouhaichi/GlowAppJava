@@ -39,5 +39,10 @@
             <Image url="@../../../../../../../Users/ASUS/Desktop/62100.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="32.0" layoutX="650.0" layoutY="29.0" onMouseClicked="#commetonclick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Users/ASUS/Desktop/Notice-Free-PNG-Image.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

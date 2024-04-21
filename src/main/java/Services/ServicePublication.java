@@ -1,5 +1,6 @@
 package Services;
 
+import Entities.Comment;
 import Entities.Publication;
 import Entities.User;
 import Utils.MyDatabase;
@@ -61,6 +62,11 @@ public class ServicePublication implements IServices<Publication> {
     }
 
     @Override
+    public void supprimer(Comment comment) throws SQLException {
+
+    }
+
+    @Override
     public List<Publication> afficher() throws SQLException {
         List<Publication> publications = new ArrayList<>();
         String req = "SELECT * FROM publication";
@@ -72,11 +78,15 @@ public class ServicePublication implements IServices<Publication> {
                 publication.setTitrep(rs.getString("titre_p"));
                 publication.setTypep(rs.getString("type_p"));
                 publication.setContentp(rs.getString("contenue_p"));
-                // You might need to set other properties too
                 publications.add(publication);
             }
         }
         return publications;
+    }
+
+    @Override
+    public List<Publication> affiche(int publication_id) throws SQLException {
+        return List.of();
     }
 
     @Override
@@ -85,7 +95,7 @@ public class ServicePublication implements IServices<Publication> {
     }
 
     @Override
-    public Publication afficher(int id) throws SQLException {
+    public List<Comment> afficher(int id) throws SQLException {
         String req = "SELECT * FROM publication WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(req);
         preparedStatement.setInt(1, id);
@@ -97,7 +107,7 @@ public class ServicePublication implements IServices<Publication> {
             publication.setTitrep(rs.getString("titre_p"));
             publication.setTypep(rs.getString("type_p"));
             publication.setContentp(rs.getString("contenue_p"));
-            return publication;
+            return (List<Comment>) publication;
         } else {
             return null; // Publication not found
         }

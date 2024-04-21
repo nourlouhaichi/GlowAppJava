@@ -91,10 +91,10 @@ public class tableviewController {
         // Fetch updated data from the database
         List<Publication> publications = null;
         try {
-            publications = servicePublication.afficher(); // Replace with your method for fetching data from the database
+            publications = servicePublication.afficher();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database error
+
         }
 
         // Repopulate TableView with updated data
@@ -117,4 +117,23 @@ public class tableviewController {
 
 }
 
+    public void commetonclick(MouseEvent mouseEvent) {  Publication selectedPublication = pubtable.getSelectionModel().getSelectedItem();
+        if (selectedPublication != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Commenttableview.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            CommenttableviewController controller = loader.getController();
+            controller.setSelectedPublication(selectedPublication);
+            controller.initialize();
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(root));
+            newStage.show();
+        } else {
+            System.out.println("No publication selected.");
+        }
+    }
 }

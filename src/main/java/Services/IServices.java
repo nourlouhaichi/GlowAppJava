@@ -1,5 +1,6 @@
 package Services;
 
+import Entities.Comment;
 import Entities.Publication;
 import Entities.User;
 
@@ -16,9 +17,13 @@ public interface IServices <T>{
 
     void supprimer(Publication publication) throws SQLException;
 
+    void supprimer(Comment comment) throws SQLException;
+
     public List<T> afficher() throws SQLException;
+
+    public List<T> affiche(int publication_id) throws SQLException;
 
     T afficher(T t) throws  SQLException;
 
-    Publication afficher(int id) throws SQLException;
+    List<Comment> afficher(int id) throws SQLException;
 }

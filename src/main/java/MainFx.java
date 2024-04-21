@@ -16,7 +16,7 @@ public class MainFx extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         MyDatabase bd= MyDatabase.getInstance();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditPublication.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Commenttableview.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setTitle("Admin");
