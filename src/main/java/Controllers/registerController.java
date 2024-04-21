@@ -1,6 +1,5 @@
 package Controllers;
 
-import Services.GMailer;
 import Utils.MyDatabase;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +14,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.DatePicker;
 
 import java.sql.*;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.net.URL;
 import java.io.File;
@@ -25,6 +25,7 @@ import de.svws_nrw.ext.jbcrypt.BCrypt;
 import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
 import java.time.LocalDate;
+import java.util.Random;
 
 public class registerController implements Initializable {
 
@@ -36,6 +37,10 @@ public class registerController implements Initializable {
     private Button registerButton;
     @FXML
     private Label registerMessageLabel;
+    @FXML
+    private Label captchaLabel;
+    @FXML
+    private Label attemptsLabel;
     @FXML
     private TextField cinTextField;
     @FXML
@@ -49,17 +54,32 @@ public class registerController implements Initializable {
     @FXML
     private TextField passwordTextField;
     @FXML
+    private TextField captchaTextField;
+    @FXML
     private RadioButton maleRadioButton;
     @FXML
     private RadioButton femaleRadioButton;
     @FXML
     private DatePicker dobDatePicker;
 
+    int attempts = 0 ;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File brandingFile = new File("images/registerpic.jpg");
         Image brandingImage = new Image(brandingFile.toURI().toString());
         brandingImageView.setImage(brandingImage);
+
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        int length = 5;
+        Random random = new Random();
+        StringBuilder captcha = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(chars.length());
+            captcha.append(chars.charAt(index));
+        }
+        System.out.println(captcha.toString());
+        captchaLabel.setText(captcha.toString());
     }
 
     public void cancelButtonAction(ActionEvent event) {
@@ -74,9 +94,11 @@ public class registerController implements Initializable {
                 && !phoneTextField.getText().isBlank()
                 && !emailTextField.getText().isBlank()
                 && !passwordTextField.getText().isBlank()
+                && !captchaTextField.getText().isBlank()
                 && (maleRadioButton.isSelected() || femaleRadioButton.isSelected())
                 && dobDatePicker.getValue() != null) {
             if (verifyInputs()) {
+
                 try {
                     MyDatabase bd = MyDatabase.getInstance();
                     Connection connectDB = bd.getConnection();
@@ -107,11 +129,25 @@ public class registerController implements Initializable {
                         registerMessageLabel.setText("Phone number already exists!");
                     }
                     else {
-                        registerUser();
-                        JOptionPane.showMessageDialog(null, "You are registered!", "Success", JOptionPane.PLAIN_MESSAGE);
-                        Stage stage = (Stage) registerButton.getScene().getWindow();
-                        stage.close();
 
+                        if(Objects.equals(captchaLabel.getText(), captchaTextField.getText())) {
+                            registerUser();
+                            JOptionPane.showMessageDialog(null, "You are registered!", "Success", JOptionPane.PLAIN_MESSAGE);
+                            Stage stage = (Stage) registerButton.getScene().getWindow();
+                            stage.close();
+                        }
+                        else {
+                            registerMessageLabel.setText("Wrong Characters!");
+                            captchaLabel.setText(generateCaptcha());
+                            attempts++;
+                            int last = 3 - attempts;
+                            attemptsLabel.setText("You have " + last + " attempts");
+                            if (attempts == 3) {
+                                JOptionPane.showMessageDialog(null, "You are a robot!", "Failed", JOptionPane.PLAIN_MESSAGE);
+                                Stage stage = (Stage) registerButton.getScene().getWindow();
+                                stage.close();
+                            }
+                        }
                     }
                 } catch (SQLException e) {
                     // Handle database errors
@@ -193,6 +229,19 @@ public class registerController implements Initializable {
         } else {
             return true;
         }
+    }
+
+    public static String generateCaptcha() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        int length = 5;
+        Random random = new Random();
+        StringBuilder captcha = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(chars.length());
+            captcha.append(chars.charAt(index));
+        }
+        return captcha.toString();
     }
 
 }
