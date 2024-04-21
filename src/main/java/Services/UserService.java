@@ -3,8 +3,10 @@ package Services;
 import Entities.User;
 import Utils.MyDatabase;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class UserService implements IServices<User> {
@@ -188,6 +190,66 @@ public class UserService implements IServices<User> {
         preparedStatement.setString(2, user.getCin());
 
         preparedStatement.executeUpdate();
+    }
+
+    public int countGender(String gender) throws SQLException {
+        String sql = "SELECT COUNT(*) AS gender_count FROM user WHERE gender = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, gender);
+        ResultSet rs = preparedStatement.executeQuery();
+
+        int genderCount = 0;
+        if (rs.next()) {
+            genderCount = rs.getInt("gender_count");
+        }
+
+        return genderCount;
+    }
+
+    public int countBans(Boolean ban) throws SQLException {
+        String sql = "SELECT COUNT(*) AS ban_count FROM user WHERE is_banned = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setBoolean(1, ban);
+        ResultSet rs = preparedStatement.executeQuery();
+
+        int banCount = 0;
+        if (rs.next()) {
+            banCount = rs.getInt("ban_count");
+        }
+
+        return banCount;
+    }
+
+    public int countRole(String role) throws SQLException {
+        String sql = "SELECT COUNT(*) AS role_count FROM user WHERE roles = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, role);
+        ResultSet rs = preparedStatement.executeQuery();
+
+        int roleCount = 0;
+        if (rs.next()) {
+            roleCount = rs.getInt("role_count");
+        }
+
+        return roleCount;
+    }
+
+    public Map<String, Integer> getUserEvolutionData() throws SQLException {
+        String sql = "SELECT SUBSTRING(created_at, 1, 10) AS date, COUNT(cin) AS userCount " +
+                "FROM user " +
+                "GROUP BY SUBSTRING(created_at, 1, 10) " +
+                "ORDER BY SUBSTRING(created_at, 1, 10) ASC";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        Map<String, Integer> userEvolutionDataMap = new HashMap<>();
+        while (resultSet.next()) {
+            String date = resultSet.getString("date");
+            int userCount = resultSet.getInt("userCount");
+            userEvolutionDataMap.put(date, userCount);
+        }
+        return userEvolutionDataMap;
     }
 
 }
