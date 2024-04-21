@@ -1,5 +1,8 @@
 package Controllers;
 
+import Entities.User;
+import Services.GMailer;
+import Services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +19,7 @@ import javafx.stage.StageStyle;
 
 import java.sql.*;
 import java.util.Objects;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.net.URL;
 import java.io.File;
@@ -40,6 +44,7 @@ public class loginController implements Initializable {
     @FXML
     private TextField enterPasswordTextField;
     private Session session;
+    String code = generateRandomCode();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,6 +70,98 @@ public class loginController implements Initializable {
     public void exitButtonAction(ActionEvent event) {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void resetButtonAction(ActionEvent event) {
+        if (!emailTextField.getText().isBlank()) {
+            try {
+                MyDatabase bd = MyDatabase.getInstance();
+                Connection connectDB = bd.getConnection();
+
+                String query = "SELECT * FROM User WHERE email = ?";
+                PreparedStatement statement = connectDB.prepareStatement(query);
+                statement.setString(1, emailTextField.getText());
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    String username = resultSet.getString("lastname") + " " + resultSet.getString("firstname");
+                    UserService us = new UserService();
+                    us.resetPassword(emailTextField.getText(),BCrypt.hashpw(code, BCrypt.gensalt(13)));
+                    GMailer mail = new GMailer();
+                    mail.sendHtmlMail("New Password", """
+                <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Verification Code</title>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    background-color: #f4f4f4;
+                                    margin: 0;
+                                    padding: 0;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    height: 100vh;
+                                    text-align: center;
+                                }
+                                .container {
+                                    background-color: #fff;
+                                    padding: 20px;
+                                    border-radius: 8px;
+                                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                                }
+                                h1 {
+                                    color: #FFB524;
+                                    margin-bottom: 20px;
+                                }
+                                p {
+                                    color: #333;
+                                    font-size: 16px;
+                                    line-height: 1.6;
+                                    margin-bottom: 20px;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="container">
+                                <img src="https://i.ibb.co/FqtPjbH/logoglowapp.png" style="max-width: 300px; height: auto;" alt="GlowApp Logo">
+                                <h1>Dear
+                                """ + username + """
+                                </h1>
+                                <p>Please find below your new password:</p>
+                                <p>
+                                 """ + code + """
+                                </p>
+                                <p>Thank you!</p>
+                            </div>
+                        </body>
+                        </html>
+                """);
+
+                } else {
+                    loginMessageLabel.setText("User not found!");
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else {
+            loginMessageLabel.setText("Enter email!");
+        }
+    }
+
+    public static String generateRandomCode() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        int length = 9;
+        Random random = new Random();
+        StringBuilder code = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(chars.length());
+            code.append(chars.charAt(index));
+        }
+        return code.toString();
     }
 
     public void registerButtonOnAction(ActionEvent event) {
