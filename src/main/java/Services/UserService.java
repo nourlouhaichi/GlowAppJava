@@ -182,6 +182,17 @@ public class UserService implements IServices<User> {
         preparedStatement.executeUpdate();
     }
 
+    public void verifyUser(String cin , String code) throws SQLException {
+        String sql = "UPDATE `user` SET `is_verified`=? ,`auth_code`=? WHERE cin = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setBoolean(1, true);
+        preparedStatement.setString(2, code);
+        preparedStatement.setString(3, cin);
+
+        preparedStatement.executeUpdate();
+    }
+
     public void modifierBack(User user) throws SQLException {
         String sql = "UPDATE `user` SET `roles` = ? WHERE cin = ?";
 

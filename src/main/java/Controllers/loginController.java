@@ -102,6 +102,8 @@ public class loginController implements Initializable {
                     if (!Objects.equals(resultSet.getString("roles"),"[\"ROLE_ADMIN\"]")) {
                         if (Objects.equals(resultSet.getString("is_banned"), "1")) {
                             loginMessageLabel.setText("You are banned!");
+                        } else if (Objects.equals(resultSet.getString("is_verified"), "0")){
+                            loadVerificationScene(resultSet.getString("cin"));
                         } else {
                             loadHomeScene();
                         }
@@ -160,6 +162,24 @@ public class loginController implements Initializable {
             backStage.show();
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadVerificationScene(String cin) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/authCodeGUI.fxml"));
+            Parent root = loader.load();
+
+            authCodeController controller = loader.getController();
+            controller.getCin(cin);
+
+            Stage codeStage = new Stage();
+            codeStage.initStyle(StageStyle.UNDECORATED);
+            codeStage.setScene(new Scene(root,500,150));
+            codeStage.show();
 
         } catch (Exception e) {
             e.printStackTrace();

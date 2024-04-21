@@ -114,7 +114,8 @@ public class profiledetailsController implements Initializable {
                         <div class="container">
                             <img src="https://i.ibb.co/FqtPjbH/logoglowapp.png" style="max-width: 300px; height: auto;" alt="GlowApp Logo">
                             <h1>You have been banned from GlowApp</h1>
-                            <p>We regret to inform you that your account has been banned due to inappropriate behavior.</p>
+                            <p> """ + lastnameTextField.getText() + " " + firstnameTextField.getText() + """
+                            , we regret to inform you that your account has been banned due to inappropriate behavior.</p>
                             <p>If you believe this ban is a mistake, please contact our support team at <a href="mailto:support@glowapp.com">support@glowapp.com</a>.</p>
                         </div>
                     </body>
