@@ -80,7 +80,8 @@ public class ListProduitController {
     @FXML
     private AnchorPane main_form;
 
-
+    @FXML
+    private Button CategoryButton;
     @FXML
     private Button profileButton;
 
@@ -269,7 +270,7 @@ public class ListProduitController {
                     UpdateProduitController updateProduitController = loader.getController();
 
                     // Initialize the update interface with the selected produit information
-                    //updateProduitController.initData(selectedProduit);
+                    updateProduitController.initData(selectedProduit);
 
                     // Create a new stage
                     Stage stage = new Stage();
@@ -291,10 +292,32 @@ public class ListProduitController {
         }
 
     @FXML
+    void categorieButton(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListCateforieP.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @FXML
     void userButtonOnAction(ActionEvent event) {
 
     }
 
-}
+    }
+
+
 
 

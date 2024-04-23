@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ListProduitController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CategorieProdListController">
     <children>
         <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
             <children>
@@ -74,12 +74,12 @@
                                                 <Font name="Arial Rounded MT Bold" size="18.0" />
                                             </font>
                                         </Button>
-                                        <Button fx:id="userButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" onAction="#userButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
+                                        <Button fx:id="ProduitButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" onAction="#userButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
                                             <graphic>
 
                                             </graphic>
                                         </Button>
-                                        <Button fx:id="CategoryButton" layoutX="16.0" layoutY="299.0" mnemonicParsing="false" onAction="#categorieButton" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Catergory">
+                                        <Button fx:id="CategoryButton" layoutX="16.0" layoutY="299.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Catergory">
                                             <graphic>
 
                                             </graphic>
@@ -108,45 +108,36 @@
                             <children>
                                 <AnchorPane fx:id="home_form" layoutX="63.0" layoutY="87.0" prefHeight="555.0" prefWidth="889.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
-                                        <AnchorPane layoutX="6.0" layoutY="11.0" prefHeight="528.0" prefWidth="877.0" stylesheets="@dashboardDesign.css">
+                                        <AnchorPane layoutY="13.0" prefHeight="528.0" prefWidth="871.0" stylesheets="@dashboardDesign.css">
                                             <styleClass>
                                                 <String fx:value="white-bg" />
                                                 <String fx:value="shadow" />
                                             </styleClass>
                                             <children>
-                                                <TableView fx:id="ProduitTable" layoutX="15.0" layoutY="68.0" onMouseClicked="#getProduit" prefHeight="338.0" prefWidth="838.0">
+                                                <TableView fx:id="CategoriePTable" layoutX="153.0" layoutY="72.0" onMouseClicked="#getCategorieProd" prefHeight="333.0" prefWidth="542.0">
                                                     <columns>
-                                                        <TableColumn fx:id="RefColumn" prefWidth="88.79997634887695" text="Ref" />
-                                                        <TableColumn fx:id="namePColumn" minWidth="0.800018310546875" prefWidth="122.4000244140625" text="Name" />
-                                                        <TableColumn fx:id="DescriptionPColumn" prefWidth="118.39994812011719" text="Description" />
-                                                        <TableColumn fx:id="CategoryPColumn" prefWidth="108.0" text="category" />
-                                                        <TableColumn fx:id="PricePColumn" prefWidth="106.39996337890625" text="Price" />
-                                                        <TableColumn fx:id="QuantityPColumn" prefWidth="88.00006103515625" text="Quantity" />
-                                                        <TableColumn fx:id="PhotoPColumn" prefWidth="83.99993896484375" text="Photo " />
-                                                        <TableColumn fx:id="roleColumn" minWidth="0.800018310546875" prefWidth="120.80007324218752" text="ROLE" />
+                                                        <TableColumn fx:id="idColumn" prefWidth="88.79997634887695" text="ID" />
+                                                        <TableColumn fx:id="namePColumn" minWidth="0.800018310546875" prefWidth="147.20001220703125" text="NAME" />
+                                                        <TableColumn fx:id="DateCatColumn" prefWidth="155.20001220703125" text="DATE" />
+                                                        <TableColumn fx:id="DescriptionCatPColumn" prefWidth="150.39996337890625" text="DESCRITPTION" />
                                                     </columns>
                                                 </TableView>
-                                                <Label alignment="CENTER" layoutX="308.0" layoutY="26.0" prefHeight="22.0" prefWidth="252.0" text="TABLE OF PRODUCTS" textFill="#797979">
+                                                <Label alignment="CENTER" layoutX="308.0" layoutY="26.0" prefHeight="22.0" prefWidth="252.0" text="CATEGORIES" textFill="#797979">
                                                     <font>
                                                         <Font name="Arial Bold" size="20.0" />
                                                     </font>
                                                 </Label>
-                                                <Button fx:id="addButton" layoutX="135.0" layoutY="431.0" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #81c408;" text="Add" textFill="WHITE" textOverrun="CLIP">
+                                                <Button fx:id="addButton" layoutX="728.0" layoutY="207.0" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #81c408;" text="Add" textFill="WHITE" textOverrun="CLIP">
                                                     <font>
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>
                                                 </Button>
-                                                <Button fx:id="updateButton" layoutX="135.0" layoutY="470.0" mnemonicParsing="false" onAction="#updateButtonOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffb524;" text="Update" textFill="WHITE">
+                                                <Button fx:id="updateButton" layoutX="386.0" layoutY="431.0" mnemonicParsing="false" onAction="#updateButtonOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffb524;" text="Update" textFill="WHITE">
                                                     <font>
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>
                                                 </Button>
-                                                <Button fx:id="deleteButton" layoutX="715.0" layoutY="431.0" mnemonicParsing="false" onAction="#deleteButtonOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ff3547;" text="Delete" textFill="WHITE">
-                                                    <font>
-                                                        <Font name="Arial Rounded MT Bold" size="14.0" />
-                                                    </font>
-                                                </Button>
-                                                <Button fx:id="clearButton" layoutX="715.0" layoutY="470.0" mnemonicParsing="false" onAction="#clearButtonOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #615b5b;" text="Clear" textFill="WHITE">
+                                                <Button fx:id="deleteButton" layoutX="34.0" layoutY="207.0" mnemonicParsing="false" onAction="#deleteButtonOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ff3547;" text="Delete" textFill="WHITE">
                                                     <font>
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>

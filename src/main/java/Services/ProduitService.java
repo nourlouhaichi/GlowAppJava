@@ -53,7 +53,7 @@ public class ProduitService implements IServices<Produit> {
     public void update(Produit produit) throws SQLException {
 
 
-        String req="UPDATE produit set name=?,description=?,image=?,quantity=?,price=?,categorie_prod_id=? where ref=?  WHERE ref=?";
+        String req="UPDATE produit set name=?,description=?,image=?,quantity=?,price=?,categorie_prod_id=?   WHERE ref=?";
 
 
         try (PreparedStatement preparedStatement= connection.prepareStatement(req)){
@@ -65,7 +65,7 @@ public class ProduitService implements IServices<Produit> {
         preparedStatement.setInt(4,produit.getQuantity());
         preparedStatement.setDouble(5,produit.getPrice());
         preparedStatement.setInt(6,produit.getCategorie().getId());
-        preparedStatement.setInt(6,produit.getRef());
+        preparedStatement.setInt(7,produit.getRef());
 
 
         preparedStatement.executeUpdate();
