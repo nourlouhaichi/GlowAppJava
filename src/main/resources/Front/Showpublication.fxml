@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="card" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontController.ShowPublicationController">
+    <children>
+        <ImageView fx:id="imagefx" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="titlefx" text="Label">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <Label fx:id="contentfx" prefHeight="43.0" prefWidth="425.0" text="Label" />
+    </children>
+</VBox>

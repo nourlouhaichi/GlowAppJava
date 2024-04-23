@@ -78,6 +78,7 @@ public class ServicePublication implements IServices<Publication> {
                 publication.setTitrep(rs.getString("titre_p"));
                 publication.setTypep(rs.getString("type_p"));
                 publication.setContentp(rs.getString("contenue_p"));
+                publication.setImage(rs.getString("image"));
                 publications.add(publication);
             }
         }
@@ -112,5 +113,30 @@ public class ServicePublication implements IServices<Publication> {
             return null; // Publication not found
         }
 
+    }
+
+    @Override
+    public void ajouterWithImage(Publication publication, byte[] imageData) throws SQLException {
+
+    }
+
+    public void create(Publication publication) throws SQLException {
+        String req = "INSERT INTO publication(titre_p, type_p, contenue_p, image) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(req, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, publication.getTitrep());
+            ps.setString(2, publication.getTypep());
+            ps.setString(3, publication.getContentp());;
+            ps.setString(4, publication.getImage());
+
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                publication.setId(rs.getInt(1));
+            }
+
+            rs.close();
+        }
+        System.out.println("publication ajoutée");
     }
 }

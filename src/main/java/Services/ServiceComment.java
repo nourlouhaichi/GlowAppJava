@@ -108,5 +108,10 @@ public class ServiceComment implements IServices<Comment> {
         return List.of();
     }
 
+    @Override
+    public void ajouterWithImage(Publication publication, byte[] imageData) throws SQLException {
+
+    }
+
 
 }

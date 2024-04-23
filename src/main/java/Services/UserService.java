@@ -140,4 +140,9 @@ public class UserService implements IServices<User> {
     public List<Comment> afficher(int id) throws SQLException {
         return null;
     }
+
+    @Override
+    public void ajouterWithImage(Publication publication, byte[] imageData) throws SQLException {
+
+    }
 }

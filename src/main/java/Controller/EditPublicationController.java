@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -53,6 +54,16 @@ public class EditPublicationController {
     ServicePublication Servicepublication = new ServicePublication();
     @FXML
     void editonclick(ActionEvent event) throws SQLException {
+        if(titlefx.getText().equals("") || typefx.getText().equals("") || contentfx.getText().equals("")) {
+            titlefx.setStyle("-fx-background-color: red;");
+            typefx.setStyle("-fx-background-color: red;");
+            contentfx.setStyle("-fx-background-color: red;");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all fields.");
+            alert.showAndWait();
+        } else {
             Publication publication = new Publication();
             publication.setId(Integer.parseInt(idfx.getText()));
             publication.setTitrep(titlefx.getText());
@@ -60,7 +71,7 @@ public class EditPublicationController {
             publication.setContentp(contentfx.getText());
             //publication.setDatecrp(Date.from(datefx.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             Servicepublication.modifier(publication);
-
+        }
     }
 
 

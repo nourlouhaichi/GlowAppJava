@@ -52,7 +52,7 @@
                                     <children>
                                         <ImageView fx:id="logoImageView" fitHeight="150.0" fitWidth="200.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../images/logoglowapp.png" />
+                                                <Image url="@../../../../images/logoglowapp.png" />
                                             </image>
                                         </ImageView>
 
@@ -67,7 +67,7 @@
                                             </font>
                                         </Label>
                                         <Line endX="69.0" layoutX="121.0" layoutY="199.0" startX="-100.0" stroke="#ffb524" />
-                                        <Button fx:id="homeButton" layoutX="16.0" layoutY="228.0" mnemonicParsing="false"  prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
+                                        <Button fx:id="homeButton" layoutX="16.0" layoutY="228.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
                                             <graphic>
 
                                             </graphic>
@@ -75,7 +75,7 @@
                                                 <Font name="Arial Rounded MT Bold" size="18.0" />
                                             </font>
                                         </Button>
-                                        <Button fx:id="userButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false"  prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Users">
+                                        <Button fx:id="userButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Users">
                                             <graphic>
 
                                             </graphic>

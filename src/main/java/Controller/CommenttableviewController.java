@@ -3,7 +3,6 @@ package Controller;
 import Entities.Comment;
 import Entities.Publication;
 import Services.ServiceComment;
-import Services.ServicePublication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -71,7 +71,7 @@ public class CommenttableviewController {
     public void editonclick(MouseEvent mouseEvent) throws IOException, SQLException {
         Comment selectedcomment = commtab.getSelectionModel().getSelectedItem();
         if (selectedcomment != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditComment.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back/EditComment.fxml"));
             Parent root = loader.load();
             EditCommentController controller = loader.getController();
             controller.initData(selectedcomment);
@@ -84,8 +84,19 @@ public class CommenttableviewController {
 
 
 
-    public void deleteonclick(MouseEvent mouseEvent) {
+    public void deleteonclick(MouseEvent mouseEvent) throws SQLException {
         int idselected = commtab.getSelectionModel().getSelectedIndex();
         commtab.getItems().remove(idselected);
+        ServiceComment serviceComment = new ServiceComment();
+        serviceComment.supprimer(idselected);
+    }
+
+
+    public void addcommonclick(MouseEvent mouseEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back/AddComment.fxml"));
+        Parent root = loader.load();
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
     }
 }

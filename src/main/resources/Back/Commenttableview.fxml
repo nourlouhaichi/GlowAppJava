@@ -23,12 +23,17 @@
       </Label>
       <ImageView fitHeight="22.0" fitWidth="29.0" layoutX="538.0" layoutY="37.0" onMouseClicked="#editonclick" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Users/ASUS/Desktop/6324826.png" />
+            <Image url="@../../../../../../../../Users/ASUS/Desktop/6324826.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="16.0" fitWidth="22.0" layoutX="507.0" layoutY="40.0" onMouseClicked="#deleteonclick" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Users/ASUS/Desktop/61918.png" />
+            <Image url="@../../../../../../../../Users/ASUS/Desktop/61918.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="22.0" layoutX="477.0" layoutY="40.0" onMouseClicked="#addcommonclick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Users/ASUS/Desktop/61183.png" />
          </image>
       </ImageView>
    </children>

@@ -26,4 +26,6 @@ public interface IServices <T>{
     T afficher(T t) throws  SQLException;
 
     List<Comment> afficher(int id) throws SQLException;
+
+    void ajouterWithImage(Publication publication, byte[] imageData) throws SQLException;
 }

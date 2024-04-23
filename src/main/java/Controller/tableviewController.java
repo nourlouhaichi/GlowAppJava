@@ -2,13 +2,9 @@ package Controller;
 
 import Entities.Publication;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.sql.*;
 
 import Services.ServicePublication;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,13 +14,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class tableviewController {
 
@@ -64,15 +56,31 @@ public class tableviewController {
 
 
     public void deleteonclick(javafx.scene.input.MouseEvent mouseEvent) {
-        int idselected = pubtable.getSelectionModel().getSelectedIndex();
-        pubtable.getItems().remove(idselected);
+        // Get the selected publication
+        Publication selectedPublication = pubtable.getSelectionModel().getSelectedItem();
 
+        // Check if a publication is selected
+        if (selectedPublication != null) {
+            try {
+                // Remove the selected publication from the TableView
+                pubtable.getItems().remove(selectedPublication);
+
+                // Delete the selected publication from the database
+                ServicePublication servicePublication = new ServicePublication();
+                servicePublication.supprimer(selectedPublication);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("No publication selected.");
+        }
     }
+
 
     public void editonclick(MouseEvent mouseEvent) throws IOException {
         Publication selectedPublication = pubtable.getSelectionModel().getSelectedItem();
         if (selectedPublication != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Editpublication.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back/EditPublication.fxml"));
             Parent root = loader.load();
             EditPublicationController controller = loader.getController();
             controller.initData(selectedPublication);
@@ -105,7 +113,7 @@ public class tableviewController {
 
     public void addonclick(MouseEvent mouseEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Publication.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Back/Publication.fxml"));
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root, 400, 400));
             newStage.show();
@@ -119,7 +127,7 @@ public class tableviewController {
 
     public void commetonclick(MouseEvent mouseEvent) {  Publication selectedPublication = pubtable.getSelectionModel().getSelectedItem();
         if (selectedPublication != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Commenttableview.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back/Commenttableview.fxml"));
             Parent root = null;
             try {
                 root = loader.load();

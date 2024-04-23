@@ -13,6 +13,7 @@ public class Publication {
     private Date updated;
     private String usercin;
     private List<Comment> comments;
+    private String image;
 
     public Publication() {}
 
@@ -99,5 +100,13 @@ public class Publication {
     @Override
     public String toString() {
         return "Publication : " + id + " " + typep + " " + contentp + " " + titrep + " " + updated + " " + datecrp + " " + usercin + " " + imagename;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
