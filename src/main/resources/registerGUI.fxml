@@ -6,6 +6,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -73,8 +74,11 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <RadioButton fx:id="femaleRadioButton" layoutX="237.0" layoutY="231.0" mnemonicParsing="false" text="Female" textFill="#615b5b" />
-            <RadioButton fx:id="maleRadioButton" layoutX="166.0" layoutY="230.0" mnemonicParsing="false" text="Male" textFill="#615b5b" />
+            <RadioButton fx:id="femaleRadioButton" layoutX="237.0" layoutY="231.0" mnemonicParsing="false" text="Female" textFill="#615b5b">
+               <toggleGroup>
+                  <ToggleGroup fx:id="gender" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="maleRadioButton" layoutX="166.0" layoutY="230.0" mnemonicParsing="false" text="Male" textFill="#615b5b" toggleGroup="$gender" />
             <DatePicker fx:id="dobDatePicker" layoutX="158.0" layoutY="265.0" prefHeight="26.0" prefWidth="150.0" />
             <AnchorPane layoutY="-1.0" prefHeight="88.0" prefWidth="350.0" style="-fx-background-color: #ffb524;">
                <children>

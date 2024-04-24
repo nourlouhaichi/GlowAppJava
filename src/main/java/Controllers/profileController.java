@@ -239,7 +239,6 @@ public class profileController implements Initializable {
 
     public void pictureButtonOnAction(ActionEvent event) {
         url = getProfilePicturePath();
-        System.out.println(url);
         File pictureFile = new File("images/" + url);
         Image profilePictureImage = new Image(pictureFile.toURI().toString());
         profilePicture.setFitWidth(200);
