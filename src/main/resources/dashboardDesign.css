@@ -115,7 +115,19 @@
     -fx-text-fill:red;
     -fx-cursor:hand;
 }
+.btnEvent{
+    -fx-background-color: orange;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+    -fx-cursor:hand;
+}
 
+
+.Background{
+    -fx-background-color:linear-gradient(to bottom right,  #efefef, #81c408);
+}
 .add-btn{
     -fx-background-color:#304575;
     -fx-background-radius:8px;
