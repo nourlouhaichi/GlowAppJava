@@ -16,6 +16,7 @@ import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,9 @@ import javafx.collections.ObservableList;
 import Services.EventServices;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.control.Alert;
+
+
 
 public class EventController {
 
@@ -58,6 +62,9 @@ public class EventController {
 
     @FXML
     private TableColumn<Event, String> categoryIdColumn;
+
+    @FXML
+    private TextField Search;
 
     @FXML
     private ResourceBundle resources;
@@ -179,6 +186,7 @@ public class EventController {
             String lastName = cellData.getValue().getUserId().getLastname();
             String fullName = firstName + " " + lastName;
             return new SimpleStringProperty(fullName);
+
         });
 
         categoryIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategoryId().getTitle()));
@@ -186,11 +194,18 @@ public class EventController {
 
         // Populate table view
         populateEventTable();
+        Search.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterEvents(newValue);
+        });
+
+
         //refresh table
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), event -> populateEventTable()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+
     }
+
 
     @FXML
     void deleteE(ActionEvent event) {
@@ -341,6 +356,17 @@ public class EventController {
             e.printStackTrace();
         }
     }
+    private void filterEvents(String searchText) {
+        if (searchText == null || searchText.isEmpty()) {
+            populateEventTable();
+        } else {
+            ObservableList<Event> eventList = eventTableView.getItems();
+            FilteredList<Event> filteredData = new FilteredList<>(eventList, event -> event.getTitle().toLowerCase().contains(searchText.toLowerCase()));
+            eventTableView.setItems(filteredData);
+        }
+    }
+
+
 
     }
 

@@ -3,10 +3,16 @@ package Services;
 import Entities.Event;
 import Utils.MyDatabase;
 import Entities.Reservation;
+import javafx.scene.image.Image;
+
+import javax.imageio.ImageIO;
+import java.io.ByteArrayOutputStream;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class ReservationServices  {
     private Connection connection;
@@ -28,9 +34,6 @@ public class ReservationServices  {
         }
         System.out.println("Reservation ajoutée");
     }
-
-
-
 
 
     public void modifier(Reservation reservation) throws SQLException {
@@ -78,7 +81,11 @@ public class ReservationServices  {
         }
         return reservations;
     }
-}
+
+    }
+
+
+
 
 
 
