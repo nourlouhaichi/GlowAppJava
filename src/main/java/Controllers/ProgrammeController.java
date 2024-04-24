@@ -72,17 +72,7 @@ public class ProgrammeController {
         programmeTableView.getSelectionModel().clearSelection();
     }
 
-//    @FXML
-//    public void handleProgrammeSelection() {
-//        Programme selectedProgramme = programmeTableView.getSelectionModel().getSelectedItem();
-//        if (selectedProgramme != null) {
-//            idField.setText(String.valueOf(selectedProgramme.getId()));
-//            titreproField.setText(selectedProgramme.getTitrepro());
-//            planproField.setText(selectedProgramme.getPlanpro());
-//            placedispoField.setText(String.valueOf(selectedProgramme.getPlacedispo()));
-//            dateproPicker.setValue(selectedProgramme.getDatepro().toLocalDate());
-//        }
-//    }
+
 
 
     @FXML
