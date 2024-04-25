@@ -120,7 +120,6 @@ public class authCodeController implements Initializable {
     public void getCin(String cin) {
         cinLabel.setText(cin);
 
-        System.out.println(code);
         try {
             UserService us = new UserService();
             User user = us.getUser(cinLabel.getText());

@@ -1,6 +1,5 @@
 package Controllers;
 
-import Entities.User;
 import Services.GMailer;
 import Services.UserService;
 import javafx.fxml.FXML;

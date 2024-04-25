@@ -191,6 +191,7 @@ public class UserService implements IServices<User> {
 
         preparedStatement.executeUpdate();
     }
+
     public void verifyUser(String cin , String code) throws SQLException {
         String sql = "UPDATE `user` SET `is_verified`=? ,`auth_code`=? WHERE cin = ?";
 

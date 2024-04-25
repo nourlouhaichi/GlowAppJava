@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -185,8 +186,11 @@
                                        </font>
                                     </TextField>
                                     <Line endX="-100.0" endY="170.0" layoutX="391.0" layoutY="330.0" startX="-100.0" stroke="#ffb524" />
-                                    <RadioButton fx:id="femaleRadioButton" layoutX="181.0" layoutY="471.0" mnemonicParsing="false" text="Female" textFill="#615b5b" />
-                                    <RadioButton fx:id="maleRadioButton" layoutX="110.0" layoutY="470.0" mnemonicParsing="false" text="Male" textFill="#615b5b" />
+                                    <RadioButton fx:id="femaleRadioButton" layoutX="181.0" layoutY="471.0" mnemonicParsing="false" text="Female" textFill="#615b5b">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="gender" />
+                                       </toggleGroup></RadioButton>
+                                    <RadioButton fx:id="maleRadioButton" layoutX="110.0" layoutY="470.0" mnemonicParsing="false" text="Male" textFill="#615b5b" toggleGroup="$gender" />
                                     <DatePicker fx:id="dobDatePicker" layoutX="401.0" layoutY="467.0" prefHeight="26.0" prefWidth="181.0" style="-fx-border-color: #ffb524;" />
                                     <PasswordField fx:id="passwordTextField" layoutX="90.0" layoutY="425.0" prefHeight="29.0" prefWidth="177.0" style="-fx-border-color: #ffb524;" />
                                     <Label layoutX="13.0" layoutY="431.0" text="Password">
@@ -219,15 +223,18 @@
                                           <Font name="Arial Rounded MT Bold" size="14.0" />
                                        </font>
                                     </Button>
-                                    <RadioButton fx:id="userRadioButton" layoutX="770.0" layoutY="348.0" mnemonicParsing="false" text="Member" textFill="#615b5b" />
-                                    <RadioButton fx:id="adminRadioButton" layoutX="689.0" layoutY="347.0" mnemonicParsing="false" text="Admin" textFill="#615b5b" />
+                                    <RadioButton fx:id="userRadioButton" layoutX="770.0" layoutY="348.0" mnemonicParsing="false" text="Member" textFill="#615b5b">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="role" />
+                                       </toggleGroup></RadioButton>
+                                    <RadioButton fx:id="adminRadioButton" layoutX="689.0" layoutY="347.0" mnemonicParsing="false" text="Admin" textFill="#615b5b" toggleGroup="$role" />
                                     <Label layoutX="636.0" layoutY="347.0" text="Role">
                                        <font>
                                           <Font name="Arial Rounded MT Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <RadioButton fx:id="coachRadioButton" layoutX="689.0" layoutY="380.0" mnemonicParsing="false" text="Coach" textFill="#615b5b" />
-                                    <RadioButton fx:id="nutRadioButton" layoutX="770.0" layoutY="380.0" mnemonicParsing="false" text="Nutritionist" textFill="#615b5b" />
+                                    <RadioButton fx:id="coachRadioButton" layoutX="689.0" layoutY="380.0" mnemonicParsing="false" text="Coach" textFill="#615b5b" toggleGroup="$role" />
+                                    <RadioButton fx:id="nutRadioButton" layoutX="770.0" layoutY="380.0" mnemonicParsing="false" text="Nutritionist" textFill="#615b5b" toggleGroup="$role" />
                                     <Button fx:id="clearButton" layoutX="749.0" layoutY="465.0" mnemonicParsing="false" onAction="#clearButtonOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #615b5b;" text="Clear" textFill="WHITE">
                                        <font>
                                           <Font name="Arial Rounded MT Bold" size="14.0" />

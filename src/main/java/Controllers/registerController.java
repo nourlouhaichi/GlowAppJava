@@ -78,7 +78,7 @@ public class registerController implements Initializable {
             int index = random.nextInt(chars.length());
             captcha.append(chars.charAt(index));
         }
-        System.out.println(captcha.toString());
+
         captchaLabel.setText(captcha.toString());
     }
 
@@ -139,6 +139,7 @@ public class registerController implements Initializable {
                         else {
                             registerMessageLabel.setText("Wrong Characters!");
                             captchaLabel.setText(generateCaptcha());
+                            captchaTextField.clear();
                             attempts++;
                             int last = 3 - attempts;
                             attemptsLabel.setText("You have " + last + " attempts");
