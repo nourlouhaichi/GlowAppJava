@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -40,16 +38,12 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.scene.layout.BorderPane;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
@@ -370,17 +364,17 @@ public class EventsClient {
                             javafx.scene.image.Image fxImage = new javafx.scene.image.Image(imageUrl);
 
                             // Create a new item controller for the location
-                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/item.fxml"));
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ItemEvent.fxml"));
                             AnchorPane itemPane;
                             try {
                                 itemPane = fxmlLoader.load();
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-                            ItemController itemController = fxmlLoader.getController();
+                            ItemEventController itemEventController = fxmlLoader.getController();
 
                             // Set the location information in the item controller
-                            itemController.setLocation(location.getTitle(), fxImage);
+                            itemEventController.setLocation(location.getTitle(), fxImage);
 
                             // Set size constraints for the itemPane
                             itemPane.setPrefSize(300, 300); // Adjust size as needed

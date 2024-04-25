@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public class ItemController {
+public class ItemEventController {
 
     @FXML
     private ResourceBundle resources;
