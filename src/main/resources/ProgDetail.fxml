@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProgDetailController">
+    <children>
+        <VBox layoutX="14.0" layoutY="14.0" spacing="10" prefWidth="572" prefHeight="376">
+            <children>
+                <Label fx:id="titleLabel" text="Title: "/>
+                <Label fx:id="planLabel" text="Description: "/>
+                <Label fx:id="placeLabel" text="Places Available: "/>
+                <Label fx:id="dateLabel" text="date: "/>
+<!--                <Label text="Enter number of places to reserve:"/>-->
+<!--                <TextField fx:id="reservationPlacesField" promptText="Number of places"/>-->
+<!--                <Button text="Reserve" onAction="#handleReserveAction"/>-->
+<!--                <Label fx:id="messageLabel" text=""/>-->
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

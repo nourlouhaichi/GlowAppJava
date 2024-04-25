@@ -20,6 +20,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.util.Callback?>
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProgrammeController">
 
    <children>
@@ -50,7 +52,7 @@
                                  <Font name="Arial" size="13.0" />
                               </font>
                            </Label>
-                           <Button fx:id="frontButton" layoutX="1040.0" layoutY="4.0" mnemonicParsing="false"  style="-fx-background-color: #81c408;" text="Front" textFill="WHITE">
+                           <Button fx:id="frontButton" layoutX="1040.0" layoutY="4.0" mnemonicParsing="false" onAction="#goFront"  style="-fx-background-color: #81c408;" text="Front" textFill="WHITE">
                               <font>
                                  <Font name="Arial Rounded MT Bold" size="14.0" />
                               </font>
@@ -153,6 +155,8 @@
                                        <TableColumn fx:id="columnPlan" minWidth="0.800018310546875" prefWidth="143.99998474121094" text="Plan" />
                                        <TableColumn fx:id="columnPlaces" prefWidth="128.79998779296875" text="Available Places" />
                                        <TableColumn fx:id="columnDate" prefWidth="78.39996337890625" text="Date" />
+
+
                                     </columns>
                                  </TableView>
                                  <Label alignment="CENTER" layoutX="335.0" layoutY="26.0" prefHeight="23.0" prefWidth="194.0" text="TABLE OF Progs" textFill="#797979">

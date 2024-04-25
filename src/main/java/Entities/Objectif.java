@@ -1,27 +1,25 @@
 package Entities;
 
-
 public class Objectif {
     private int id;
-    private  String objectifo;
-    private  String descriptiono;
-    private  float poido;
+    private String objectifo;
+    private String descriptiono;
+    private float poido;
     private float tailleo;
-    private String usercin;
+    private Programme programme;
 
 
 
-    public Objectif(){
-
-    }
-
-    public Objectif(int id, String objectifo, String descriptiono, float poido, float tailleo, String usercin) {
+    public Objectif(int id, String objectifo, String descriptiono, float poido, float tailleo, Programme programme) {
         this.id = id;
         this.objectifo = objectifo;
         this.descriptiono = descriptiono;
         this.poido = poido;
         this.tailleo = tailleo;
-        this.usercin = usercin;
+        this.programme = programme;
+    }
+
+    public Objectif() {
     }
 
     public int getId() {
@@ -32,28 +30,12 @@ public class Objectif {
         this.id = id;
     }
 
-    public String getObjectifo() {
-        return objectifo;
+    public Programme getProgramme() {
+        return programme;
     }
 
-    public void setObjectifo(String objectifo) {
-        this.objectifo = objectifo;
-    }
-
-    public String getDescriptiono() {
-        return descriptiono;
-    }
-
-    public void setDescriptiono(String descriptiono) {
-        this.descriptiono = descriptiono;
-    }
-
-    public float getPoido() {
-        return poido;
-    }
-
-    public void setPoido(float poido) {
-        this.poido = poido;
+    public void setProgramme(Programme programme) {
+        this.programme = programme;
     }
 
     public float getTailleo() {
@@ -64,25 +46,29 @@ public class Objectif {
         this.tailleo = tailleo;
     }
 
-    public String getUsercin() {
-        return usercin;
+    public float getPoido() {
+        return poido;
     }
 
-    public void setUsercin(String usercin) {
-        this.usercin = usercin;
+    public void setPoido(float poido) {
+        this.poido = poido;
     }
 
-    @Override
-    public String toString() {
-        return "Objectif{" +
-                "id=" + id +
-                ", objectifo='" + objectifo + '\'' +
-                ", descriptiono='" + descriptiono + '\'' +
-                ", poido=" + poido +
-                ", tailleo=" + tailleo +
-                ", usercin='" + usercin + '\'' +
-                '}';
+    public String getDescriptiono() {
+        return descriptiono;
     }
+
+    public void setDescriptiono(String descriptiono) {
+        this.descriptiono = descriptiono;
+    }
+
+    public String getObjectifo() {
+        return objectifo;
+    }
+
+    public void setObjectifo(String objectifo) {
+        this.objectifo = objectifo;
+    }
+
+
 }
-
-

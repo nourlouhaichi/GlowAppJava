@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceProgramme implements IServices<Programme> {
+public class ServiceProgramme implements IServicesProgramme<Programme> {
     Connection connection;
     public ServiceProgramme(){
         connection= MyDatabase.getInstance().getConnection();

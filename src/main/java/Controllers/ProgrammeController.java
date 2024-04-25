@@ -7,9 +7,16 @@ import Entities.Programme;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -34,21 +41,23 @@ public class ProgrammeController {
     private ServiceProgramme serviceProgramme;
 
 
-    private Programme currentSelectedProgramme;
     private int selectedProgramId;
 
 
     @FXML
     public void initialize() {
         serviceProgramme = new ServiceProgramme();
-//        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        columnPlan.setCellValueFactory(new PropertyValueFactory<>("planpro"));
-        columnDate.setCellValueFactory(new PropertyValueFactory<>("datepro"));
+
         columnTitle.setCellValueFactory(new PropertyValueFactory<>("titrepro"));
+        columnPlan.setCellValueFactory(new PropertyValueFactory<>("planpro"));
         columnPlaces.setCellValueFactory(new PropertyValueFactory<>("placedispo"));
+        columnDate.setCellValueFactory(new PropertyValueFactory<>("datepro"));
+
 
         loadProgrammeData();
     }
+
+
 
 
 
@@ -72,7 +81,7 @@ public class ProgrammeController {
         programmeTableView.getSelectionModel().clearSelection();
     }
 
-
+//
 
 
     @FXML
@@ -222,5 +231,25 @@ public class ProgrammeController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+
+
+
+    public void goFront(javafx.event.ActionEvent event) {
+        try {
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            currentStage.close();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
