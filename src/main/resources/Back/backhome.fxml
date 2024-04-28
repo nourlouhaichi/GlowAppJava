@@ -30,12 +30,12 @@
                                                 <Font name="Arial" size="13.0" />
                                             </font>
                                         </Label>
-                                        <Button fx:id="frontButton" layoutX="1040.0" layoutY="4.0" mnemonicParsing="false"  style="-fx-background-color: #81c408;" text="Front" textFill="WHITE">
+                                        <Button fx:id="frontButton" layoutX="1040.0" layoutY="4.0" mnemonicParsing="false" onAction="#fronthome" style="-fx-background-color: #81c408;" text="Front" textFill="WHITE">
                                             <font>
                                                 <Font name="Arial Rounded MT Bold" size="14.0" />
                                             </font>
                                         </Button>
-                                        <Button fx:id="profileButton" layoutX="966.0" layoutY="4.0" mnemonicParsing="false"  style="-fx-background-color: #81c408;" text="Profile" textFill="WHITE">
+                                        <Button fx:id="profileButton" layoutX="966.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #81c408;" text="Profile" textFill="WHITE">
                                             <font>
                                                 <Font name="Arial Rounded MT Bold" size="14.0" />
                                             </font>
@@ -91,7 +91,7 @@
 
                                             </graphic>
                                         </Button>
-                                        <Button fx:id="logoutButton" layoutX="9.0" layoutY="509.0" mnemonicParsing="false"  stylesheets="@dashboardDesign.css">
+                                        <Button fx:id="logoutButton" layoutX="9.0" layoutY="509.0" mnemonicParsing="false" stylesheets="@dashboardDesign.css">
                                             <graphic>
 
                                             </graphic>

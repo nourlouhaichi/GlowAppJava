@@ -16,7 +16,8 @@ public class MainFx extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         MyDatabase bd= MyDatabase.getInstance();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Front/fronthome.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Front/ListPublications" +
+                ".fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("Front/style.css").toExternalForm());

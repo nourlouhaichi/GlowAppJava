@@ -5,10 +5,14 @@ import Services.ServicePublication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,6 +24,9 @@ public class ListPublicationsController {
     private GridPane pubgrid;
     @FXML
     private VBox publicationBox;
+
+    @FXML
+    private Button detailbutton;
 
     private final ServicePublication servicePublication = new ServicePublication();
 
@@ -37,6 +44,7 @@ public class ListPublicationsController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Front/ShowPublication.fxml"));
                 Node publicationNode = loader.load();
                 ShowPublicationController controller = loader.getController();
+                controller.setSelectedPublication(publication);
                 controller.initialize(publication);
                 row.getChildren().add(publicationNode);
             }
@@ -44,5 +52,7 @@ public class ListPublicationsController {
             e.printStackTrace();
         }
     }
+    }
 
-}
+
+

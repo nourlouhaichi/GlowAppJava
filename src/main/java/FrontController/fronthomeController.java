@@ -4,10 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
 import java.awt.*;
 import java.io.IOException;
 
@@ -48,5 +51,12 @@ public class fronthomeController {
     }
     public void handleReserveButtonClick(ActionEvent actionEvent) {
 
+    }
+
+    public void publication(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Front/ListPublications.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
     }
 }

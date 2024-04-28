@@ -74,6 +74,20 @@
 .nav-button:hover {
     -fx-background-color: #303F9F; /* Change hover color as desired */
 }
+.btnEvent{
+    -fx-background-color: orange;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+    -fx-cursor:hand;
+}
+
+
+.Background{
+    -fx-background-color:linear-gradient(to bottom right,  #efefef, #81c408);
+}
+
 #card {
     -fx-background-color: #fff; /* Background color of the card */
     -fx-background-radius: 5px; /* Border radius of the card */

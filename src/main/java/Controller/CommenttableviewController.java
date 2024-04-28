@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -29,9 +28,7 @@ public class CommenttableviewController {
     @FXML
     private TableView<Comment> commtab;
 
-
     private Publication selectedPublication;
-
 
     public void setSelectedPublication(Publication publication) {
         this.selectedPublication = publication;
@@ -56,14 +53,11 @@ public class CommenttableviewController {
             List<Comment> comments = retrieveCommentsForPublication(selectedPublication.getId());
 
             if (comments != null) {
-
                 commtab.getItems().addAll(comments);
             } else {
-
                 System.out.println("No comments available for the selected publication.");
             }
         } else {
-
             System.out.println("No publication selected.");
         }
     }
@@ -80,17 +74,19 @@ public class CommenttableviewController {
             newStage.show();
         } else {
             System.out.println("No Comment selected.");
-        }}
-
-
-
-    public void deleteonclick(MouseEvent mouseEvent) throws SQLException {
-        int idselected = commtab.getSelectionModel().getSelectedIndex();
-        commtab.getItems().remove(idselected);
-        ServiceComment serviceComment = new ServiceComment();
-        serviceComment.supprimer(idselected);
+        }
     }
 
+    public void deleteonclick(MouseEvent mouseEvent) throws SQLException {
+        Comment selectedComment = commtab.getSelectionModel().getSelectedItem();
+        if (selectedComment != null) {
+            commtab.getItems().remove(selectedComment);
+            ServiceComment serviceComment = new ServiceComment();
+            serviceComment.supprimer(selectedComment);
+        } else {
+            System.out.println("No Comment selected.");
+        }
+    }
 
     public void addcommonclick(MouseEvent mouseEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back/AddComment.fxml"));

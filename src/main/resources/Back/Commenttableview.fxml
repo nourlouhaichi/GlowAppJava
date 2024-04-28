@@ -31,10 +31,5 @@
             <Image url="@../../../../../../../../Users/ASUS/Desktop/61918.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="16.0" fitWidth="22.0" layoutX="477.0" layoutY="40.0" onMouseClicked="#addcommonclick" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../../Users/ASUS/Desktop/61183.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

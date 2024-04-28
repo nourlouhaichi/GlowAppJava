@@ -3,6 +3,7 @@ package Controller;
 import Entities.Publication;
 
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 import Services.ServicePublication;
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,10 +24,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.function.Predicate;
 import javafx.scene.control.TextField;
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
 
 public class tableviewController {
 
@@ -44,7 +52,28 @@ public class tableviewController {
     private TableColumn<Publication, String> typecol;
     @FXML
     private TableColumn<Publication, String> contentcol;
+    private String convertPublicationListToHtml(List<Publication> pubList) {
+        StringBuilder htmlBuilder = new StringBuilder();
 
+        // Begin HTML
+        htmlBuilder.append("<html><body>");
+        htmlBuilder.append("<h1>Programme Report</h1>");
+        htmlBuilder.append("<table border='1'><tr><th>Title</th><th>Plan</th><th>Available Places</th></tr>");
+
+        // Add rows for each Programme
+        for (Publication pub : pubList) {
+            htmlBuilder.append("<tr>");
+            htmlBuilder.append("<td>").append(pub.getTitrep()).append("</td>");
+            htmlBuilder.append("<td>").append(pub.getContentp()).append("</td>");
+            htmlBuilder.append("<td>").append(pub.getTypep()).append("</td>");
+            htmlBuilder.append("</tr>");
+        }
+
+        // End HTML
+        htmlBuilder.append("</table></body></html>");
+
+        return htmlBuilder.toString();
+    }
 
     private List<Publication> retrieveDataFromDatabase() {
         ServicePublication servicePublication = new ServicePublication();
@@ -194,10 +223,53 @@ public class tableviewController {
         // Bind the SortedList to the TableView
         sortedData.comparatorProperty().bind(pubtable.comparatorProperty());
         pubtable.setItems(sortedData);
+        if(searchText.isEmpty()){
+            updateTableView();
+        }
 
     }
 
-    public void refreshonclick(MouseEvent mouseEvent) {
-        updateTableView();
+
+    public void generatePDFReport(ActionEvent actionEvent) {
+        ServicePublication serviceProgramme = new ServicePublication();
+        try {
+            List<Publication> pubList = serviceProgramme.afficher();
+            String htmlContent = convertPublicationListToHtml(pubList);
+            String apiEndpoint = "https://pdf-api.co/pdf";
+            String apiKey = "007AAFF6403C0D554DE694FA59030F057C94";
+            String requestBody = String.format("{\"apiKey\": \"%s\", \"html\": \"%s\"}", apiKey, htmlContent);
+            HttpResponse<byte[]> response = Unirest.post(apiEndpoint)
+                    .header("Content-Type", "application/json")
+                    .body(requestBody)
+                    .asBytes();
+
+            if (response.getStatus() == 200 && "application/pdf".equals(response.getHeaders().getFirst("Content-Type"))) {
+                Path path = Paths.get("ProgramReport.pdf");
+                Files.write(path, response.getBody());
+                System.out.println("PDF Generated at: " + path.toAbsolutePath());
+
+                if (Desktop.isDesktopSupported()) {
+                    try {
+                        File pdfFile = new File(path.toString());
+                        Desktop.getDesktop().open(pdfFile);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        System.err.println("Unable to open the PDF file. Error: " + ex.getMessage());
+                    }
+                } else {
+                    System.err.println("Desktop operations not supported on the current platform. Cannot open the PDF file automatically.");
+                }
+            } else {
+                System.err.println("Failed to generate PDF: " + response.getStatusText());
+                System.err.println("Status Code: " + response.getStatus());
+                System.err.println("Response Headers: " + response.getHeaders());
+                String responseBody = new String(response.getBody(), StandardCharsets.UTF_8);
+                System.err.println("Response Body: " + responseBody);
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
     }
-}
+
+
+    }
