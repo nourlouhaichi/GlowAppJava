@@ -13,8 +13,10 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -52,7 +54,10 @@ public class UpdateProduitController {
 
     @FXML
     private Button updateProduitButton;
+    private String selectedImagePath;
 
+    @FXML
+    private Button imageSelectButton;
     private Produit selectedProduit;
     private final CategorieService catus = new CategorieService();
 
@@ -67,7 +72,7 @@ public class UpdateProduitController {
         // Set the fields with the information of the selected product
         namePTextField.setText(selectedProduit.getName());
         descriptiontextfield.setText(selectedProduit.getDescription());
-        photoPtextfield.setText(selectedProduit.getImage());
+        //photoPtextfield.setText(selectedProduit.getImage());
         pricePTextField.setText(String.valueOf(selectedProduit.getPrice()));
         quantitytextfield.setText(String.valueOf(selectedProduit.getQuantity()));
         // Set the selected category in the combo box (if applicable)
@@ -97,7 +102,7 @@ public class UpdateProduitController {
     @FXML
     void UpdateProduitButtonOnAction(ActionEvent event) {
         // Check if any of the fields are empty
-        if (namePTextField.getText().isEmpty() || descriptiontextfield.getText().isEmpty() || photoPtextfield.getText().isEmpty()
+        if (namePTextField.getText().isEmpty() || descriptiontextfield.getText().isEmpty()
                 || pricePTextField.getText().isEmpty() || quantitytextfield.getText().isEmpty() || categoryComboBox.getValue() == null) {
             // Display an alert informing the user that all fields are required
             showAlert(Alert.AlertType.ERROR, "Error", "All fields are required!");
@@ -131,7 +136,13 @@ public class UpdateProduitController {
         // Update the product information
         selectedProduit.setName(namePTextField.getText());
         selectedProduit.setDescription(descriptiontextfield.getText());
-        selectedProduit.setImage(photoPtextfield.getText());
+
+        // Check if an image is selected
+        String imagePath = getSelectedImagePath();
+        if (imagePath != null && !imagePath.isEmpty()) {
+            selectedProduit.setImage(imagePath);
+        }
+        selectedProduit.setImage(getSelectedImagePath());
         selectedProduit.setPrice(Double.parseDouble(pricePTextField.getText()));
         selectedProduit.setQuantity(Integer.parseInt(quantitytextfield.getText()));
 
@@ -174,6 +185,26 @@ public class UpdateProduitController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
 
+    }
+
+    public void selectImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose an image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
+        );
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        if (selectedFile != null) {
+            selectedImagePath = selectedFile.toURI().getPath(); // Store the selected image path without the file:\ prefix
+        }
+        System.out.println("Selected Image Path: " + selectedImagePath);
+    }
+    @FXML
+    void selectImage(ActionEvent event) {
+        selectImage(); // Call the selectImage method
+    }
+    public String getSelectedImagePath() {
+        return selectedImagePath;
     }
 
 }

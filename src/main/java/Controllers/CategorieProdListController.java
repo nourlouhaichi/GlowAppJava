@@ -3,28 +3,31 @@ package Controllers;
 import Entities.CategorieProd;
 import Entities.Produit;
 import Services.CategorieService;
-import Services.ProduitService;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +35,6 @@ public class CategorieProdListController {
 
     @FXML
     private TableView<CategorieProd> CategoriePTable;
-
     @FXML
     private TableColumn<CategorieProd, String> DateCatColumn;
 
@@ -40,7 +42,36 @@ public class CategorieProdListController {
     private TableColumn<CategorieProd, String> DescriptionCatPColumn;
 
     @FXML
+    private TableColumn<CategorieProd, String> namePColumn;
+    @FXML
+    private TableColumn<CategorieProd, Integer> idColumn;
+
+
+    @FXML
+    private Button CategoryButton;
+
+    @FXML
+    private Label CreationDateButton;
+
+
+
+    @FXML
+    private DatePicker createdateField;
+    @FXML
+    private TextArea DescripTextfield;
+
+    @FXML
+    private TextField nomCatTextfield;
+
+    @FXML
+    private Label DescriptionButton;
+
+    @FXML
+    private Button ProduitButton;
+
+    @FXML
     private Button addButton;
+
 
     @FXML
     private Button deleteButton;
@@ -54,8 +85,6 @@ public class CategorieProdListController {
     @FXML
     private AnchorPane home_form;
 
-    @FXML
-    private TableColumn<CategorieProd, Integer> idColumn;
 
     @FXML
     private ImageView logoImageView;
@@ -66,8 +95,12 @@ public class CategorieProdListController {
     @FXML
     private AnchorPane main_form;
 
+
+
     @FXML
-    private TableColumn<CategorieProd, String> namePColumn;
+    private Label nomCatButton;
+
+
 
     @FXML
     private Button profileButton;
@@ -75,14 +108,16 @@ public class CategorieProdListController {
     @FXML
     private Button updateButton;
 
-
-    @FXML
-    private Button ProduitButton;
     @FXML
     private Label usernameLabel;
 
+
+
     @FXML
     void initialize() {
+        File logoFile = new File("images/logoglowapp.png");
+        Image logoImage = new Image(logoFile.toURI().toString());
+        logoImageView.setImage(logoImage);
         // Initialize the table columns
         idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         namePColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNom_ca()));
@@ -115,32 +150,9 @@ public class CategorieProdListController {
 
 
 
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
-    @FXML
-    void addButtonOnAction(ActionEvent event) {
-        try {
-            // Load the new FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddCat.fxml"));
-            Parent root = loader.load();
 
-            // Create a new stage
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
 
-            // Show the stage
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
 
 
@@ -191,6 +203,59 @@ public class CategorieProdListController {
             // Handle exception
         }
     }
+    @FXML
+    void addButtonOnAction(ActionEvent event) {
+
+        try {
+            // Retrieve data from the UI controls
+            String nomCat= nomCatTextfield.getText();
+            String descriptionCat = DescripTextfield.getText();
+            LocalDate selectedDate = createdateField.getValue();
+
+
+
+            if (nomCat.isEmpty() || descriptionCat.isEmpty() ) {
+                showAlert(Alert.AlertType.ERROR, "Error", "All fields are required.");
+                return;
+            }
+
+            // Check if date is in the past
+            if (selectedDate.isBefore(LocalDate.now())) {
+                // Display error alert for past date
+                showAlert(Alert.AlertType.ERROR, "Error", "Date cannot be in the past.");
+                return;
+            }
+
+            // Create a categorie object with the retrieved data
+            CategorieProd categorieToAdd = new CategorieProd();
+            categorieToAdd.setNom_ca(nomCat);
+            categorieToAdd.setDescription_cat(descriptionCat);
+            categorieToAdd.setCreate_date_ca(selectedDate.atTime(0, 0)); // Set time component to midnight
+
+
+
+            // Call the add method to add the product
+            CategorieService categorieService= new CategorieService();
+            categorieService.add(categorieToAdd);
+
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Category  added successfully!");
+            //Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            //stage.close();
+        } catch (SQLException | NumberFormatException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while adding the category.");
+        }
+
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
 
     @FXML
@@ -220,25 +285,45 @@ public class CategorieProdListController {
 
     @FXML
     void updateButtonOnAction(ActionEvent event) {
+        // Get the selected produit from the table view
+        CategorieProd selectedCategorieProd = CategoriePTable.getSelectionModel().getSelectedItem();
 
+        if (selectedCategorieProd != null) {
+            try {
+                // Load the new FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/cat_update.fxml"));
+                Parent root = loader.load();
+
+                // Get the controller of the update produit interface
+                UpdateCategorieController updateCategorieController = loader.getController();
+
+                // Initialize the update interface with the selected produit information
+                updateCategorieController.initData(selectedCategorieProd);
+
+                // Create a new stage
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+
+                // Show the stage
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // If no produit is selected, show an error message
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a produit to modify.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
-    void ProductButtonOnAction(ActionEvent event) {
-        try {
-            // Load the new FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListProduit.fxml"));
-            Parent root = loader.load();
+    void ProduitButtonOnAction(ActionEvent event) {
 
-            // Create a new stage
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
 
-            // Show the stage
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
+
 }

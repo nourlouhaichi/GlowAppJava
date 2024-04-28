@@ -1,6 +1,7 @@
 package Entities;
 
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class CategorieProd {
@@ -8,13 +9,13 @@ public class CategorieProd {
 
     private String nom_ca;
 
-    private Date create_date_ca;
+    private LocalDateTime create_date_ca;
 
     private  String description_cat;
 
     public CategorieProd() {
     }
-    public CategorieProd(int id, String nom_ca, Date create_date_ca, String description_cat) {
+    public CategorieProd(int id, String nom_ca, LocalDateTime create_date_ca, String description_cat) {
         this.id=id;
         this.nom_ca=nom_ca ;
         this.create_date_ca=create_date_ca;
@@ -24,7 +25,7 @@ public class CategorieProd {
         this.id = id;
         this.nom_ca = nom_ca;
     }
-    public CategorieProd(String nom_ca, Date create_date_ca, String description_cat) {
+    public CategorieProd(String nom_ca, LocalDateTime create_date_ca, String description_cat) {
 
         this.nom_ca=nom_ca ;
         this.create_date_ca=create_date_ca;
@@ -43,11 +44,11 @@ public class CategorieProd {
         return nom_ca;
     }
 
-    public Date getCreate_date_ca() {
+    public LocalDateTime getCreate_date_ca() {
         return create_date_ca;
     }
 
-    public void setCreate_date_ca(Date create_date_ca) {
+    public void setCreate_date_ca(LocalDateTime create_date_ca) {
         this.create_date_ca = create_date_ca;
     }
 

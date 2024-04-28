@@ -6,6 +6,7 @@ import Entities.CategorieProd;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProduitService implements IServices<Produit> {
@@ -47,31 +48,33 @@ public class ProduitService implements IServices<Produit> {
     }
 
     @Override
-
-
-
     public void update(Produit produit) throws SQLException {
+        StringBuilder reqBuilder = new StringBuilder("UPDATE produit SET name=?, description=?, quantity=?, price=?, categorie_prod_id=?");
+        List<Object> values = new ArrayList<>(Arrays.asList(produit.getName(), produit.getDescription(), produit.getQuantity(), produit.getPrice(), produit.getCategorie().getId()));
 
+        // Check if an image path is provided
+        String imagePath = produit.getImage();
+        if (imagePath != null && !imagePath.isEmpty()) {
+            reqBuilder.append(", image=?"); // Add the image column to the query
+            values.add(imagePath); // Add the image path to the values list
+        }
 
-        String req="UPDATE produit set name=?,description=?,image=?,quantity=?,price=?,categorie_prod_id=?   WHERE ref=?";
+        reqBuilder.append(" WHERE ref=?"); // Add the WHERE clause
+        values.add(produit.getRef()); // Add the product reference to the values list
 
+        String req = reqBuilder.toString();
 
-        try (PreparedStatement preparedStatement= connection.prepareStatement(req)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(req)) {
+            // Set the values in the prepared statement
+            for (int i = 0; i < values.size(); i++) {
+                preparedStatement.setObject(i + 1, values.get(i));
+            }
 
-        // Définition des valeurs à l'aide des méthodes setter
-        preparedStatement.setString(1,produit.getName());
-        preparedStatement.setString(2,produit.getDescription());
-        preparedStatement.setString(3,produit.getImage());
-        preparedStatement.setInt(4,produit.getQuantity());
-        preparedStatement.setDouble(5,produit.getPrice());
-        preparedStatement.setInt(6,produit.getCategorie().getId());
-        preparedStatement.setInt(7,produit.getRef());
-
-
-        preparedStatement.executeUpdate();
-    }
+            preparedStatement.executeUpdate();
+        }
         System.out.println("Produit modifié");
     }
+
 
     public void delete(Produit produit) throws SQLException {
         String sql = "DELETE FROM produit WHERE ref = ?";
@@ -113,6 +116,53 @@ public class ProduitService implements IServices<Produit> {
 
 
 
+
+    public List<Produit> getAllProduits() throws SQLException {
+        List<Produit> produits = new ArrayList<>();
+        String req = "SELECT p.*, c.id AS category_id, c.nom_ca AS category_name FROM produit p JOIN categorie_prod c ON p.categorie_prod_id = c.id";
+        try (PreparedStatement stm = connection.prepareStatement(req);
+             ResultSet rs = stm.executeQuery()) {
+            while (rs.next()) {
+                CategorieProd categorie = new CategorieProd(rs.getInt("category_id"), rs.getString("category_name"));
+                Produit produit = new Produit(
+                        rs.getInt("ref"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getString("image"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price"),
+                        categorie
+                );
+                produits.add(produit);
+            }
+        }
+        return produits;
+    }
+
+
+    public Produit getProduitById(int produitId) throws SQLException {
+        Produit produit = null;
+        String req = "SELECT p.*, c.nom_ca FROM produit p JOIN categorie_prod c ON p.categorie_prod_id = c.id WHERE p.ref = ?";
+        try (PreparedStatement stm = connection.prepareStatement(req)) {
+            stm.setInt(1, produitId);
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    produit = new Produit();
+                    produit.setRef(rs.getInt("ref"));
+                    produit.setName(rs.getString("name"));
+                    produit.setDescription(rs.getString("description"));
+                    produit.setImage(rs.getString("image"));
+                    produit.setQuantity(rs.getInt("quantity"));
+                    produit.setPrice(rs.getDouble("price"));
+                    int categoryId = rs.getInt("categorie_prod_id");
+                    CategorieService categoryServices = new CategorieService();
+                    CategorieProd categorie = categoryServices.getCategorieById(categoryId);
+                    produit.setCategorie(categorie);
+                }
+            }
+        }
+        return produit;
+    }
 
 
 }

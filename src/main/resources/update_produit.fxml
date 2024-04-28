@@ -29,30 +29,15 @@
                     <left>
                         <AnchorPane prefHeight="555.0" prefWidth="211.0" BorderPane.alignment="CENTER">
                             <children>
-                                <AnchorPane layoutY="-45.6" prefHeight="600.0" prefWidth="1100.0" styleClass="nav-form" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-889.0" AnchorPane.topAnchor="-46.0">
+                                <AnchorPane layoutY="-46.0" prefHeight="600.0" prefWidth="1100.0" styleClass="nav-form" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-889.0" AnchorPane.topAnchor="-46.0">
                            <children>
-                                        <ImageView fx:id="logoImageView" fitHeight="77.0" fitWidth="127.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../photos/logoglowapp.png" />
-                                            </image>
-                                        </ImageView>
-                           </children>
-                                </AnchorPane>
-                            </children>
-                        </AnchorPane>
-                    </left>
-                    <center>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                            <children>
-                                <AnchorPane fx:id="home_form" layoutX="14.0" layoutY="14.0" prefHeight="555.0" prefWidth="889.0" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-13.200000000000045" AnchorPane.topAnchor="14.0">
-                                    <children>
-                                        <AnchorPane layoutX="-64.0" layoutY="-28.0" prefHeight="557.0" prefWidth="894.0" stylesheets="@dashboardDesign.css">
+                                        <AnchorPane layoutX="89.0" layoutY="41.0" prefHeight="534.0" prefWidth="825.0" stylesheets="@dashboardDesign.css">
                                             <styleClass>
                                                 <String fx:value="white-bg" />
                                                 <String fx:value="shadow" />
                                             </styleClass>
                                             <children>
-                                                <Label alignment="CENTER" layoutX="281.0" layoutY="29.0" prefHeight="27.0" prefWidth="271.0" text="UPDATE PRODUCT" textFill="#46413c">
+                                                <Label alignment="CENTER" layoutX="281.0" layoutY="29.0" prefHeight="27.0" prefWidth="271.0" text="UPDATE PRODUCT" textFill="#5e5750">
                                                     <font>
                                                         <Font name="Arial Bold" size="24.0" />
                                                     </font>
@@ -82,22 +67,22 @@
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>
                                                 </Label>
-                                                <Label layoutX="28.0" layoutY="396.0" text="Price">
+                                                <Label layoutX="447.0" layoutY="167.0" text="Price">
                                                     <font>
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="pricePTextField" layoutX="26.0" layoutY="433.0" prefHeight="25.0" prefWidth="230.0" style="-fx-border-color: #ffb524;">
+                                                <TextField fx:id="pricePTextField" layoutX="449.0" layoutY="194.0" prefHeight="25.0" prefWidth="230.0" style="-fx-border-color: #ffb524;">
                                                     <font>
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>
                                                 </TextField>
-                                                <Button fx:id="updateProduitButton" layoutX="524.0" layoutY="246.0" mnemonicParsing="false" onAction="#UpdateProduitButtonOnAction" prefHeight="27.0" prefWidth="115.0" style="-fx-background-color: #81c408;" text="Update" textFill="WHITE">
+                                                <Button fx:id="updateProduitButton" layoutX="657.0" layoutY="347.0" mnemonicParsing="false" onAction="#UpdateProduitButtonOnAction" prefHeight="20.0" prefWidth="86.0" style="-fx-background-color: #81c408;" text="Update" textFill="WHITE">
                                                     <font>
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>
                                                 </Button>
-                                                <Button fx:id="cancelButton" layoutX="651.0" layoutY="246.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: #615b5b;" text="cancel" textFill="WHITE">
+                                                <Button fx:id="cancelButton" layoutX="657.0" layoutY="391.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: #615b5b;" text="cancel" textFill="WHITE">
                                                     <font>
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>
@@ -108,25 +93,34 @@
                                                     </font>
                                                 </TextArea>
                                                 <Line endX="-100.0" endY="170.0" layoutX="493.0" layoutY="341.0" startX="-100.00006103515625" startY="-245.79998779296875" stroke="#ffb524" />
-                                                <TextField fx:id="photoPtextfield" layoutX="448.0" layoutY="181.0" prefHeight="22.0" prefWidth="234.0" style="-fx-border-color: #ffb524;">
-                                                    <font>
-                                                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                                                    </font>
-                                                </TextField>
-                                                <Label layoutX="448.0" layoutY="157.0" prefHeight="18.0" prefWidth="45.0" text="Photo">
+                                                <Label layoutX="442.0" layoutY="258.0" prefHeight="18.0" prefWidth="45.0" text="Photo">
                                                     <font>
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>
                                                 </Label>
                                                 <ComboBox fx:id="categoryComboBox" layoutX="24.0" layoutY="331.0" prefHeight="30.0" prefWidth="236.0" />
                                                 <TextField fx:id="quantitytextfield" layoutX="447.0" layoutY="114.0" prefHeight="21.0" prefWidth="235.0" style="-fx-border-color: #ffb524;" />
+                                              <ImageView fx:id="logoImageView" fitHeight="66.0" fitWidth="121.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@../../../images/logoglowapp.png" />
+                                                  </image>
+                                              </ImageView>
+                                    <Button fx:id="imageSelectButton" layoutX="447.0" layoutY="290.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="26.0" prefWidth="210.0" style="-fx-background-color: #ffb524;" text="Select Photo" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="13.0" />
+                                       </font>
+                                    </Button>
                                             </children>
                                         </AnchorPane>
-                                    </children>
-                                </AnchorPane>
+                                    <AnchorPane layoutX="-24.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0">
+                                        <children>
+                                            <AnchorPane fx:id="home_form" layoutX="142.0" layoutY="100.0" prefHeight="548.0" prefWidth="894.0" AnchorPane.bottomAnchor="-93.60000000000002" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="-147.60000000000014" AnchorPane.topAnchor="100.0" />
+                                        </children>
+                                    </AnchorPane>
+                           </children></AnchorPane>
                             </children>
                         </AnchorPane>
-                    </center>
+                    </left>
                 </BorderPane>
             </children>
         </AnchorPane>

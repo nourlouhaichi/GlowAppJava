@@ -18,29 +18,34 @@ public class CategorieService implements IServices<CategorieProd>{
     @Override
 
     public void add(CategorieProd cat) throws SQLException {
-        String req = "INSERT INTO categorie_prod (nom_cat, create_dateCat, description) VALUES(?,?,?)";
+        String req = "INSERT INTO categorie_prod (nom_ca, create_date_ca, description_cat) VALUES(?,?,?)";
         try (PreparedStatement stm = connection.prepareStatement(req)) {
-            stm.setInt(1, cat.getId());
-            stm.setString(2, cat.getNom_ca());
-            // Convert java.util.Date to java.sql.Date
-            java.sql.Date sqlDate = new java.sql.Date(cat.getCreate_date_ca().getTime());
-            stm.setDate(2, sqlDate);
-            stm.setString(4, cat.getDescription_cat());
-            stm.executeUpdate(req);
-        }
+
+            stm.setString(1, cat.getNom_ca());
+            stm.setTimestamp(2, Timestamp.valueOf(cat.getCreate_date_ca()));
+            stm.setString(3, cat.getDescription_cat());
+            // Exécution de la requête
+            stm.executeUpdate();
+
         System.out.println("categorie ajouté");
+
+    } catch (SQLException e) {
+        // Gestion de l'exception SQLException
+        System.err.println("Erreur lors de l'ajout de la categorie : " + e.getMessage());
+        // Vous pouvez également propager l'exception à la couche supérieure si nécessaire
+        throw e;
     }
+    }
+
 
     @Override
     public  void update(CategorieProd categorie) throws SQLException {
-        String req=" UPDATE categorie_prod SET nom_cat=?,create_DateCat=?,description=? WHERE id=?";
+        String req=" UPDATE categorie_prod SET nom_ca=?,create_date_ca=?,description_cat=? WHERE id=?";
         try {
 
             PreparedStatement preparedStatement = connection.prepareStatement(req);
             preparedStatement.setString(1, categorie.getNom_ca());
-            // Convert java.util.Date to java.sql.Date
-            java.sql.Date sqlDate = new java.sql.Date(categorie.getCreate_date_ca().getTime());
-            preparedStatement.setDate(2, sqlDate);
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(categorie.getCreate_date_ca()));
             preparedStatement.setString(3, categorie.getDescription_cat());
             preparedStatement.setInt(4, categorie.getId());
             preparedStatement.executeUpdate();
@@ -78,8 +83,8 @@ public class CategorieService implements IServices<CategorieProd>{
         while (rs.next()){
             CategorieProd categorie= new CategorieProd();
             categorie.setNom_ca(rs.getString("nom_ca"));
-            categorie.setCreate_date_ca(rs.getDate(3));
-            categorie.setDescription_cat(rs.getString(4));
+            categorie.setCreate_date_ca(rs.getTimestamp("create_date_ca").toLocalDateTime());
+            categorie.setDescription_cat(rs.getString("description_cat"));
             categorie.setId_cat(rs.getInt("id"));
 
 
@@ -101,7 +106,7 @@ public class CategorieService implements IServices<CategorieProd>{
                 CategorieProd categorie = new CategorieProd();
                 categorie.setId_cat(rs.getInt("id"));
                 categorie.setNom_ca(rs.getString("nom_ca"));
-                categorie.setCreate_date_ca(rs.getDate("create_date_ca"));
+                categorie.setCreate_date_ca(rs.getTimestamp("create_date_ca").toLocalDateTime());
                 categorie.setDescription_cat(rs.getString("description_cat"));
                 categories.add(categorie);
             }
@@ -127,6 +132,21 @@ public class CategorieService implements IServices<CategorieProd>{
         return null;
     }
 
+    public CategorieProd getCategorieById(int categorieId) throws SQLException {
+        CategorieProd categorie = null;
+        String req = "SELECT * FROM categorie_prod WHERE id = ?";
+        try (PreparedStatement stm = connection.prepareStatement(req)) {
+            stm.setInt(1, categorieId);
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    categorie = new CategorieProd();
+                    categorie.setId_cat(rs.getInt("id"));
+                    categorie.setNom_ca(rs.getString("nom_ca"));
+                }
+            }
+        }
+        return categorie;
+    }
 
 
 }

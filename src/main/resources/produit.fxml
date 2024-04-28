@@ -33,7 +33,7 @@
                                     <children>
                                         <ImageView fx:id="logoImageView" fitHeight="105.0" fitWidth="192.0" layoutX="16.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../photos/logoglowapp.png" />
+                                                <Image url="@../../../images/logoglowapp.png" />
                                             </image>
                                         </ImageView>
                                         <Label fx:id="usernameLabel" alignment="CENTER" layoutX="1.0" layoutY="153.0" prefHeight="23.0" prefWidth="194.0" text="Username" textFill="#797979">
@@ -128,12 +128,12 @@
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>
                                                 </TextField>
-                                                <Button fx:id="addProduitButton" layoutX="524.0" layoutY="246.0" mnemonicParsing="false" onAction="#addProduitButtonOnAction" prefHeight="27.0" prefWidth="115.0" style="-fx-background-color: #81c408;" text="AddProduct" textFill="WHITE">
+                                                <Button fx:id="addProduitButton" layoutX="632.0" layoutY="253.0" mnemonicParsing="false" onAction="#addProduitButtonOnAction" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #81c408;" text="AddProduct" textFill="WHITE">
                                                     <font>
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>
                                                 </Button>
-                                                <Button fx:id="cancelButton" layoutX="651.0" layoutY="246.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: #615b5b;" text="cancel" textFill="WHITE">
+                                                <Button fx:id="cancelButton" layoutX="633.0" layoutY="290.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: #615b5b;" text="cancel" textFill="WHITE">
                                                     <font>
                                                         <Font name="Arial Rounded MT Bold" size="14.0" />
                                                     </font>
@@ -144,18 +144,18 @@
                                        </font>
                                     </TextArea>
                                               <Line endX="-100.0" endY="170.0" layoutX="493.0" layoutY="341.0" startX="-100.00006103515625" startY="-245.79998779296875" stroke="#ffb524" />
-                                    <TextField fx:id="photoPtextfield" layoutX="448.0" layoutY="181.0" prefHeight="22.0" prefWidth="234.0" style="-fx-border-color: #ffb524;">
-                                       <font>
-                                          <Font name="Arial Rounded MT Bold" size="12.0" />
-                                       </font>
-                                    </TextField>
                                     <Label layoutX="448.0" layoutY="157.0" prefHeight="18.0" prefWidth="45.0" text="Photo">
                                        <font>
                                           <Font name="Arial Rounded MT Bold" size="14.0" />
                                        </font>
                                     </Label>
                                     <ComboBox fx:id="categoryComboBox" layoutX="24.0" layoutY="331.0" prefHeight="30.0" prefWidth="236.0" />
-                                    <TextField fx:id="quantitytextfield" layoutX="447.0" layoutY="114.0" prefHeight="21.0" prefWidth="235.0" style="-fx-border-color: #ffb524;" />
+                                    <TextField fx:id="quantitytextfield" layoutX="447.0" layoutY="114.0" prefHeight="27.0" prefWidth="190.0" style="-fx-border-color: #ffb524;" />
+                                    <Button fx:id="imageSelectButton" layoutX="462.0" layoutY="186.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: #ffb524;" text="Select Photo" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="13.0" />
+                                       </font>
+                                    </Button>
                                             </children>
                                         </AnchorPane>
                                     </children>

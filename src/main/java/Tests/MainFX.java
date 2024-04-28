@@ -12,6 +12,7 @@ public class MainFX extends Application {
         launch(args);
     }
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListProduit.fxml"));
@@ -25,5 +26,4 @@ public class MainFX extends Application {
         primaryStage.show();
 
     }
-
 }
