@@ -96,7 +96,11 @@
     -fx-border-radius: 5px; /* Border radius of the card */
     -fx-padding: 10px; /* Padding inside the card */
 }
-
+.comment-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #666;
+    -fx-padding: 5px;
+}
 #titlefx {
     -fx-text-fill: #81c408; /* Text color of the title */
     -fx-font-weight: bold; /* Bold font for the title */

@@ -1,6 +1,7 @@
 package FrontController;
 
 import Entities.Publication;
+import Services.ServiceComment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -28,16 +30,32 @@ public class ShowPublicationController {
     @FXML
     private Label titlefx;
 
+
     @FXML
-    private Button detailbutton;
+    private Label commentCountLabel;
 
     private Publication selectedPublication;
 
     public void setSelectedPublication(Publication publication) {
         this.selectedPublication = publication;
     }
-    @FXML
-    private void showDetails(ActionEvent event) {
+
+
+    public void initialize(Publication publication) throws SQLException, FileNotFoundException {
+        contentfx.setText(publication.getContentp());
+        titlefx.setText(publication.getTitrep());
+        String imagePath = publication.getImage();
+        if (imagePath != null && !imagePath.isEmpty()) {
+            Image image = new Image(new FileInputStream(imagePath));
+            imagefx.setImage(image);
+            ServiceComment serviceComment = new ServiceComment();
+            int commentCount = serviceComment.getCommentCount(publication.getId());
+            commentCountLabel.setText(String.valueOf(commentCount));
+        }
+    }
+
+
+    public void showdetails(MouseEvent mouseEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Front/ShowDetailsPub.fxml"));
             Parent root = loader.load();
@@ -50,16 +68,4 @@ public class ShowPublicationController {
             e.printStackTrace();
         }
     }
-
-    public void initialize(Publication publication) throws SQLException, FileNotFoundException {
-        contentfx.setText(publication.getContentp());
-        titlefx.setText(publication.getTitrep());
-        String imagePath = publication.getImage();
-        if (imagePath != null && !imagePath.isEmpty()) {
-            Image image = new Image(new FileInputStream(imagePath));
-            imagefx.setImage(image);
-        }
-    }
-
-
 }

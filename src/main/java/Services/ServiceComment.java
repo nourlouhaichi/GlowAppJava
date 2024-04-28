@@ -112,6 +112,18 @@ public class ServiceComment implements IServices<Comment> {
     public void ajouterWithImage(Publication publication, byte[] imageData) throws SQLException {
 
     }
+    public int getCommentCount(int publication_id) throws SQLException {
+        String req = "SELECT COUNT(*) AS comment_count FROM comment WHERE publication_id=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(req)) {
+            preparedStatement.setInt(1, publication_id);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("comment_count");
+                }
+            }
+        }
+        return 0;
+    }
 
 
 }
