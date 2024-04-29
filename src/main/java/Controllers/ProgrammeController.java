@@ -1,7 +1,5 @@
 package Controllers;
 
-
-
 import Services.ServiceProgramme;
 import Entities.Programme;
 import javafx.collections.FXCollections;
@@ -13,15 +11,29 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
+import kong.unirest.HttpResponse;
+import kong.unirest.JsonNode;
+import kong.unirest.Unirest;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.stream.Collectors;
+import javafx.application.Platform;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Arrays;
+import java.awt.Desktop;
+import java.io.File;
+import javafx.fxml.FXML;
+import java.nio.charset.StandardCharsets;
+
 
 public class ProgrammeController {
+    public Button generatePdfButton;
     @FXML private TextField idField;
     @FXML private TextField titreproField;
     @FXML private TextField planproField;
@@ -31,7 +43,7 @@ public class ProgrammeController {
     @FXML private Button updateButton;
     @FXML private Button deleteButton;
     @FXML private Button clearButton;
-
+    @FXML private TextField searchTextField;
     @FXML private TableView<Programme> programmeTableView;
     @FXML private TableColumn<Programme, Integer> columnId;
     @FXML private TableColumn<Programme, String> columnTitle;
@@ -40,8 +52,76 @@ public class ProgrammeController {
     @FXML private TableColumn<Programme, Date> columnDate;
     private ServiceProgramme serviceProgramme;
 
-
     private int selectedProgramId;
+
+    @FXML
+    public void generatePDFReport() {
+        ServiceProgramme serviceProgramme = new ServiceProgramme();
+        try {
+            List<Programme> programmeList = serviceProgramme.afficher();
+            String htmlContent = convertProgrammeListToHtml(programmeList);
+            String apiEndpoint = "https://pdf-api.co/pdf";
+            String apiKey = "952DB3D1DA80ED588277A06827311D0A627F";
+            String requestBody = String.format("{\"apiKey\": \"%s\", \"html\": \"%s\"}", apiKey, htmlContent);
+            HttpResponse<byte[]> response = Unirest.post(apiEndpoint)
+                    .header("Content-Type", "application/json")
+                    .body(requestBody)
+                    .asBytes();
+
+            if (response.getStatus() == 200 && "application/pdf".equals(response.getHeaders().getFirst("Content-Type"))) {
+                Path path = Paths.get("ProgramReport.pdf");
+                Files.write(path, response.getBody());
+                System.out.println("PDF Generated at: " + path.toAbsolutePath());
+
+                if (Desktop.isDesktopSupported()) {
+                    try {
+                        File pdfFile = new File(path.toString());
+                        Desktop.getDesktop().open(pdfFile);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        System.err.println("Unable to open the PDF file. Error: " + ex.getMessage());
+                    }
+                } else {
+                    System.err.println("Desktop operations not supported on the current platform. Cannot open the PDF file automatically.");
+                }
+            } else {
+                System.err.println("Failed to generate PDF: " + response.getStatusText());
+                System.err.println("Status Code: " + response.getStatus());
+                System.err.println("Response Headers: " + response.getHeaders());
+                String responseBody = new String(response.getBody(), StandardCharsets.UTF_8);
+                System.err.println("Response Body: " + responseBody);
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+    private String convertProgrammeListToHtml(List<Programme> programmeList) {
+        StringBuilder htmlBuilder = new StringBuilder();
+
+        // Begin HTML
+        htmlBuilder.append("<html><body>");
+        htmlBuilder.append("<h1>Programme Report</h1>");
+        htmlBuilder.append("<table border='1'><tr><th>Title</th><th>Plan</th><th>Available Places</th><th>Date</th></tr>");
+
+        // Add rows for each Programme
+        for (Programme prog : programmeList) {
+            htmlBuilder.append("<tr>");
+            htmlBuilder.append("<td>").append(prog.getTitrepro()).append("</td>");
+            htmlBuilder.append("<td>").append(prog.getPlanpro()).append("</td>");
+            htmlBuilder.append("<td>").append(prog.getPlacedispo()).append("</td>");
+            htmlBuilder.append("<td>").append(prog.getDatepro().toString()).append("</td>");
+            htmlBuilder.append("</tr>");
+        }
+
+        // End HTML
+        htmlBuilder.append("</table></body></html>");
+
+        return htmlBuilder.toString();
+    }
 
 
     @FXML
@@ -53,11 +133,15 @@ public class ProgrammeController {
         columnPlaces.setCellValueFactory(new PropertyValueFactory<>("placedispo"));
         columnDate.setCellValueFactory(new PropertyValueFactory<>("datepro"));
 
-
         loadProgrammeData();
+        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isEmpty()) {
+                loadProgrammeData();
+            } else {
+                searchProgrammeData();
+            }
+        });
     }
-
-
 
 
 
@@ -71,6 +155,20 @@ public class ProgrammeController {
         }
     }
 
+    private void searchProgrammeData() {
+        String searchText = searchTextField.getText().toLowerCase();
+        try {
+            ObservableList<Programme> allProgrammes = FXCollections.observableArrayList(serviceProgramme.afficher());
+            ObservableList<Programme> filteredList = allProgrammes.stream()
+                    .filter(p -> p.getTitrepro().toLowerCase().contains(searchText) ||
+                            p.getPlanpro().toLowerCase().contains(searchText))
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+            programmeTableView.setItems(filteredList);
+        } catch (SQLException e) {
+            showError("Error filtering programmes: " + e.getMessage());
+        }
+    }
 
     @FXML
     private void clearForm() {
@@ -252,4 +350,8 @@ public class ProgrammeController {
 
 
     }
+
+
+
 }
+

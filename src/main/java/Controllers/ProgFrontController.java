@@ -13,9 +13,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+import kong.unirest.HttpResponse;
+import kong.unirest.JsonNode;
+import kong.unirest.Unirest;
+import javafx.fxml.FXML;
 import java.io.IOException;
 import java.sql.SQLException;
+
 
 public class ProgFrontController {
 
@@ -24,7 +28,6 @@ public class ProgFrontController {
     private TilePane cardContainer;
 
     private ServiceProgramme serviceProgramme = new ServiceProgramme();
-
 
 
     @FXML
