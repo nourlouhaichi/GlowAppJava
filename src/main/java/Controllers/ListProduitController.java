@@ -5,6 +5,7 @@ import Entities.Produit;
 import Services.ProduitService;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -103,6 +104,8 @@ public class ListProduitController {
 
 
     @FXML
+    private Button StatGenerateButton;
+    @FXML
     private Button CategorieButton;
 
     @FXML
@@ -185,24 +188,49 @@ public class ListProduitController {
 
 
     private void populateProduitTable() {
-        // Clear existing items
-       // ProduitTable.getItems().clear();
-
+        ProduitService produitService = new ProduitService(); // Instantiate the service
         try {
+            // Fetch products from the database
+            List<Produit> produits = produitService.getAllProduits();
 
-            ProduitService produitCrud = new ProduitService();
-            ObservableList<Produit> produitData = FXCollections.observableArrayList();
-            // Retrieve and add new items
-            List<Produit> produits = produitCrud.show(); // Call show() on the instance
-            produitData.addAll(produits);
+            // Clear the table to avoid duplicate entries
+            ProduitTable.getItems().clear();
 
-            // Set items to TableView
-            ProduitTable.setItems(produitData);
+            // Add products to the table
+            for (Produit produit : produits) {
+                // Create a new table row
+                TableRow<Produit> row = new TableRow<>();
+                row.setItem(produit);
+
+                // Add the row to the table
+                ProduitTable.getItems().add(produit);
+
+                // Check if the quantity is 10 or lower and display an alert
+                if (produit.getQuantity() <= 10) {
+                    showAlert(Alert.AlertType.WARNING, "Low Stock Alert", "Product '" + produit.getName() + "' is low in stock. Remaining quantity: " + produit.getQuantity());
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to populate produit table.");
         }
     }
+
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(alertType);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(content);
+            alert.show();
+        });
+    }
+
+    @FXML
+    void StatGenerateButtonOnAction(ActionEvent event) {
+
+    }
+
 
 
     @FXML
