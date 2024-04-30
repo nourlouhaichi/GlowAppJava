@@ -71,4 +71,20 @@ public class Home {
 
 
     }
+    public void ObjOnAction(javafx.event.ActionEvent event) {
+        try {
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ObjFront.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            currentStage.close();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }

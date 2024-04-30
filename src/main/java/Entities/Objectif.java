@@ -1,74 +1,67 @@
 package Entities;
 
+
 public class Objectif {
     private int id;
-    private String objectifo;
-    private String descriptiono;
-    private float poido;
-    private float tailleo;
+    private String objectif_o;
+    private String description_o;
+    private Float poid_o;
+    private Float taille_o;
     private Programme programme;
 
-
-
-    public Objectif(int id, String objectifo, String descriptiono, float poido, float tailleo, Programme programme) {
+    public Objectif(int id, String objectifo, String descriptiono, Float poido, Float tailleo) {
         this.id = id;
-        this.objectifo = objectifo;
-        this.descriptiono = descriptiono;
-        this.poido = poido;
-        this.tailleo = tailleo;
-        this.programme = programme;
-    }
-
-    public Objectif() {
+        this.objectif_o = objectifo;
+        this.description_o = descriptiono;
+        this.poid_o = poido;
+        this.taille_o = tailleo;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id) {this.id = id;}
+
+    public String getObjectifO() {return objectif_o;}
+
+    public void setObjectifO(String objectifo) {
+        this.objectif_o = objectifo;
     }
 
-    public Programme getProgramme() {
-        return programme;
+    public String getDescriptionO() {return description_o;
     }
 
-    public void setProgramme(Programme programme) {
-        this.programme = programme;
+    public void setDescriptionO(String descriptiono) {
+        this.description_o = descriptiono;
     }
 
-    public float getTailleo() {
-        return tailleo;
+    public Float getPoidO() {
+        return poid_o;
     }
 
-    public void setTailleo(float tailleo) {
-        this.tailleo = tailleo;
+    public void setPoidO(Float poido) {
+        this.poid_o = poido;
     }
 
-    public float getPoido() {
-        return poido;
+    public Float getTailleO() {
+        return taille_o;
     }
 
-    public void setPoido(float poido) {
-        this.poido = poido;
-    }
-
-    public String getDescriptiono() {
-        return descriptiono;
-    }
-
-    public void setDescriptiono(String descriptiono) {
-        this.descriptiono = descriptiono;
-    }
-
-    public String getObjectifo() {
-        return objectifo;
-    }
-
-    public void setObjectifo(String objectifo) {
-        this.objectifo = objectifo;
+    public void setTailleO(Float tailleo) {
+        this.taille_o = tailleo;
     }
 
 
+
+    @Override
+    public String toString() {
+        return "Objectif{" +
+                "id=" + id +
+                ", objectifo='" + objectif_o + '\'' +
+                ", descriptiono='" + description_o + '\'' +
+                ", poido=" + poid_o +
+                ", tailleo=" + taille_o +
+                '}';
+    }
 }

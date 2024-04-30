@@ -1,7 +1,7 @@
 package Controllers;
 
-import Services.ServiceProgramme;
-import Entities.Programme;
+import Entities.Objectif;
+import Services.ServiceObjectif;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,56 +10,55 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import kong.unirest.HttpResponse;
-import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
+import org.w3c.dom.Text;
+
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.stream.Collectors;
-import javafx.application.Platform;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Arrays;
-import java.awt.Desktop;
-import java.io.File;
-import javafx.fxml.FXML;
-import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
+public class ObjectifController {
 
-public class ProgrammeController {
     public Button generatePdfButton;
     @FXML private TextField idField;
-    @FXML private TextField titreproField;
-    @FXML private TextField planproField;
-    @FXML private TextField placedispoField;
-    @FXML private DatePicker dateproPicker;
+    @FXML private TextField ObjectifField;
+    @FXML private TextField DescriptionField;
+    @FXML private TextField WeightField;
+    @FXML private TextField HeightField;
     @FXML private Button addButton;
     @FXML private Button updateButton;
     @FXML private Button deleteButton;
     @FXML private Button clearButton;
     @FXML private TextField searchTextField;
-    @FXML private TableView<Programme> programmeTableView;
-    @FXML private TableColumn<Programme, Integer> columnId;
-    @FXML private TableColumn<Programme, String> columnTitle;
-    @FXML private TableColumn<Programme, String> columnPlan;
-    @FXML private TableColumn<Programme, Integer> columnPlaces;
-    @FXML private TableColumn<Programme, Date> columnDate;
-    private ServiceProgramme serviceProgramme;
+    @FXML private TableView<Objectif> ObjectifTableView;
+    @FXML private TableColumn<Objectif, Integer> columnId;
+    @FXML private TableColumn<Objectif, String> columnObjectif;
+    @FXML private TableColumn<Objectif, String> columnDescription;
+    @FXML private TableColumn<Objectif, Float> columnWeight;
+    @FXML private TableColumn<Objectif, Float> columnHeight;
 
-    private int selectedProgramId;
+    private ServiceObjectif serviceObjectif;
+
+    private int selectedObjectifId;
 
     @FXML
     public void generatePDFReport() {
-        ServiceProgramme serviceProgramme = new ServiceProgramme();
+        ServiceObjectif serviceObjectif = new ServiceObjectif();
         try {
-            List<Programme> programmeList = serviceProgramme.afficher();
-            String htmlContent = convertProgrammeListToHtml(programmeList);
+            List<Objectif> objectifsList = serviceObjectif.afficher();
+            String htmlContent = convertObjectifListToHtml(objectifsList);
             String apiEndpoint = "https://pdf-api.co/pdf";
             String apiKey = "952DB3D1DA80ED588277A06827311D0A627F";
             String requestBody = String.format("{\"apiKey\": \"%s\", \"html\": \"%s\"}", apiKey, htmlContent);
@@ -99,21 +98,21 @@ public class ProgrammeController {
 
 
 
-    private String convertProgrammeListToHtml(List<Programme> programmeList) {
+    private String convertObjectifListToHtml(List<Objectif> objectifList) {
         StringBuilder htmlBuilder = new StringBuilder();
 
         // Begin HTML
         htmlBuilder.append("<html><body>");
-        htmlBuilder.append("<h1>Programs Report</h1>");
-        htmlBuilder.append("<table border='1'><tr><th>Title</th><th>Plan</th><th>Available Places</th><th>Date</th></tr>");
+        htmlBuilder.append("<h1>Objectives Report</h1>");
+        htmlBuilder.append("<table border='1'><tr><th>Objectif</th><th>Description</th><th>Weight</th><th>Height</th></tr>");
 
         // Add rows for each Programme
-        for (Programme prog : programmeList) {
+        for (Objectif obj : objectifList) {
             htmlBuilder.append("<tr>");
-            htmlBuilder.append("<td>").append(prog.getTitrepro()).append("</td>");
-            htmlBuilder.append("<td>").append(prog.getPlanpro()).append("</td>");
-            htmlBuilder.append("<td>").append(prog.getPlacedispo()).append("</td>");
-            htmlBuilder.append("<td>").append(prog.getDatepro().toString()).append("</td>");
+            htmlBuilder.append("<td>").append(obj.getObjectifO()).append("</td>");
+            htmlBuilder.append("<td>").append(obj.getDescriptionO()).append("</td>");
+            htmlBuilder.append("<td>").append(obj.getPoidO()).append("</td>");
+            htmlBuilder.append("<td>").append(obj.getTailleO()).append("</td>");
             htmlBuilder.append("</tr>");
         }
 
@@ -126,19 +125,19 @@ public class ProgrammeController {
 
     @FXML
     public void initialize() {
-        serviceProgramme = new ServiceProgramme();
+       serviceObjectif = new ServiceObjectif();
 
-        columnTitle.setCellValueFactory(new PropertyValueFactory<>("titrepro"));
-        columnPlan.setCellValueFactory(new PropertyValueFactory<>("planpro"));
-        columnPlaces.setCellValueFactory(new PropertyValueFactory<>("placedispo"));
-        columnDate.setCellValueFactory(new PropertyValueFactory<>("datepro"));
+        columnObjectif.setCellValueFactory(new PropertyValueFactory<>("objectifO"));
+        columnDescription.setCellValueFactory(new PropertyValueFactory<>("descriptionO"));
+        columnWeight.setCellValueFactory(new PropertyValueFactory<>("poidO"));
+        columnHeight.setCellValueFactory(new PropertyValueFactory<>("tailleO"));
 
-        loadProgrammeData();
+        loadObjectifData();
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.isEmpty()) {
-                loadProgrammeData();
+                loadObjectifData();
             } else {
-                searchProgrammeData();
+                searchObjectifData();
             }
         });
     }
@@ -146,95 +145,95 @@ public class ProgrammeController {
 
 
 
-    private void loadProgrammeData() {
+    private void loadObjectifData() {
         try {
-            ObservableList<Programme> programmeData = FXCollections.observableArrayList(serviceProgramme.afficher());
-            programmeTableView.setItems(programmeData);
+            ObservableList<Objectif> objectifData = FXCollections.observableArrayList(serviceObjectif.afficher());
+            ObjectifTableView.setItems(objectifData);
         } catch (SQLException e) {
-            showError("Error loading programmes: " + e.getMessage());
+            showError("Error loading objectives: " + e.getMessage());
         }
     }
 
-    private void searchProgrammeData() {
+    private void searchObjectifData() {
         String searchText = searchTextField.getText().toLowerCase();
         try {
-            ObservableList<Programme> allProgrammes = FXCollections.observableArrayList(serviceProgramme.afficher());
-            ObservableList<Programme> filteredList = allProgrammes.stream()
-                    .filter(p -> p.getTitrepro().toLowerCase().contains(searchText) ||
-                            p.getPlanpro().toLowerCase().contains(searchText))
+            ObservableList<Objectif> allObjectifs = FXCollections.observableArrayList(serviceObjectif.afficher());
+            ObservableList<Objectif> filteredList = allObjectifs.stream()
+                    .filter(p -> p.getObjectifO().toLowerCase().contains(searchText) ||
+                            p.getDescriptionO().toLowerCase().contains(searchText))
                     .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-            programmeTableView.setItems(filteredList);
+            ObjectifTableView.setItems(filteredList);
         } catch (SQLException e) {
-            showError("Error filtering programmes: " + e.getMessage());
+            showError("Error filtering objectives: " + e.getMessage());
         }
     }
 
     @FXML
     private void clearForm() {
-        titreproField.clear();
-        planproField.clear();
-        placedispoField.clear();
-        dateproPicker.setValue(null);
-        programmeTableView.getSelectionModel().clearSelection();
+        ObjectifField.clear();
+        DescriptionField.clear();
+        WeightField.clear();
+        HeightField.clear();
+        ObjectifTableView.getSelectionModel().clearSelection();
     }
 
 //
 
 
     @FXML
-    public void handleProgrammeSelection() {
-        Programme selectedProgramme = programmeTableView.getSelectionModel().getSelectedItem();
-        if (selectedProgramme != null) {
-            selectedProgramId = selectedProgramme.getId();
-            titreproField.setText(selectedProgramme.getTitrepro());
-            planproField.setText(selectedProgramme.getPlanpro());
-            placedispoField.setText(String.valueOf(selectedProgramme.getPlacedispo()));
-            dateproPicker.setValue(selectedProgramme.getDatepro().toLocalDate());
+    public void handleObjectifSelection() {
+        Objectif selectedObjectif = ObjectifTableView.getSelectionModel().getSelectedItem();
+        if (selectedObjectif != null) {
+            selectedObjectifId = selectedObjectif.getId();
+            ObjectifField.setText(selectedObjectif.getObjectifO());
+            DescriptionField.setText(selectedObjectif.getDescriptionO());
+            WeightField.setText(String.valueOf(selectedObjectif.getPoidO()));
+            HeightField.setText(String.valueOf(selectedObjectif.getTailleO()));
         }
     }
 
 
 
     @FXML
-    public void addProgramme() {
-        if (!validateTitle() || !validatePlan() || !validateAvailablePlaces() || !validateDate()) {
+    public void addObjectif() {
+        if (!validateObjectif() || !validateDescription() || !validateWeight() || !validateHeight()) {
             return;
         }
         try {
-            Programme programme = new Programme(
+            Objectif objectif = new Objectif(
                     0,
-                    titreproField.getText(),
-                    planproField.getText(),
-                    Integer.parseInt(placedispoField.getText()),
-                    Date.valueOf(dateproPicker.getValue())
-                    );
-            serviceProgramme.ajouter(programme);
-            loadProgrammeData();
+                    ObjectifField.getText(),
+                    DescriptionField.getText(),
+                    Float.parseFloat(WeightField.getText()),
+                    Float.parseFloat(HeightField.getText())
+            );
+            serviceObjectif.ajouter(objectif);
+            loadObjectifData();
             clearForm();
-            showConfirmation("Programme added successfully.");
+            showConfirmation("Objectif added successfully.");
         } catch (Exception e) {
             showError(e.getMessage());
         }
     }
 
     @FXML
-    public void updateProgramme() {
-        if (!validateTitle() || !validatePlan() || !validateAvailablePlaces() || !validateDate()) {
+    public void updateObjectif() {
+        if (!validateObjectif() || !validateDescription() || !validateWeight() || !validateHeight()) {
             return;
         }
         try {
-            Programme programme = new Programme(
-                    selectedProgramId,
-                    titreproField.getText(),
-                    planproField.getText(),
-                    Integer.parseInt(placedispoField.getText()),
-                    java.sql.Date.valueOf(dateproPicker.getValue())
-                );
-            serviceProgramme.modifier(programme);
-            loadProgrammeData();
+            Objectif objectif = new Objectif(
+                    selectedObjectifId,
+                    ObjectifField.getText(),
+                    DescriptionField.getText(),
+                    Float.parseFloat(WeightField.getText()),
+                    Float.parseFloat(HeightField.getText())
+            );
+            serviceObjectif.modifier(objectif);
+            loadObjectifData();
             clearForm();
-            showConfirmation("Programme updated successfully.");
+            showConfirmation("Objectif updated successfully.");
         } catch (Exception e) {
             showError(e.getMessage());
         }
@@ -244,12 +243,12 @@ public class ProgrammeController {
 
 
     @FXML
-    public void deleteProgramme() {
+    public void deleteObjectif() {
         try {
-            serviceProgramme.supprimer(selectedProgramId);
-            loadProgrammeData();
+            serviceObjectif.supprimer(selectedObjectifId);
+            loadObjectifData();
             clearForm();
-            showConfirmation("Programme deleted successfully.");
+            showConfirmation("Objectif deleted successfully.");
 
         } catch (Exception e) {
             showError(e.getMessage());
@@ -274,50 +273,53 @@ public class ProgrammeController {
 
 
 
-    private boolean validateTitle() {
-        String title = titreproField.getText().trim();
+    private boolean validateObjectif() {
+        String title = ObjectifField.getText().trim();
         if (title.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Title cannot be empty.");
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Objectif Title cannot be empty.");
             return false;
         }
-        if (title.length() > 15) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Title is too long.");
+        if (title.length() > 70) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Objectif Title is too long.");
             return false;
         }
         return true;
     }
 
-    private boolean validatePlan() {
-        String plan = planproField.getText().trim();
+    private boolean validateDescription() {
+        String plan = DescriptionField.getText().trim();
         if (plan.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Plan cannot be empty.");
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Description cannot be empty.");
             return false;
         }
         return true;
     }
 
-    private boolean validateAvailablePlaces() {
-        String availablePlaces = placedispoField.getText().trim();
+    private boolean validateWeight() {
+        String Weight = WeightField.getText().trim();
         try {
-            int places = Integer.parseInt(availablePlaces);
-            if (places <= 0) {
-                showAlert(Alert.AlertType.ERROR, "Validation Error", "Available places must be a positive number.");
+            Float weight = Float.parseFloat(Weight);
+            if (weight <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "Weight must be a positive number.");
                 return false;
             }
         } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Available places must be a valid integer.");
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Weight must be a valid integer.");
             return false;
         }
         return true;
     }
 
-    private boolean validateDate() {
-        if (dateproPicker.getValue() == null) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please select a date.");
-            return false;
-        }
-        if (dateproPicker.getValue().isBefore(LocalDate.now())) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "The date cannot be in the past.");
+    private boolean validateHeight() {
+        String Height = HeightField.getText().trim();
+        try {
+            Float height = Float.parseFloat(Height);
+            if (height <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "Height must be a positive number.");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Height must be a valid integer.");
             return false;
         }
         return true;
@@ -366,7 +368,6 @@ public class ProgrammeController {
 
 
     }
-
     public void Objback(javafx.event.ActionEvent event) {
         try {
 
@@ -384,5 +385,8 @@ public class ProgrammeController {
 
     }
 
+
+
 }
+
 

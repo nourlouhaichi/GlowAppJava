@@ -1,6 +1,8 @@
 package Controllers;
 
+import Entities.Objectif;
 import Entities.Programme;
+import Services.ServiceObjectif;
 import Services.ServiceProgramme;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,41 +15,35 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import kong.unirest.HttpResponse;
-import kong.unirest.JsonNode;
-import kong.unirest.Unirest;
-import javafx.fxml.FXML;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
-
-public class ProgFrontController {
-
-
+public class ObjFrontController {
     @FXML
     private TilePane cardContainer;
 
-    private ServiceProgramme serviceProgramme = new ServiceProgramme();
+    private ServiceObjectif serviceObjectif = new ServiceObjectif();
 
 
     @FXML
     public void initialize() {
-        loadProgCards();
+        loadObjCards();
     }
 
-    private void loadProgCards() {
+    private void loadObjCards() {
         try {
-            for (Programme prog : serviceProgramme.afficher()) {
+            for (Objectif obj : serviceObjectif.afficher()) {
                 VBox card = new VBox(10);
                 card.setPadding(new Insets(10));
                 card.setStyle("-fx-border-color: black; -fx-border-width: 2;");
 
-                Label titleLabel = new Label("title: " + prog.getTitrepro());
-                Label planLabel = new Label("plan: " + prog.getPlanpro());
+                Label objectifLabel = new Label("Objectif : " + obj.getObjectifO());
+                Label descriptionLabel = new Label("Description: " + obj.getDescriptionO());
                 Button detailsButton = new Button("View Details");
-                detailsButton.setOnAction(e -> showProgDetails(prog));
+                detailsButton.setOnAction(e -> showObjDetails(obj));
 
-                card.getChildren().addAll(titleLabel, planLabel, detailsButton);
+                card.getChildren().addAll(objectifLabel, descriptionLabel, detailsButton);
                 cardContainer.getChildren().add(card);
             }
         } catch (SQLException e) {
@@ -55,16 +51,16 @@ public class ProgFrontController {
         }
     }
 
-    private void showProgDetails(Programme programme) {
+    private void showObjDetails(Objectif objectif) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProgDetail.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ObjDetail.fxml"));
             Parent root = loader.load();
 
-            ProgDetailController controller = loader.getController();
-            controller.setProg(programme);
+            ObjDetailController controller = loader.getController();
+            controller.setObj(objectif);
 
             Stage stage = new Stage();
-            stage.setTitle("Prog Details");
+            stage.setTitle("Objectif Details");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
@@ -123,8 +119,9 @@ public class ProgFrontController {
 
 
     }
-
 }
+
+
 
 
 

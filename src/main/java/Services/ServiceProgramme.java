@@ -8,8 +8,7 @@ import java.util.List;
 
 public class ServiceProgramme implements IServicesProgramme<Programme> {
     Connection connection;
-    public ServiceProgramme(){
-        connection= MyDatabase.getInstance().getConnection();
+    public ServiceProgramme(){connection= MyDatabase.getInstance().getConnection();
     }
     @Override
     public void ajouter(Programme Programme) throws SQLException {

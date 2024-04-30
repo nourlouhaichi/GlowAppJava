@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.geometry.Insets?>
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
@@ -13,20 +9,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProgFrontController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ObjFrontController">
     <children>
-        <BorderPane  styleClass="main-layout" layoutX="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <BorderPane layoutX="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="main-layout" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
                 <!-- Navigation bar -->
                 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0" prefWidth="822.0" styleClass="navbar" stylesheets="style.css" BorderPane.alignment="CENTER_RIGHT">
-                    <Button maxHeight="-Infinity" maxWidth="-Infinity" onAction="#backHome" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="52.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Home" textFill="black">
+                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#backHome" prefHeight="18.0" prefWidth="52.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Home" textFill="black">
                         <HBox.margin>
                             <Insets left="200.0" right="-60.0" />
                         </HBox.margin>
@@ -80,12 +75,6 @@
                     <padding>
                         <Insets bottom="40.0" left="-150.0" top="50.0" />
                     </padding>
-                    <BorderPane.margin>
-                        <Insets />
-                    </BorderPane.margin>
-                    <padding>
-                        <Insets bottom="40.0" left="-150.0" top="50.0" />
-                    </padding>
                     <!-- Add more buttons as needed -->
                 </HBox>
 
@@ -96,7 +85,7 @@
                     <children>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="89.0" prefWidth="435.0">
                             <children>
-                                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="217.0" text="Programmes" textFill="#878787">
+                                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="217.0" text="Objectives" textFill="#878787">
                                     <font>
                                         <Font name="Cambria Bold" size="40.0" />
                                     </font>
@@ -148,7 +137,7 @@
                                     <children>
 
                                     </children></HBox>
-                                <Button mnemonicParsing="false"  prefHeight="50.0" prefWidth="270.0" styleClass="add-btn" stylesheets="@style.css" text="RESERVER" textFill="#828282">
+                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" styleClass="add-btn" stylesheets="@style.css" text="RESERVER" textFill="#828282">
                                     <VBox.margin>
                                         <Insets bottom="20.0" top="30.0" />
                                     </VBox.margin>
@@ -205,11 +194,11 @@
                             <children>
                                 <ScrollPane fx:id="scroll" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="840.0" styleClass="transparent">
                                     <content>
-                                            <TilePane fx:id="cardContainer" layoutX="14.0" layoutY="14.0" prefColumns="2" hgap="20" vgap="20" prefHeight="600.0" prefWidth="800.0">
-                                                <padding>
-                                                    <Insets top="10" right="10" bottom="10" left="10"/>
-                                                </padding>
-                                            </TilePane>
+                                        <TilePane fx:id="cardContainer" hgap="20" layoutX="14.0" layoutY="14.0" prefColumns="2" prefHeight="600.0" prefWidth="800.0" vgap="20">
+                                            <padding>
+                                                <Insets bottom="10" left="10" right="10" top="10" />
+                                            </padding>
+                                        </TilePane>
                                     </content>
                                     <HBox.margin>
                                         <Insets bottom="-50.0" top="10.0" />
@@ -226,5 +215,3 @@
         </BorderPane>
     </children>
 </AnchorPane>
-
-
