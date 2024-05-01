@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="1016.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CartViewController">
+   <children>
+      <AnchorPane layoutX="11.0" layoutY="108.0" prefHeight="514.0" prefWidth="994.0" stylesheets="@dashboardDesign.css">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <TableView fx:id="cartTableView" layoutX="142.0" layoutY="60.0" prefHeight="232.0" prefWidth="688.0">
+               <columns>
+                  <TableColumn fx:id="productNameColumn" prefWidth="347.99998474121094" text="ProductName" />
+                  <TableColumn fx:id="priceColumn" prefWidth="340.800048828125" text="Price(TND)" />
+               </columns>
+            </TableView>
+            <Label fx:id="totalPriceLabel" layoutX="617.0" layoutY="322.0" prefHeight="22.0" prefWidth="153.0" text="Total Price (TND) :">
+               <font>
+                  <Font name="Baskerville Old Face" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="620.0" layoutY="364.0" prefHeight="19.0" prefWidth="115.0" text="Code promo :">
+               <font>
+                  <Font name="Baskerville Old Face" size="18.0" />
+               </font>
+            </Label>
+            <TextField layoutX="733.0" layoutY="361.0" prefHeight="27.0" prefWidth="180.0" style="-fx-border-color: #ffb524;" />
+            <Button fx:id="payButton" layoutX="710.0" layoutY="399.0" mnemonicParsing="false" onAction="#payment" prefHeight="26.0" prefWidth="238.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Pay">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="removeButton" layoutX="72.0" layoutY="327.0" mnemonicParsing="false" onAction="#removeButtonOnClick" prefHeight="27.0" prefWidth="115.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Remove">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="712.0" layoutY="433.0" mnemonicParsing="false" onAction="#returnToProduitFront" prefHeight="26.0" prefWidth="238.0" styleClass="clear-btn" stylesheets="@dashboardDesign.css" text="Return">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+            </Button>
+            <Label layoutX="403.0" layoutY="4.0" prefHeight="56.0" prefWidth="226.0" text="MY CART" textFill="#62b427">
+               <font>
+                  <Font name="Baskerville Old Face" size="48.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="327.0" layoutY="22.0" prefHeight="74.0" prefWidth="619.0" style="-fx-background-color: #81c408;" stylesheets="@dashboardDesign.css">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <Button layoutX="91.0" layoutY="23.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #ffffff;" text="Home" textFill="#81c408">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.5" />
+               </font>
+            </Button>
+            <Button layoutX="256.0" layoutY="23.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #ffffff;" text="Shop" textFill="#81c408">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.5" />
+               </font>
+            </Button>
+            <Button layoutX="409.0" layoutY="23.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #ffffff;" text="Cart" textFill="#81c408">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.5" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="logoImageView" fitHeight="105.0" fitWidth="186.0" layoutX="16.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/logoglowapp.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

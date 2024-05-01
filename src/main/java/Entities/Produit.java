@@ -33,6 +33,11 @@ public class Produit {
         this.categorie = categorie; // Initialize the category
 
     }
+    public Produit(String  name, double price) {
+        this.name = name;
+        this.price=price ;
+
+    }
 
     public int getRef() {
         return ref;

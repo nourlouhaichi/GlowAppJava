@@ -1,12 +1,15 @@
 package Controllers;
 
+import Entities.Cart;
 import Entities.Produit;
 import Services.ProduitService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -32,7 +35,8 @@ public class ProduitFrontController {
     @FXML
     private Label LocationPriceLabel;
 
-
+    @FXML
+    private Button buttonCart;
     @FXML
     private Label adresseLabel;
 
@@ -52,6 +56,7 @@ public class ProduitFrontController {
     private ScrollPane scroll;
 
     private int selectedLocationId;
+
 
 
     @FXML
@@ -82,6 +87,7 @@ public class ProduitFrontController {
         Label locationPriceLabel = (Label) chosenFruitCard.lookup("#LocationPriceLabel");
         ImageView locationImageView = (ImageView) chosenFruitCard.lookup("#locationimg");
         // Label adresseLabel = (Label) chosenFruitCard.lookup("#adresseLabel"); // Add this line
+
         Label descriptionLabel = (Label) chosenFruitCard.lookup("#descriptionLabel"); // Add this line
 
         // Update labels with location information
@@ -95,10 +101,62 @@ public class ProduitFrontController {
         // Load the image using the URL
         Image fxImage = new Image(location.getImage());
         locationImageView.setImage(fxImage);
+
     }
+    @FXML
+    void handleAddToCartButtonClick(ActionEvent event) {
+        // Récupérer les détails du produit sélectionné
+        String name = LocationNameLabel.getText();
+        double price = Double.parseDouble(LocationPriceLabel.getText());
+
+
+
+        // Créer une instance de Produit avec les détails récupérés
+        Produit selectedProduct = new Produit(name, price);
+
+        // Ajouter le produit au panier
+        Cart.addToCart(selectedProduct);
+
+        // Afficher un message de confirmation
+       // System.out.println("Product added to cart!");
+
+        // Afficher un message de confirmation
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Product Added");
+        alert.setHeaderText(null);
+        alert.setContentText("Product has been added to the cart!");
+        alert.showAndWait();
+    }
+
+
+    @FXML
+    private void openCartView(ActionEvent event) {
+        try {
+            // Charger la vue CartView.fxml dans un Parent
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CartView.fxml"));
+            Parent root = loader.load();
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Scene currentScene = ((Node) event.getSource()).getScene();
+
+            // Remplacer le contenu de la racine de la scène actuelle par le contenu du panier
+            currentScene.setRoot(root);
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+}
+
+
 
     @FXML
     void initialize() throws SQLException {
+
+
         // Fetch locations from the database
         ProduitService locationService = new ProduitService();
         List<Produit> produits = locationService.show();
@@ -124,7 +182,7 @@ public class ProduitFrontController {
                     Image fxImage = new Image(produit.getImage());
 
                     // Create a new item controller for the product
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/item.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/itemProduct.fxml"));
                     AnchorPane itemPane = fxmlLoader.load();
                     ItemProduitController itemController = fxmlLoader.getController();
 
@@ -160,5 +218,6 @@ public class ProduitFrontController {
                 row++;
             }
         }
+
     }
 }

@@ -15,7 +15,7 @@ public class MainFX extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeBack.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListProduit.fxml"));
 
 
         Parent root =loader.load();

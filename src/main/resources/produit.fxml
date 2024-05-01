@@ -29,49 +29,13 @@
                     <left>
                         <AnchorPane prefHeight="555.0" prefWidth="211.0" BorderPane.alignment="CENTER">
                             <children>
-                                <AnchorPane prefHeight="555.0" prefWidth="214.0" styleClass="nav-form" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <AnchorPane layoutY="-45.6" prefHeight="600.0" prefWidth="1100.0" styleClass="nav-form" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-889.0" AnchorPane.topAnchor="-46.0">
                                     <children>
-                                        <ImageView fx:id="logoImageView" fitHeight="105.0" fitWidth="192.0" layoutX="16.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                                        <ImageView fx:id="logoImageView" fitHeight="105.0" fitWidth="192.0" layoutX="16.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../../../images/logoglowapp.png" />
                                             </image>
                                         </ImageView>
-                                        <Label fx:id="usernameLabel" alignment="CENTER" layoutX="1.0" layoutY="153.0" prefHeight="23.0" prefWidth="194.0" text="Username" textFill="#797979">
-                                            <font>
-                                                <Font name="Arial Bold" size="20.0" />
-                                            </font>
-                                        </Label>
-                                        <Line endX="69.0" layoutX="121.0" layoutY="199.0" startX="-100.0" stroke="#ffb524" />
-                                        <Button fx:id="homeButton" layoutX="16.0" layoutY="228.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
-                                            <graphic>
-
-                                            </graphic>
-                                            <font>
-                                                <Font name="Arial Rounded MT Bold" size="18.0" />
-                                            </font>
-                                        </Button>
-                                        <Button fx:id="produitbutton" layoutX="16.0" layoutY="298.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
-                                            <graphic>
-
-                                            </graphic>
-                                 <font>
-                                    <Font name="Arial Rounded MT Bold" size="18.0" />
-                                 </font>
-                                        </Button>
-                                        <Button fx:id="logoutButton" layoutX="9.0" layoutY="509.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" stylesheets="@dashboardDesign.css">
-                                            <graphic>
-
-                                            </graphic>
-                                            <styleClass>
-                                                <String fx:value="logout" />
-                                                <String fx:value="shadow" />
-                                            </styleClass>
-                                        </Button>
-                                        <Label layoutX="47.0" layoutY="511.0" text="Logout" textFill="WHITE">
-                                            <font>
-                                                <Font name="Arial Rounded MT Bold" size="18.0" />
-                                            </font>
-                                        </Label>
                                     </children>
                                 </AnchorPane>
                             </children>
@@ -82,7 +46,7 @@
                             <children>
                                 <AnchorPane fx:id="home_form" layoutX="63.0" layoutY="87.0" prefHeight="555.0" prefWidth="889.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
-                                        <AnchorPane layoutX="5.0" layoutY="13.0" prefHeight="534.0" prefWidth="857.0" stylesheets="@dashboardDesign.css">
+                                        <AnchorPane layoutX="-18.0" layoutY="8.0" prefHeight="526.0" prefWidth="851.0" stylesheets="@dashboardDesign.css">
                                             <styleClass>
                                                 <String fx:value="white-bg" />
                                                 <String fx:value="shadow" />

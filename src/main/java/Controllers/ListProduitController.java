@@ -16,6 +16,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -349,21 +350,25 @@ public class ListProduitController {
 
     @FXML
     void categorieButton(ActionEvent event) {
-        try {
-            // Load the new FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListCateforieP.fxml"));
-            Parent root = loader.load();
 
-            // Create a new stage
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            try {
+                // Load the new FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListCateforieP.fxml"));
+                Parent root = loader.load();
 
-            // Show the stage
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+                // Create a new stage
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage1.close();
+
+                // Show the stage
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
+
 
 
         @FXML
