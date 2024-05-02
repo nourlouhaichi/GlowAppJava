@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CategorieProdListController">
+    <children>
+        <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <BorderPane layoutX="79.0" layoutY="100.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <top>
+                        <AnchorPane prefHeight="45.0" prefWidth="200.0" styleClass="semi-top-form" stylesheets="@dashboardDesign.css" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane layoutX="145.0" layoutY="-77.0" prefHeight="35.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+
+                                        <Label layoutX="754.0" layoutY="10.0" text="Glow app Management System" textFill="#2c2b2b">
+                                            <font>
+                                                <Font name="Arial" size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="frontButton" layoutX="1040.0" layoutY="4.0" mnemonicParsing="false" onAction="#frontButtonOnAction" style="-fx-background-color: #81c408;" text="Front" textFill="WHITE">
+                                            <font>
+                                                <Font name="Arial Rounded MT Bold" size="14.0" />
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="profileButton" layoutX="966.0" layoutY="4.0" mnemonicParsing="false" onAction="#profileButtonOnAction" style="-fx-background-color: #81c408;" text="Profile" textFill="WHITE">
+                                            <font>
+                                                <Font name="Arial Rounded MT Bold" size="14.0" />
+                                            </font>
+                                        </Button>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </top>
+                    <left>
+                        <AnchorPane prefHeight="555.0" prefWidth="211.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane prefHeight="554.0" prefWidth="211.0" styleClass="nav-form" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <ImageView fx:id="logoImageView" fitHeight="150.0" fitWidth="200.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/logoglowapp.png" />
+                                            </image>
+                                        </ImageView>
+
+                                        <Label layoutX="74.0" layoutY="117.0" prefHeight="18.0" prefWidth="70.0" text="Welcome" textFill="#c17511">
+                                            <font>
+                                                <Font name="Arial Rounded MT Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="usernameLabel" alignment="CENTER" layoutX="9.0" layoutY="148.0" prefHeight="23.0" prefWidth="194.0" text="Username" textFill="#797979">
+                                            <font>
+                                                <Font name="Arial Bold" size="20.0" />
+                                            </font>
+                                        </Label>
+                                        <Line endX="69.0" layoutX="121.0" layoutY="199.0" startX="-100.0" stroke="#ffb524" />
+                                        <Button fx:id="homeButton" layoutX="16.0" layoutY="228.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
+                                            <graphic>
+
+                                            </graphic>
+                                            <font>
+                                                <Font name="Arial Rounded MT Bold" size="18.0" />
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="ProduitButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" onAction="#ProduitButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
+                                            <graphic>
+
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="CategoryButton" layoutX="16.0" layoutY="299.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Catergory">
+                                            <graphic>
+
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="logoutButton" layoutX="9.0" layoutY="509.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" stylesheets="@dashboardDesign.css">
+                                            <graphic>
+
+                                            </graphic>
+                                            <styleClass>
+                                                <String fx:value="logout" />
+                                                <String fx:value="shadow" />
+                                            </styleClass>
+                                        </Button>
+                                        <Label layoutX="47.0" layoutY="511.0" text="Logout" textFill="WHITE">
+                                            <font>
+                                                <Font name="Arial Rounded MT Bold" size="18.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </left>
+                    <center>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane fx:id="home_form" layoutX="63.0" layoutY="87.0" prefHeight="555.0" prefWidth="889.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="539.0" prefWidth="863.0" stylesheets="@dashboardDesign.css">
+                                            <styleClass>
+                                                <String fx:value="white-bg" />
+                                                <String fx:value="shadow" />
+                                            </styleClass>
+                                            <children>
+                                                <TableView fx:id="CategoriePTable" layoutX="341.0" layoutY="78.0" onMouseClicked="#getCategorieProd" prefHeight="306.0" prefWidth="518.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="idColumn" prefWidth="88.79997634887695" text="ID" />
+                                                        <TableColumn fx:id="namePColumn" minWidth="0.800018310546875" prefWidth="147.20001220703125" text="NAME" />
+                                                        <TableColumn fx:id="DateCatColumn" prefWidth="155.20001220703125" text="DATE" />
+                                                        <TableColumn fx:id="DescriptionCatPColumn" prefWidth="150.39996337890625" text="DESCRITPTION" />
+                                                    </columns>
+                                                </TableView>
+                                                <Label alignment="CENTER" layoutX="470.0" layoutY="32.0" prefHeight="22.0" prefWidth="252.0" text="CATEGORIES" textFill="#797979">
+                                                    <font>
+                                                        <Font name="Arial Bold" size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <Button fx:id="addButton" layoutX="202.0" layoutY="423.0" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #81c408;" text="Add" textFill="WHITE" textOverrun="CLIP">
+                                                    <font>
+                                                        <Font name="Arial Rounded MT Bold" size="14.0" />
+                                                    </font>
+                                                </Button>
+                                                <Button fx:id="updateButton" layoutX="741.0" layoutY="399.0" mnemonicParsing="false" onAction="#updateButtonOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffb524;" text="Update" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Arial Rounded MT Bold" size="14.0" />
+                                                    </font>
+                                                </Button>
+                                                <Button fx:id="deleteButton" layoutX="741.0" layoutY="438.0" mnemonicParsing="false" onAction="#deleteButtonOnAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ff3547;" text="Delete" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Arial Rounded MT Bold" size="14.0" />
+                                                    </font>
+                                                </Button>
+                                    <Line endX="18.20001220703125" endY="311.60003662109375" layoutX="302.0" layoutY="213.0" startX="18.20001220703125" startY="-157.19998168945312" stroke="#ffb524" />
+                                    <Label fx:id="nomCatButton" layoutX="17.0" layoutY="89.0" text="Nom categorie">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="nomCatTextfield" layoutX="27.0" layoutY="120.0" prefHeight="27.0" prefWidth="206.0" />
+                                    <Label fx:id="CreationDateButton" layoutX="17.0" layoutY="156.0" text=" Date de Creation">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="createdateField" layoutX="26.0" layoutY="194.0" prefHeight="27.0" prefWidth="205.0" />
+                                    <Label fx:id="DescriptionButton" layoutX="17.0" layoutY="231.0" text="Description">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea fx:id="DescripTextfield" layoutX="27.0" layoutY="270.0" prefHeight="127.0" prefWidth="273.0" />
+                                    <Label layoutX="68.0" layoutY="32.0" text="Add CATEGORIES" textFill="#797979">
+                                       <font>
+                                          <Font name="Arial Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                            </children>
+                                        </AnchorPane>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </center>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
