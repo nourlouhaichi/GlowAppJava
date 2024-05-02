@@ -5,25 +5,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class MainFX extends Application {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Produitfront.fxml"));
-
-
-        Parent root =loader.load();
-        Scene scene = new Scene(root);
-        primaryStage.setTitle("produit Management");
-
-        primaryStage.setScene(scene);
+    public void start(Stage primaryStage)  throws  Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("/loginGUI.fxml"));
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setScene(new Scene(root,520,400));
         primaryStage.show();
 
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
