@@ -61,10 +61,9 @@ public class Home {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProgFront.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            currentStage.close();
-            stage.show();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,10 +76,9 @@ public class Home {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ObjFront.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            currentStage.close();
-            stage.show();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -342,10 +342,9 @@ public class ObjectifController {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            currentStage.close();
-            stage.show();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -358,10 +357,9 @@ public class ObjectifController {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Programme.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            currentStage.close();
-            stage.show();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -374,10 +372,9 @@ public class ObjectifController {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Objectif.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            currentStage.close();
-            stage.show();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

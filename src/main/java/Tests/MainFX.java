@@ -14,7 +14,7 @@ public class MainFX extends Application {
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Event Management System");
+            primaryStage.setTitle("GLOWAPP");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {

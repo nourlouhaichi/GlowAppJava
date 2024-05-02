@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
@@ -29,7 +31,9 @@ import java.util.Arrays;
 import java.awt.Desktop;
 import java.io.File;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import java.nio.charset.StandardCharsets;
+
 
 
 public class ProgrammeController {
@@ -50,6 +54,57 @@ public class ProgrammeController {
     @FXML private TableColumn<Programme, String> columnPlan;
     @FXML private TableColumn<Programme, Integer> columnPlaces;
     @FXML private TableColumn<Programme, Date> columnDate;
+    @FXML private Button uploadImageButton;
+    @FXML private String tempImagePath;
+    @FXML private ImageView imageView;
+    @FXML
+    public void uploadImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image for Programme");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            tempImagePath = selectedFile.getAbsolutePath();
+            imageView.setImage(new Image(selectedFile.toURI().toString())); // Display the selected image in an ImageView
+            showConfirmation("Image uploaded successfully.");
+        } else {
+            showError("No file selected.");
+        }
+    }
+    public void handleProgrammeSelection() {
+        Programme selectedProgramme = programmeTableView.getSelectionModel().getSelectedItem();
+        if (selectedProgramme != null) {
+            selectedProgramId = selectedProgramme.getId();
+            titreproField.setText(selectedProgramme.getTitrepro());
+            planproField.setText(selectedProgramme.getPlanpro());
+            placedispoField.setText(String.valueOf(selectedProgramme.getPlacedispo()));
+            dateproPicker.setValue(selectedProgramme.getDatepro().toLocalDate());
+            updateImageView(selectedProgramme.getImagePath());
+        }
+    }
+
+    private void updateImageView(String imagePath) {
+        if (imagePath != null && !imagePath.isEmpty()) {
+            File file = new File(imagePath);
+            if (file.exists()) {
+                Image image = new Image(file.toURI().toString());
+                imageView.setImage(image);
+            }
+        } else {
+            imageView.setImage(null);
+        }
+    }
+
+    private void updateProgrammeWithImage(Programme programme) {
+        try {
+            serviceProgramme.modifier(programme); // Assuming this method now also updates the image path
+            loadProgrammeData();
+        } catch (Exception e) {
+            showError(e.getMessage());
+        }
+    }
     private ServiceProgramme serviceProgramme;
 
     private int selectedProgramId;
@@ -182,17 +237,7 @@ public class ProgrammeController {
 //
 
 
-    @FXML
-    public void handleProgrammeSelection() {
-        Programme selectedProgramme = programmeTableView.getSelectionModel().getSelectedItem();
-        if (selectedProgramme != null) {
-            selectedProgramId = selectedProgramme.getId();
-            titreproField.setText(selectedProgramme.getTitrepro());
-            planproField.setText(selectedProgramme.getPlanpro());
-            placedispoField.setText(String.valueOf(selectedProgramme.getPlacedispo()));
-            dateproPicker.setValue(selectedProgramme.getDatepro().toLocalDate());
-        }
-    }
+
 
 
 
@@ -202,12 +247,14 @@ public class ProgrammeController {
             return;
         }
         try {
+            String defaultImagePath = null;
             Programme programme = new Programme(
                     0,
                     titreproField.getText(),
                     planproField.getText(),
                     Integer.parseInt(placedispoField.getText()),
-                    Date.valueOf(dateproPicker.getValue())
+                    Date.valueOf(dateproPicker.getValue()),
+                    defaultImagePath
                     );
             serviceProgramme.ajouter(programme);
             loadProgrammeData();
@@ -224,13 +271,16 @@ public class ProgrammeController {
             return;
         }
         try {
+            Programme currentProgramme = programmeTableView.getSelectionModel().getSelectedItem();
+            String currentImagePath = (currentProgramme != null) ? currentProgramme.getImagePath() : null;
             Programme programme = new Programme(
                     selectedProgramId,
                     titreproField.getText(),
                     planproField.getText(),
                     Integer.parseInt(placedispoField.getText()),
-                    java.sql.Date.valueOf(dateproPicker.getValue())
-                );
+                    java.sql.Date.valueOf(dateproPicker.getValue()),
+                    currentImagePath
+            );
             serviceProgramme.modifier(programme);
             loadProgrammeData();
             clearForm();
@@ -336,30 +386,26 @@ public class ProgrammeController {
 
     public void goFront(javafx.event.ActionEvent event) {
         try {
-
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            currentStage.close();
-            stage.show();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
+
     public void Progsback(javafx.event.ActionEvent event) {
         try {
 
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Programme.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            currentStage.close();
-            stage.show();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -373,10 +419,9 @@ public class ProgrammeController {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Objectif.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            currentStage.close();
-            stage.show();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

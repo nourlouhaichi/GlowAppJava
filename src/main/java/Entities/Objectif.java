@@ -7,7 +7,29 @@ public class Objectif {
     private String description_o;
     private Float poid_o;
     private Float taille_o;
+    private int programme_id;
+
     private Programme programme;
+
+    public Objectif(int id, String objectif_o, String description_o, Float poid_o, Float taille_o, int programme_id) {
+        this.id = id;
+        this.objectif_o = objectif_o;
+        this.description_o = description_o;
+        this.poid_o = poid_o;
+        this.taille_o = taille_o;
+        this.programme_id = programme_id;
+    }
+
+    public int getProgramme_id() {
+        return programme_id;
+    }
+
+    public void setProgramme_id(int programme_id) {
+        this.programme_id = programme_id;
+    }
+    public Objectif() {
+        this.programme = new Programme();
+    }
 
     public Objectif(int id, String objectifo, String descriptiono, Float poido, Float tailleo) {
         this.id = id;
