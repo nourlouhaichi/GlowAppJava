@@ -20,6 +20,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -35,7 +38,8 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 
-
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 import java.io.IOException;
@@ -230,7 +234,22 @@ public class ListProduitController {
     @FXML
     void StatGenerateButtonOnAction(ActionEvent event) {
 
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Stat.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
 
 
@@ -402,87 +421,81 @@ public class ListProduitController {
             // Initialize the content stream of the page
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-            // Define table parameters
-            float margin = 50;
-            float tableWidth = page.getMediaBox().getWidth() - 2 * margin;
-            float yStart = page.getMediaBox().getHeight() - margin;
-            float yPosition = yStart;
-            float rowHeight = 20f;
-            float tableMargin = 10;
+            // Add table of products
+            addTableOfProducts(document, contentStream, produits);
 
-            // Define column widths
-            float[] columnWidths = {0.2f, 0.3f, 0.3f, 0.2f}; // Adjust these as needed
-            float tableHeight = rowHeight * 2 + tableMargin * 3; // Assuming two rows in the header
 
-            // Begin the Content stream
-            contentStream.beginText();
-            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
-            contentStream.newLineAtOffset(margin, yPosition);
 
-            // Add header row
-            addTableHeader(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths);
-            yPosition -= rowHeight;
-
-            // Add product details
-            contentStream.setFont(PDType1Font.HELVETICA, 12);
-            for (Produit produit : produits) {
-                yPosition -= rowHeight;
-                if (yPosition <= margin) {
-                    // New page needed if content exceeds current page
-                    contentStream.endText();
-                    contentStream.close();
-                    page = new PDPage();
-                    document.addPage(page);
-                    contentStream = new PDPageContentStream(document, page);
-                    contentStream.beginText();
-                    contentStream.newLineAtOffset(margin, yStart);
-                    yPosition = yStart;
-                    addTableHeader(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths);
-                    yPosition -= rowHeight;
-                }
-                addTableRow(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths, produit);
-            }
-
-            // End the content stream
-            contentStream.endText();
+            // Close the content stream
             contentStream.close();
 
             // Save the PDF document
-            File file = new File("products.pdf");
+            File file = new File("Products.pdf");
             document.save(file);
             document.close();
 
-            // Show confirmation message
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            alert.setContentText("PDF document saved successfully!");
-            alert.showAndWait();
-
+            // Open the PDF document with the default application
+            Desktop.getDesktop().open(file);
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle exceptions appropriately
         }
     }
 
-    private void addTableHeader(PDPageContentStream contentStream, float xStart, float yStart, float tableWidth, float rowHeight, float[] columnWidths) throws IOException {
-        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
-        contentStream.setLeading(rowHeight);
-        float xPosition = xStart;
+    private void addTableOfProducts(PDDocument document, PDPageContentStream contentStream, List<Produit> produits) throws IOException {
+        // Define table parameters
+        float margin = 50;
+        float yStart = 700; // Adjust as needed
+        float yPosition = yStart;
+        float rowHeight = 20f;
+        float tableMargin = 10;
+
+        // Define column widths
+        float[] columnWidths = {0.2f, 0.3f, 0.3f, 0.2f}; // Adjust these as needed
+        float tableWidth = 500; // Adjust as needed
+
+        // Begin the Content stream
         contentStream.beginText();
+        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+        contentStream.newLineAtOffset(margin, yPosition);
+
+        // Add header row
+        addTableHeader(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths);
+        yPosition -= rowHeight;
+
+        // Add product details
+        contentStream.setFont(PDType1Font.HELVETICA, 12);
+        for (Produit produit : produits) {
+            yPosition -= rowHeight;
+            if (yPosition <= margin) {
+                // New page needed if content exceeds current page
+                contentStream.endText();
+                contentStream.close();
+                PDPage page = new PDPage();
+                document.addPage(page);
+                contentStream = new PDPageContentStream(document, page);
+                contentStream.beginText();
+                contentStream.newLineAtOffset(margin, yStart);
+                yPosition = yStart;
+                addTableHeader(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths);
+                yPosition -= rowHeight;
+            }
+            addTableRow(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths, produit);
+        }
+        // End the content stream
+        contentStream.endText();
+    }
+
+    private void addTableHeader(PDPageContentStream contentStream, float xStart, float yStart, float tableWidth, float rowHeight, float[] columnWidths) throws IOException {
+        float xPosition = xStart;
         for (float width : columnWidths) {
             contentStream.newLineAtOffset(xPosition, yStart);
             contentStream.showText("Header"); // Replace with your column headers
             xPosition += width * tableWidth;
         }
-        contentStream.endText(); // Move endText() here to properly pair with beginText()
     }
 
     private void addTableRow(PDPageContentStream contentStream, float xStart, float yStart, float tableWidth, float rowHeight, float[] columnWidths, Produit produit) throws IOException {
-        contentStream.setFont(PDType1Font.HELVETICA, 12);
-        contentStream.setLeading(rowHeight);
         float xPosition = xStart;
-        contentStream.beginText();
         for (float width : columnWidths) {
             contentStream.newLineAtOffset(xPosition, yStart);
             // Add the product information to the table row
@@ -491,8 +504,9 @@ public class ListProduitController {
             contentStream.showText("Product Info");
             xPosition += width * tableWidth;
         }
-        contentStream.endText();
     }
+
+
     private void populateProduits() {
         try {
             ProduitService produitCrud = new ProduitService();

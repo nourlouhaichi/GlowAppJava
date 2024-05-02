@@ -32,7 +32,7 @@
                 </HBox>
             <AnchorPane prefHeight="204.0" prefWidth="600.0">
                <children>
-                      <ImageView fx:id="img" fitHeight="167.0" fitWidth="380.0" layoutX="83.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fx:id="img" fitHeight="192.0" fitWidth="314.0" layoutX="121.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
 
                 </ImageView>
                </children>

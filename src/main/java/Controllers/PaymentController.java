@@ -45,6 +45,19 @@ public class PaymentController {
 
     }
     public void processPayment(ActionEvent event) {
+        // Check if any of the text fields are empty
+        if (cardNumberField.getText().isEmpty() || expMonthField.getText().isEmpty() ||
+                expYearField.getText().isEmpty() || cvcField.getText().isEmpty()) {
+            // Display an alert message indicating that all fields are required
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("All fields are required. Please enter valid card details.");
+            alert.showAndWait();
+            return; // Stop processing payment if any field is empty
+        }
+
+        // Continue with payment processing if all fields are filled
         // Initialize Stripe with your API key
         Stripe.apiKey = "sk_test_51OrmdaL5srMxpXNr8VVGkg3c3sKmpyUtCjal5z1m37VzmVj8OHnP5pYvUThi8OWWeKnIuvu4pcvWmdmUN8Kl3Hu200zabG10FE";
 
@@ -54,10 +67,9 @@ public class PaymentController {
         Integer expYear = Integer.parseInt(expYearField.getText());
         String cvc = cvcField.getText();
 
-
         // Calculate total amount
         double totalAmount = Double.parseDouble(Label.getText());
-       // Assuming this method calculates the total amount
+        // Assuming this method calculates the total amount
 
         // Create a Map to represent the charge parameters
         Map<String, Object> params = new HashMap<>();
@@ -77,12 +89,12 @@ public class PaymentController {
             alert.setContentText("Payment successful! Charge ID: " + charge.getId());
             alert.showAndWait();
             // Redirection vers Produitdront.fxml après le paiement réussi
-            /* loader = new FXMLLoader(getClass().getResource("/Produitfront.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();*/
+        /* loader = new FXMLLoader(getClass().getResource("/Produitfront.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();*/
         } catch (StripeException e) {
             // Afficher un message d'erreur en cas d'échec de paiement ou de redirection
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -96,3 +108,4 @@ public class PaymentController {
         }
     }
 }
+
