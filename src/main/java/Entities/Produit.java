@@ -8,12 +8,18 @@ public class Produit {
     private int quantity ;
     private double price ;
 
+
+
+    private User user; // Foreign key referencing User table
+
+
     private CategorieProd categorie; // Add a Category field
+
 
     public Produit() {
     }
 
-    public Produit(int ref , String  name, String description , String image , int quantity , double price , CategorieProd categorie  ) {
+    public Produit(int ref , String  name, String description , String image , int quantity , double price , CategorieProd categorie ,User user  ) {
         this.ref=ref ;
         this.name = name;
         this.description = description;
@@ -21,9 +27,10 @@ public class Produit {
         this.quantity = quantity;
         this.price=price ;
         this.categorie = categorie; // Initialize the category
+        this.user = user;
 
     }
-    public Produit( String  name, String description , String image , int quantity , double price , CategorieProd categorie  ) {
+    public Produit( String  name, String description , String image , int quantity , double price , CategorieProd categorie ,User user   ) {
 
         this.name = name;
         this.description = description;
@@ -31,6 +38,7 @@ public class Produit {
         this.quantity = quantity;
         this.price=price ;
         this.categorie = categorie; // Initialize the category
+        this.user = user;
 
     }
     public Produit(String  name, double price) {
@@ -96,6 +104,16 @@ public class Produit {
         this.categorie = categorie;
     }
 
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
     @Override
     public String toString() {
         return "produit{" +
@@ -108,5 +126,3 @@ public class Produit {
                 '}';
     }
 }
-
-

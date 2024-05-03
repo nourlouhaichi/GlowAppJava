@@ -253,7 +253,7 @@ public class loginController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/backHomeGUI.fxml"));
             Stage backStage = new Stage();
-            backStage.initStyle(StageStyle.UNDECORATED);
+            //backStage.initStyle(StageStyle.UNDECORATED);
             backStage.setScene(new Scene(root,1100,600));
             backStage.show();
             Stage stage = (Stage) loginButton.getScene().getWindow();

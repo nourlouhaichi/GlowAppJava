@@ -32,16 +32,16 @@
                                                 <Font name="Arial" size="13.0" />
                                             </font>
                                         </Label>
-                              <Button fx:id="frontButton" layoutX="1040.0" layoutY="4.0" mnemonicParsing="false" onAction="#frontButtonOnAction" style="-fx-background-color: #81c408;" text="Front" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial Rounded MT Bold" size="14.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="profileButton" layoutX="966.0" layoutY="4.0" mnemonicParsing="false" onAction="#profileButtonOnAction" style="-fx-background-color: #81c408;" text="Profile" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial Rounded MT Bold" size="14.0" />
-                                 </font>
-                              </Button>
+                                        <Button fx:id="frontButton" layoutX="1040.0" layoutY="4.0" mnemonicParsing="false" onAction="#frontButtonOnAction" style="-fx-background-color: #81c408;" text="Front" textFill="WHITE">
+                                            <font>
+                                                <Font name="Arial Rounded MT Bold" size="14.0" />
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="profileButton" layoutX="966.0" layoutY="4.0" mnemonicParsing="false" onAction="#profileButtonOnAction" style="-fx-background-color: #81c408;" text="Profile" textFill="WHITE">
+                                            <font>
+                                                <Font name="Arial Rounded MT Bold" size="14.0" />
+                                            </font>
+                                        </Button>
                                     </children>
                                 </AnchorPane>
                             </children>
@@ -52,11 +52,11 @@
                             <children>
                                 <AnchorPane prefHeight="555.0" prefWidth="214.0" styleClass="nav-form" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
-                              <ImageView fx:id="logoImageView" fitHeight="150.0" fitWidth="200.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../images/logoglowapp.png" />
-                                 </image>
-                              </ImageView>
+                                        <ImageView fx:id="logoImageView" fitHeight="150.0" fitWidth="200.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/logoglowapp.png" />
+                                            </image>
+                                        </ImageView>
 
                                         <Label layoutX="74.0" layoutY="117.0" prefHeight="18.0" prefWidth="70.0" text="Welcome" textFill="WHITE">
                                             <font>
@@ -73,16 +73,21 @@
                                             <graphic>
 
                                             </graphic>
-                                 <font>
-                                    <Font name="Arial Rounded MT Bold" size="18.0" />
-                                 </font>
+                                            <font>
+                                                <Font name="Arial Rounded MT Bold" size="18.0" />
+                                            </font>
                                         </Button>
                                         <Button fx:id="userButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" onAction="#userButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Users">
                                             <graphic>
 
                                             </graphic>
                                         </Button>
-                                        <Button layoutX="16.0" layoutY="299.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
+                                        <Button fx:id="ProduitButton" layoutX="16.0" layoutY="299.0" mnemonicParsing="false" onAction="#ProduitButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
+                                            <graphic>
+
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="eventButton" layoutX="16.0" layoutY="370.0" mnemonicParsing="false" onAction="#eventButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Events">
                                             <graphic>
 
                                             </graphic>
@@ -95,6 +100,11 @@
                                                 <String fx:value="logout" />
                                                 <String fx:value="shadow" />
                                             </styleClass>
+                                        </Button>
+                                        <Button fx:id="CategorieButton" layoutX="16.0" layoutY="335.0" mnemonicParsing="false" onAction="#categorieButton" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Category Product">
+                                            <graphic>
+
+                                            </graphic>
                                         </Button>
                                         <Label layoutX="47.0" layoutY="511.0" text="Logout" textFill="WHITE">
                                             <font>
@@ -117,21 +127,21 @@
                                                 <String fx:value="shadow" />
                                             </styleClass>
                                             <children>
-                                    <HBox layoutX="19.0" prefHeight="258.0" prefWidth="825.0">
-                                       <children>
-                                          <PieChart fx:id="genderPie" prefHeight="209.0" prefWidth="275.0" />
-                                          <PieChart fx:id="banPie" prefHeight="234.0" prefWidth="275.0" />
-                                          <PieChart fx:id="rolePie" prefHeight="220.0" prefWidth="275.0" />
-                                       </children>
-                                    </HBox>
-                                    <LineChart fx:id="lineChart" layoutX="16.0" layoutY="277.0" legendVisible="false" prefHeight="239.0" prefWidth="833.0">
-                                      <xAxis>
-                                        <CategoryAxis side="BOTTOM" fx:id="xAxis" />
-                                      </xAxis>
-                                      <yAxis>
-                                        <NumberAxis fx:id="yAxis" side="LEFT" />
-                                      </yAxis>
-                                    </LineChart>
+                                                <HBox layoutX="19.0" prefHeight="258.0" prefWidth="825.0">
+                                                    <children>
+                                                        <PieChart fx:id="genderPie" prefHeight="209.0" prefWidth="275.0" />
+                                                        <PieChart fx:id="banPie" prefHeight="234.0" prefWidth="275.0" />
+                                                        <PieChart fx:id="rolePie" prefHeight="220.0" prefWidth="275.0" />
+                                                    </children>
+                                                </HBox>
+                                                <LineChart fx:id="lineChart" layoutX="16.0" layoutY="277.0" legendVisible="false" prefHeight="239.0" prefWidth="833.0">
+                                                    <xAxis>
+                                                        <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+                                                    </xAxis>
+                                                    <yAxis>
+                                                        <NumberAxis fx:id="yAxis" side="LEFT" />
+                                                    </yAxis>
+                                                </LineChart>
                                             </children>
                                         </AnchorPane>
                                     </children>

@@ -18,6 +18,31 @@ public class UserService implements IServices<User> {
     }
 
     @Override
+    public void add(User user) throws SQLException {
+
+    }
+
+    @Override
+    public void update(User user) throws SQLException {
+
+    }
+
+    @Override
+    public void delete(User user) throws SQLException {
+
+    }
+
+    @Override
+    public List<User> show() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public User afficher(User user) throws SQLException {
+        return null;
+    }
+
+    @Override
     public void ajouter(User user) throws SQLException {
         String sql = "INSERT INTO `user`(`email`, `roles`, `password`, `cin`, `lastname`, `firstname`, `gender`, `datebirth`, `phone`, `created_at`, `is_banned`, `profile_picture`, `is_verified`, `auth_code`) " +
                 "VALUES ('" + user.getEmail() + "', '" + user.getRoles() + "', '" + user.getPassword() + "', '" + user.getCin() + "', '" + user.getLastname() + "', '" + user.getFirstname() + "', '" + user.getGender() + "', '" + user.getDatebirth() + "', '" + user.getPhone() + "', '" + user.getCreated_at() + "', " + user.getIs_banned() + ", '" + user.getProfile_picture() + "', " + user.getIs_verified() + ", '" + user.getAuth_code() + "')";
@@ -86,8 +111,7 @@ public class UserService implements IServices<User> {
         return users;
     }
 
-
-
+    public User getUser(String cin) throws SQLException {
         String sql = "SELECT * FROM user WHERE `cin` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, cin);
@@ -115,33 +139,6 @@ public class UserService implements IServices<User> {
         }
 
     }
-
-    public User getUser(String cin) throws SQLException {
-        String sql = "SELECT * FROM user WHERE `cin` = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, cin);
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()) {
-            String email = resultSet.getString("email");
-            String roles = resultSet.getString("roles");
-            String password = resultSet.getString("password");
-            String lastname = resultSet.getString("lastname");
-            String firstname = resultSet.getString("firstname");
-            String gender = resultSet.getString("gender");
-            Date datebirth = resultSet.getDate("datebirth");
-            String phone = resultSet.getString("phone");
-            Timestamp created_at = resultSet.getTimestamp("created_at");
-            boolean is_banned = resultSet.getBoolean("is_banned");
-            String profile_picture = resultSet.getString("profile_picture");
-            boolean is_verified = resultSet.getBoolean("is_verified");
-            String auth_code = resultSet.getString("auth_code");
-
-            return new User(email, roles, password, cin, lastname, firstname, gender, datebirth, phone, created_at, is_banned, profile_picture, is_verified, auth_code);
-        } else {
-            // Handle the case when no matching record is found
-            return null;
-        }
 
     public void modifierSansMdp(User user) throws SQLException {
         String sql = "UPDATE `user` SET `email`= ?,`roles`=?,`cin`=?,`lastname`=?,`firstname`=?,`gender`=?,`datebirth`=?,`phone`=?,`created_at`=?,`is_banned`=?,`profile_picture`=?,`is_verified`=?,`auth_code`=? WHERE cin = ?";
@@ -299,7 +296,6 @@ public class UserService implements IServices<User> {
             userEvolutionDataMap.put(date, userCount);
         }
         return userEvolutionDataMap;
-
     }
 
 }

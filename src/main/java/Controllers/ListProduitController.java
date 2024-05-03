@@ -3,6 +3,7 @@ package Controllers;
 import Entities.CategorieProd;
 import Entities.Produit;
 import Services.ProduitService;
+import Services.Session;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -28,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 
@@ -46,6 +48,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ListProduitController {
     @FXML
@@ -107,6 +110,9 @@ public class ListProduitController {
     @FXML
     private Button updateButton;
 
+    @FXML
+    private Button userButton;
+
 
     @FXML
     private Button StatGenerateButton;
@@ -124,6 +130,9 @@ public class ListProduitController {
 
     @FXML
     private TextField searchTextField;
+
+    private ObservableList<Produit> ProdObservableList = FXCollections.observableArrayList();
+
     @FXML
     void addButtonOnAction(ActionEvent event) {
 
@@ -166,6 +175,11 @@ public class ListProduitController {
         File logoFile = new File("images/logoglowapp.png");
         Image logoImage = new Image(logoFile.toURI().toString());
         logoImageView.setImage(logoImage);
+
+        Session session = Session.getInstance();
+        Map<String, Object> userSession = session.getUserSession();
+        usernameLabel.setText(userSession.get("email").toString());
+
         // Set cell value factories
 
         RefColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getRef()).asObject());
@@ -183,7 +197,7 @@ public class ListProduitController {
 
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             filterproduits(newValue);
-                });
+        });
 
         // Refresh table every 10 seconds
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), event -> populateProduitTable()));
@@ -199,18 +213,16 @@ public class ListProduitController {
             List<Produit> produits = produitService.getAllProduits();
 
             // Clear the table to avoid duplicate entries
-            ProduitTable.getItems().clear();
+            ProdObservableList.clear(); // Clear the observable list
 
             // Add products to the table
+            ProdObservableList.addAll(produits); // Add new products
+
+            // Set the table items
+            ProduitTable.setItems(ProdObservableList);
+
+            // Check low stock and display alerts
             for (Produit produit : produits) {
-                // Create a new table row
-                TableRow<Produit> row = new TableRow<>();
-                row.setItem(produit);
-
-                // Add the row to the table
-                ProduitTable.getItems().add(produit);
-
-                // Check if the quantity is 10 or lower and display an alert
                 if (produit.getQuantity() <= 10) {
                     showAlert(Alert.AlertType.WARNING, "Low Stock Alert", "Product '" + produit.getName() + "' is low in stock. Remaining quantity: " + produit.getQuantity());
                 }
@@ -261,53 +273,107 @@ public class ListProduitController {
     @FXML
     void deleteButtonOnAction(ActionEvent event) {
 
-            // Get the selected produit from the table view
-            Produit selectedProduit = ProduitTable.getSelectionModel().getSelectedItem();
+        // Get the selected produit from the table view
+        Produit selectedProduit = ProduitTable.getSelectionModel().getSelectedItem();
 
-            if (selectedProduit != null) {
-                // Ask for confirmation before deleting the produit
-                Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-                confirmation.setTitle("Delete Product");
-                confirmation.setHeaderText(null);
-                confirmation.setContentText("Are you sure you want to delete this product?");
-                confirmation.showAndWait()
-                        .filter(response -> response == ButtonType.OK)
-                        .ifPresent(response -> {
-                            try {
-                                // Call the delete method from ProduitService to delete the produit
-                                ProduitService produitService = new ProduitService();
-                                produitService.delete(selectedProduit);
+        if (selectedProduit != null) {
+            // Ask for confirmation before deleting the produit
+            Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmation.setTitle("Delete Product");
+            confirmation.setHeaderText(null);
+            confirmation.setContentText("Are you sure you want to delete this product?");
+            confirmation.showAndWait()
+                    .filter(response -> response == ButtonType.OK)
+                    .ifPresent(response -> {
+                        try {
+                            // Call the delete method from ProduitService to delete the produit
+                            ProduitService produitService = new ProduitService();
+                            produitService.delete(selectedProduit);
 
-                                // Refresh the table view after deletion
-                                refreshPage();
+                            // Refresh the table view after deletion
+                            refreshPage();
 
-                                // Show a success message
-                                Alert success = new Alert(Alert.AlertType.INFORMATION);
-                                success.setTitle("Success");
-                                success.setHeaderText(null);
-                                success.setContentText("Product deleted successfully!");
-                                success.showAndWait();
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                                // Handle the exception appropriately
-                            }
-                        });
-            } else {
-                // If no produit is selected, show an error message
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please select a product to delete.");
-                alert.showAndWait();
-            }
+                            // Show a success message
+                            Alert success = new Alert(Alert.AlertType.INFORMATION);
+                            success.setTitle("Success");
+                            success.setHeaderText(null);
+                            success.setContentText("Product deleted successfully!");
+                            success.showAndWait();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            // Handle the exception appropriately
+                        }
+                    });
+        } else {
+            // If no produit is selected, show an error message
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a product to delete.");
+            alert.showAndWait();
         }
+    }
 
 
 
 
-    @FXML
-    void frontButtonOnAction(ActionEvent event) {
+    public void frontButtonOnAction(ActionEvent event) {
+        Stage stage = (Stage) frontButton.getScene().getWindow();
+        stage.close();
 
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/homeGUI.fxml"));
+            Stage homeStage = new Stage();
+            homeStage.initStyle(StageStyle.UNDECORATED);
+            homeStage.setScene(new Scene(root,1024,576));
+            homeStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void userButtonOnAction(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/backUserGUI.fxml"));
+            Stage userStage = new Stage();
+            //userStage.initStyle(StageStyle.UNDECORATED);
+            userStage.setScene(new Scene(root,1100,600));
+            userStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage) userButton.getScene().getWindow();
+        stage.close();
+    }
+
+    public void profileButtonOnAction(ActionEvent event) {
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/profileGUI.fxml"));
+            Stage profileStage = new Stage();
+            profileStage.initStyle(StageStyle.UNDECORATED);
+            profileStage.setScene(new Scene(root,800,600));
+            profileStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void homeButtonOnAction(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/backHomeGUI.fxml"));
+            Stage homeStage = new Stage();
+            //homeStage.initStyle(StageStyle.UNDECORATED);
+            homeStage.setScene(new Scene(root,1100,600));
+            homeStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage) homeButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -316,84 +382,83 @@ public class ListProduitController {
     }
 
     @FXML
-    void homeButtonOnAction(ActionEvent event) {
+    void ProduitButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListProduit.fxml"));
+            Parent root = loader.load();
 
-    }
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
 
-    @FXML
-    void logoutButtonOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void profileButtonOnAction(ActionEvent event) {
-
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void updateButtonOnAction(ActionEvent event) {
 
-            // Get the selected produit from the table view
-            Produit selectedProduit = ProduitTable.getSelectionModel().getSelectedItem();
+        // Get the selected produit from the table view
+        Produit selectedProduit = ProduitTable.getSelectionModel().getSelectedItem();
 
-            if (selectedProduit != null) {
-                try {
-                    // Load the new FXML file
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/update_produit.fxml"));
-                    Parent root = loader.load();
-
-                    // Get the controller of the update produit interface
-                    UpdateProduitController updateProduitController = loader.getController();
-
-                    // Initialize the update interface with the selected produit information
-                    updateProduitController.initData(selectedProduit);
-
-                    // Create a new stage
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(root));
-
-                    // Show the stage
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                // If no produit is selected, show an error message
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please select a produit to modify.");
-                alert.showAndWait();
-            }
-        }
-
-    @FXML
-    void categorieButton(ActionEvent event) {
-
+        if (selectedProduit != null) {
             try {
                 // Load the new FXML file
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListCateforieP.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/update_produit.fxml"));
                 Parent root = loader.load();
+
+                // Get the controller of the update produit interface
+                UpdateProduitController updateProduitController = loader.getController();
+
+                // Initialize the update interface with the selected produit information
+                updateProduitController.initData(selectedProduit);
 
                 // Create a new stage
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
-                Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage1.close();
 
                 // Show the stage
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            // If no produit is selected, show an error message
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a produit to modify.");
+            alert.showAndWait();
         }
+    }
 
+    @FXML
+    void categorieButton(ActionEvent event) {
 
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListCateforieP.fxml"));
+            Parent root = loader.load();
 
-        @FXML
-        void ProduitButtonOnAction (ActionEvent event){
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
 
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
 
 
 
@@ -527,6 +592,43 @@ public class ListProduitController {
 
         // Call generatePDF method with the produits list
         generatePDF(produits);
+    }
+
+    public void logoutButtonOnAction(ActionEvent event) {
+        Session.getInstance().logout();
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        stage.close();
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/loginGUI.fxml"));
+            Stage loginStage = new Stage();
+            loginStage.initStyle(StageStyle.UNDECORATED);
+            loginStage.setScene(new Scene(root,520,400));
+            loginStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void eventButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Events.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

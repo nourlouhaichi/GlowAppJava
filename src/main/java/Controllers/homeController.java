@@ -17,6 +17,8 @@ import javafx.stage.StageStyle;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.Node;
+import java.io.IOException;
 
 public class homeController implements Initializable {
     @FXML
@@ -27,6 +29,10 @@ public class homeController implements Initializable {
     private ImageView logoImageView;
     @FXML
     private ImageView homeImageView;
+    @FXML
+    private Button eventButton;
+    @FXML
+    private Button shopButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,4 +86,43 @@ public class homeController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void shopButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Produitfront.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eventButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EventsClient.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

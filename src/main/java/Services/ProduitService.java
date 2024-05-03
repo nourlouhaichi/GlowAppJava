@@ -1,5 +1,6 @@
 package Services;
 
+import Entities.User;
 import Utils.MyDatabase;
 import Entities.Produit;
 import Entities.CategorieProd;
@@ -23,7 +24,7 @@ public class ProduitService implements IServices<Produit> {
     @Override
 
     public void add(Produit p) throws SQLException {
-        String req = "INSERT INTO produit (name, description, image, quantity, price,categorie_prod_id) VALUES (?, ?, ?, ?, ?,?)";
+        String req = "INSERT INTO produit (name, description, image, quantity, price,categorie_prod_id, user_cin) VALUES (?, ?, ?, ?, ?,?,?)";
 
 
         try (PreparedStatement stm = connection.prepareStatement(req)) {
@@ -34,6 +35,7 @@ public class ProduitService implements IServices<Produit> {
             stm.setInt(4, p.getQuantity());
             stm.setDouble(5, p.getPrice());
             stm.setInt(6,p.getCategorie().getId());
+            stm.setInt(7, Integer.parseInt(p.getUser().getCin()));
 
             // Exécution de la requête
             stm.executeUpdate();
@@ -94,11 +96,17 @@ public class ProduitService implements IServices<Produit> {
 
     public List<Produit> show() throws SQLException {
         List<Produit> produits = new ArrayList<>();
-        String req = "SELECT p.*, c.id AS category_id, c.nom_ca AS category_name FROM produit p JOIN categorie_prod c ON p.categorie_prod_id = c.id";
+        String req = "SELECT p.*, u.firstname, u.lastname, c.id AS category_id, c.nom_ca AS category_name " +
+                "FROM produit p " +
+                "JOIN user u ON p.user_cin = u.cin " +
+                "JOIN categorie_prod c ON p.categorie_prod_id = c.id";
         try (PreparedStatement stm = connection.prepareStatement(req);
              ResultSet rs = stm.executeQuery()) {
             while (rs.next()) {
                 CategorieProd categorie = new CategorieProd(rs.getInt("category_id"), rs.getString("category_name"));
+                User user = new User();
+                user.setFirstname(rs.getString("firstname"));
+                user.setLastname(rs.getString("lastname"));
                 Produit produit = new Produit(
                         rs.getInt("ref"),
                         rs.getString("name"),
@@ -106,7 +114,8 @@ public class ProduitService implements IServices<Produit> {
                         rs.getString("image"),
                         rs.getInt("quantity"),
                         rs.getDouble("price"),
-                        categorie
+                        categorie,
+                        user
                 );
                 produits.add(produit);
             }
@@ -115,15 +124,45 @@ public class ProduitService implements IServices<Produit> {
     }
 
 
+    @Override
+    public Produit afficher(Produit produit) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void ajouter(Produit produit) throws SQLException {
+
+    }
+
+    @Override
+    public void modifier(Produit produit) throws SQLException {
+
+    }
+
+    @Override
+    public void supprimer(Produit produit) throws SQLException {
+
+    }
+
+    @Override
+    public List<Produit> afficher() throws SQLException {
+        return null;
+    }
 
 
     public List<Produit> getAllProduits() throws SQLException {
         List<Produit> produits = new ArrayList<>();
-        String req = "SELECT p.*, c.id AS category_id, c.nom_ca AS category_name FROM produit p JOIN categorie_prod c ON p.categorie_prod_id = c.id";
+        String req = "SELECT p.*, u.firstname, u.lastname, c.id AS category_id, c.nom_ca AS category_name " +
+                "FROM produit p " +
+                "JOIN categorie_prod c ON p.categorie_prod_id = c.id " +
+                "JOIN user u ON p.user_cin = u.cin";
         try (PreparedStatement stm = connection.prepareStatement(req);
              ResultSet rs = stm.executeQuery()) {
             while (rs.next()) {
                 CategorieProd categorie = new CategorieProd(rs.getInt("category_id"), rs.getString("category_name"));
+                User user = new User();
+                user.setFirstname(rs.getString("firstname"));
+                user.setLastname(rs.getString("lastname"));
                 Produit produit = new Produit(
                         rs.getInt("ref"),
                         rs.getString("name"),
@@ -131,13 +170,16 @@ public class ProduitService implements IServices<Produit> {
                         rs.getString("image"),
                         rs.getInt("quantity"),
                         rs.getDouble("price"),
-                        categorie
+
+                        categorie,
+                        user
                 );
                 produits.add(produit);
             }
         }
         return produits;
     }
+
 
 
     public Produit getProduitById(int produitId) throws SQLException {
@@ -166,4 +208,3 @@ public class ProduitService implements IServices<Produit> {
 
 
 }
-

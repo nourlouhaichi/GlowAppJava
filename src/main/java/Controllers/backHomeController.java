@@ -23,6 +23,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.scene.Node;
+import java.io.IOException;
 
 public class backHomeController implements Initializable {
     @FXML
@@ -35,6 +37,8 @@ public class backHomeController implements Initializable {
     private Button userButton;
     @FXML
     private Button homeButton;
+    @FXML
+    private Button eventButton;
     @FXML
     private ImageView logoImageView;
     @FXML
@@ -176,7 +180,7 @@ public class backHomeController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/backUserGUI.fxml"));
             Stage userStage = new Stage();
-            userStage.initStyle(StageStyle.UNDECORATED);
+            //userStage.initStyle(StageStyle.UNDECORATED);
             userStage.setScene(new Scene(root,1100,600));
             userStage.show();
 
@@ -205,7 +209,7 @@ public class backHomeController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/backHomeGUI.fxml"));
             Stage homeStage = new Stage();
-            homeStage.initStyle(StageStyle.UNDECORATED);
+            //homeStage.initStyle(StageStyle.UNDECORATED);
             homeStage.setScene(new Scene(root,1100,600));
             homeStage.show();
 
@@ -216,5 +220,67 @@ public class backHomeController implements Initializable {
         stage.close();
     }
 
+    @FXML
+    void ProduitButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListProduit.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void categorieButton(ActionEvent event) {
+
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListCateforieP.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void eventButtonOnAction(ActionEvent event) {
+
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Events.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

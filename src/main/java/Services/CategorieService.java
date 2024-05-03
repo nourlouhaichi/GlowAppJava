@@ -95,6 +95,31 @@ public class CategorieService implements IServices<CategorieProd>{
         return categories;
     }
 
+    @Override
+    public CategorieProd afficher(CategorieProd categorieProd) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void ajouter(CategorieProd categorieProd) throws SQLException {
+
+    }
+
+    @Override
+    public void modifier(CategorieProd categorieProd) throws SQLException {
+
+    }
+
+    @Override
+    public void supprimer(CategorieProd categorieProd) throws SQLException {
+
+    }
+
+    @Override
+    public List<CategorieProd> afficher() throws SQLException {
+        return null;
+    }
+
 
     public List<CategorieProd> findByName(String categoryName) throws SQLException {
         List<CategorieProd> categories = new ArrayList<>();

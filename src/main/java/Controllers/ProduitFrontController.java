@@ -21,6 +21,8 @@ import javafx.scene.layout.VBox;
 
 
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 import java.io.IOException;
@@ -57,6 +59,9 @@ public class ProduitFrontController {
 
     private int selectedLocationId;
 
+    @FXML
+    private Button homeButton;
+
 
 
     @FXML
@@ -80,6 +85,66 @@ public class ProduitFrontController {
 
         // Update chosen location
         updateChosenLocation(clickedLocation);
+    }
+
+    @FXML
+    void homeButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homeGUI.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void eventButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EventsClient.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void productButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Produitfront.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void updateChosenLocation(Produit location) {
@@ -118,7 +183,7 @@ public class ProduitFrontController {
         Cart.addToCart(selectedProduct);
 
         // Afficher un message de confirmation
-       // System.out.println("Product added to cart!");
+        // System.out.println("Product added to cart!");
 
         // Afficher un message de confirmation
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -149,7 +214,7 @@ public class ProduitFrontController {
         }
 
 
-}
+    }
 
 
 

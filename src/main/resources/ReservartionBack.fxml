@@ -64,6 +64,14 @@
                                             </font>
                                         </Label>
                                         <Line endX="69.0" layoutX="121.0" layoutY="199.0" startX="-100.0" stroke="#ffb524" />
+
+
+                                        <Button layoutX="16.0" layoutY="299.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
+                                            <graphic>
+
+                                            </graphic>
+                                        </Button>
+
                                         <Button fx:id="homeButton" layoutX="16.0" layoutY="228.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
                                             <graphic>
 
@@ -72,17 +80,18 @@
                                                 <Font name="Arial Rounded MT Bold" size="18.0" />
                                             </font>
                                         </Button>
+
                                         <Button fx:id="userButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" onAction="#userButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Users">
                                             <graphic>
 
                                             </graphic>
                                         </Button>
-                                        <Button layoutX="16.0" layoutY="299.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
+                                        <Button fx:id="ProduitButton" layoutX="16.0" layoutY="299.0" mnemonicParsing="false" onAction="#ProduitButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
                                             <graphic>
 
                                             </graphic>
                                         </Button>
-                                        <Button layoutX="16.0" layoutY="335.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Events">
+                                        <Button fx:id="eventButton" layoutX="16.0" layoutY="370.0" mnemonicParsing="false" onAction="#eventButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Events">
                                             <graphic>
 
                                             </graphic>
@@ -95,6 +104,11 @@
                                                 <String fx:value="logout" />
                                                 <String fx:value="shadow" />
                                             </styleClass>
+                                        </Button>
+                                        <Button fx:id="CategorieButton" layoutX="16.0" layoutY="335.0" mnemonicParsing="false" onAction="#categorieButton" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Category Product">
+                                            <graphic>
+
+                                            </graphic>
                                         </Button>
                                         <Label layoutX="47.0" layoutY="511.0" text="Logout" textFill="WHITE">
                                             <font>
@@ -131,7 +145,7 @@
                                                     </font>
                                                 </Text>
                                                 <Button layoutX="61.0" layoutY="467.0" mnemonicParsing="false" onAction="#deleteR" prefHeight="40.0" prefWidth="189.0" style="-fx-background-color: #81c408;" text="Delete Reservation" textFill="WHITE" />
-                                    <Button layoutX="666.0" layoutY="469.0" mnemonicParsing="false" onAction="#Events" prefHeight="40.0" prefWidth="189.0" style="-fx-background-color: #81c408;" text="Events" textFill="WHITE" />
+
                                             </children>
                                         </AnchorPane>
                                     </children>

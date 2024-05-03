@@ -3,11 +3,14 @@ package Controllers;
 import java.io.File;
 import java.net.URL;
 
+import java.util.Map;
 import java.util.ResourceBundle;
 import Entities.CategorieProd;
 import Entities.Produit;
+import Entities.User;
 import Services.CategorieService;
 import Services.ProduitService;
+import Services.Session;
 import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -119,6 +122,13 @@ public class AddProduitController {
             produitToAdd.setPrice(price);
             produitToAdd.setQuantity(quantity);
             produitToAdd.setCategorie(selectedCategory); // Set the category
+
+            Session session = Session.getInstance();
+            Map<String, Object> userSession = session.getUserSession();
+            User us = new User();
+            us.setCin((userSession.get("cin").toString()));
+            produitToAdd.setUser(us);
+
 
             // Call the add method to add the product
             ProduitService produitService = new ProduitService();

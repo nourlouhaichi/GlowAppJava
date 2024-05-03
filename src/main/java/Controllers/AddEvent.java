@@ -5,6 +5,7 @@ import Entities.Event;
 import Entities.User;
 import Services.CategoryServices;
 import Services.EventServices;
+import Services.Session;
 import Services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.io.File;
+import java.util.Map;
 
 public class AddEvent {
 
@@ -92,8 +94,10 @@ public class AddEvent {
             eventToAdd.setLocation(location);
             eventToAdd.setDate(selectedDate.atTime(0, 0)); // Set time component to midnight
             eventToAdd.setNbP(participants);
+            Session session = Session.getInstance();
+            Map<String, Object> userSession = session.getUserSession();
             User us = new User();
-            us.setCin("14326585");
+            us.setCin((userSession.get("cin").toString()));
             eventToAdd.setUserId(us);
             eventToAdd.setCategoryId(selectedCategory);
             eventToAdd.setImageUrl(photoPath); // Set the photo path
