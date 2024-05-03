@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServicePublication implements IServices<Publication> {
+public class ServicePublication implements IServicePub<Publication> {
     Connection connection;
 
     public ServicePublication() {
@@ -40,6 +40,16 @@ public class ServicePublication implements IServices<Publication> {
         System.out.println("Publication modifiée");
     }
 
+
+    @Override
+    public void ajouter(Comment comment) throws SQLException {
+
+    }
+
+    @Override
+    public void modifier(Comment comment) throws SQLException {
+
+    }
 
     @Override
     public void supprimer(User user) throws SQLException {
@@ -88,6 +98,11 @@ public class ServicePublication implements IServices<Publication> {
     @Override
     public List<Publication> affiche(int publication_id) throws SQLException {
         return List.of();
+    }
+
+    @Override
+    public Comment afficher(Comment comment) throws SQLException {
+        return null;
     }
 
     @Override

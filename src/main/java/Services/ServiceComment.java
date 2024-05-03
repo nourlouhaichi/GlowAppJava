@@ -9,11 +9,21 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceComment implements IServices<Comment> {
+public class ServiceComment implements IServicePub<Comment> {
     private Connection connection;
 
     public ServiceComment() {
         this.connection = MyDatabase.getInstance().getConnection();
+    }
+
+    @Override
+    public void ajouter(Publication Publication) throws SQLException {
+
+    }
+
+    @Override
+    public void modifier(Publication Publication) throws SQLException {
+
     }
 
     @Override
@@ -100,6 +110,11 @@ public class ServiceComment implements IServices<Comment> {
 
     @Override
     public Comment afficher(Comment comment) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Publication afficher(Publication publication) throws SQLException {
         return null;
     }
 
