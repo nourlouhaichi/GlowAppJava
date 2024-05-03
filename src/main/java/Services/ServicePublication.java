@@ -139,6 +139,25 @@ public class ServicePublication implements IServices<Publication> {
         }
         System.out.println("publication ajoutée");
     }
+    public List<Publication> searchPublications(String keyword) throws SQLException {
+        List<Publication> filteredPublications = new ArrayList<>();
+        String sql = "SELECT * FROM publication WHERE titre_p LIKE ? OR contenue_p LIKE ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, "%" + keyword + "%");
+            ps.setString(2, "%" + keyword + "%");
+            ResultSet rs = ps.executeQuery();
 
-
+            while (rs.next()) {
+                Publication publication = new Publication();
+                publication.setId(rs.getInt("id"));
+                publication.setTitrep(rs.getString("titre_p"));
+                publication.setTypep(rs.getString("type_p"));
+                publication.setContentp(rs.getString("contenue_p"));
+                publication.setImage(rs.getString("image"));
+                filteredPublications.add(publication);
+            }
+            rs.close();
+        }
+        return filteredPublications;
+    }
 }

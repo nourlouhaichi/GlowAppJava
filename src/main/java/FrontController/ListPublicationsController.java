@@ -2,12 +2,14 @@ package FrontController;
 
 import Entities.Publication;
 import Services.ServicePublication;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -27,6 +29,8 @@ public class ListPublicationsController {
 
     @FXML
     private Button detailbutton;
+    @FXML
+    private TextField searchField;
 
     private final ServicePublication servicePublication = new ServicePublication();
 
@@ -52,7 +56,46 @@ public class ListPublicationsController {
             e.printStackTrace();
         }
     }
+
+    public void handleSearch(ActionEvent actionEvent) {
+        loadPublications();
     }
+    public void loadPublications() {
+        publicationBox.getChildren().clear();
+        String searchKeyword = searchField.getText();
+        try {
+            List<Publication> publications = servicePublication.searchPublications(searchKeyword);
+            int itemsPerRow = 3;
+            HBox row = null;
+            for (Publication publication : publications) {
+                if (row == null || row.getChildren().size() == itemsPerRow) {
+                    row = new HBox(10);
+                    publicationBox.getChildren().add(row);
+                }
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Front/ShowPublication.fxml"));
+                Node publicationNode = loader.load();
+                ShowPublicationController controller = loader.getController();
+                controller.setSelectedPublication(publication);
+                controller.initialize(publication);
+                row.getChildren().add(publicationNode);
+            }
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addpub(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Back/Publication.fxml"));
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(root, 400, 400));
+            newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
 
 
 

@@ -125,5 +125,4 @@ public class ServiceComment implements IServices<Comment> {
         return 0;
     }
 
-
 }

@@ -2,6 +2,7 @@ package FrontController;
 
 import Entities.Publication;
 import Services.ServiceComment;
+import Services.ServicePublication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,9 +37,12 @@ public class ShowPublicationController {
 
     private Publication selectedPublication;
 
+    ListPublicationsController listPublicationsController;
+
     public void setSelectedPublication(Publication publication) {
         this.selectedPublication = publication;
     }
+    ServicePublication servicePublication= new ServicePublication();
 
 
     public void initialize(Publication publication) throws SQLException, FileNotFoundException {
@@ -67,5 +71,12 @@ public class ShowPublicationController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteonclick(MouseEvent mouseEvent) throws SQLException {
+
+        servicePublication.supprimer(selectedPublication);
+        listPublicationsController.loadPublications();
+
     }
 }

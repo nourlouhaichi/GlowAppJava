@@ -109,3 +109,50 @@
 #contentfx {
     -fx-text-fill: #ffb524; /* Text color of the content */
 }
+.root {
+    -fx-font-family: 'Arial';
+}
+
+.button-raised {
+    -fx-background-color: #4dcf23, linear-gradient(#8be270 50%, white 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0.0, 0, 1);
+    -fx-font-size: 14px;
+    -fx-padding: 8 15 8 15;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.text-field {
+    -fx-padding: 8;
+    -fx-border-color: #BDBDBD;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+}
+
+.comments-container {
+    -fx-padding: 10px;
+    -fx-spacing: 10px; /* Space between comments */
+    -fx-background-color: #f9f9f9; /* Light grey background for the whole container */
+}
+
+.comment-style {
+    -fx-padding: 10px;
+    -fx-background-color: #ffffff; /* White background for each comment */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 5);
+    -fx-border-color: #ddd; /* Light grey border */
+    -fx-border-width: 0 0 1 0; /* Border at the bottom only */
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-font-size: 14px; /* Larger font size for better readability */
+}
+
+.comment-style:hover {
+    -fx-background-color: #f0f0f0; /* Slightly darker background on hover */
+}

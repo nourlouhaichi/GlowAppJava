@@ -9,6 +9,14 @@
 
 <VBox fx:id="card" prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontController.ShowPublicationController">
     <children>
+      <ImageView fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteonclick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Users/ASUS/Desktop/61918.png" />
+         </image>
+         <VBox.margin>
+            <Insets left="180.0" />
+         </VBox.margin>
+      </ImageView>
         <ImageView fx:id="imagefx" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
         <Label fx:id="titlefx" text="Label">
             <font>
