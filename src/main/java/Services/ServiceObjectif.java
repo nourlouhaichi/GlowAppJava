@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceObjectif implements IServiceObjectif<Objectif>{
+public class ServiceObjectif implements IServices<Objectif>{
     Connection connection;
     public ServiceObjectif(){connection= MyDatabase.getInstance().getConnection();
     }

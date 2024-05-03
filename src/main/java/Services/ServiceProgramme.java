@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
 
-public class ServiceProgramme implements IServicesProgramme<Programme> {
+public class ServiceProgramme implements IServices<Programme> {
     private Connection connection;
 
     public ServiceProgramme() {
