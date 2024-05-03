@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ffcbf5d7-9344-4155-9cd9-5fc5f3c1b4e0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PDFErrorDebug.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Fprofile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/c-est-quoi-une-belle-femme-temoignages.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/categorie-visage-homme.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/homme-plein-coup-appareil.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/Home.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/ObjDetailController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/ObjFrontController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/ObjectifController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/ProgDetailController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/ProgFrontController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/ProgrammeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Objectif.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Programme.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Services/IServiceObjectif.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Services/IServicesProgramme.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Services/ServiceObjectif.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Services/ServiceProgramme.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Tests/MainFX.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/EventsClient.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Home.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ObjDetail.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ObjFront.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Objectif.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ProgDetail.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ProgFront.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Programme.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/dashboardDesign.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/glowappLogo-removebg-preview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/logoApp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/progdetail.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProgramReport.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/ProgramReport.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/AddCommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AddCommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CommenttableviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/CommenttableviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EditCommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/EditCommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EditPublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/EditPublicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/PublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/PublicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/backhomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/backhomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/tableviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/tableviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Services/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Services/IServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tests/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tests/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/AddComment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/AddComment.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/Commenttableview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/Commenttableview.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/EditComment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/EditComment.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/EditPublication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/EditPublication.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/Publication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/Publication.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/backhome.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/backhome.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/tableview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/tableview.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="Interface" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/pom.xml" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2fB8wfxNG9ldSpXLbHaLUUtYFX2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.MainFX.executor": "Run",
+    "Maven.JavaProject [clean].executor": "Run",
+    "Maven.JavaProject [install].executor": "Run",
+    "Maven.JavaProject [org.openjfx:javafx-maven-plugin:0.0.8:jlink].executor": "Run",
+    "Maven.TestJ [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Merging integration",
+    "jdk.selected.JAVA_MODULE": "21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/tahan/OneDrive/Bureau/projetjava/GlowAppJava/GlowAppJava/src/main/resources/META-INF",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pathVariables",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tahan\OneDrive\Bureau\projetjava\GlowAppJava\GlowAppJava\src\main\resources\META-INF" />
+      <recent name="C:\Users\blanc\Desktop\taha naat\projetjava\GlowAppJava\src\main\java\Controllers" />
+      <recent name="C:\Users\blanc\Desktop\taha naat\projetjava\GlowAppJava\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\blanc\Desktop\taha naat\projetjava\GlowAppJava\src\main\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MainFX" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Tests.MainFX" />
+      <module name="JavaProject" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\tahan\Downloads\openjfx-22.0.1_windows-x64_bin-sdk\javafx-sdk-22.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-corretto-21.0.2-4caba194b151-51586f01" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ffcbf5d7-9344-4155-9cd9-5fc5f3c1b4e0" name="Changes" comment="" />
+      <created>1713263350472</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713263350472</updated>
+      <workItem from="1714020580759" duration="170000" />
+      <workItem from="1714038093920" duration="1935000" />
+      <workItem from="1714040185973" duration="1160000" />
+      <workItem from="1714047266093" duration="68000" />
+      <workItem from="1714235261764" duration="12587000" />
+      <workItem from="1714253115288" duration="6218000" />
+      <workItem from="1714259665536" duration="496000" />
+      <workItem from="1714260513984" duration="174000" />
+      <workItem from="1714316490090" duration="154000" />
+      <workItem from="1714340060536" duration="2232000" />
+      <workItem from="1714430036365" duration="1889000" />
+      <workItem from="1714432145143" duration="2456000" />
+      <workItem from="1714479837518" duration="15245000" />
+      <workItem from="1714503255257" duration="1049000" />
+      <workItem from="1714512469144" duration="6493000" />
+      <workItem from="1714563759971" duration="14000" />
+      <workItem from="1714563894607" duration="21000" />
+      <workItem from="1714564183011" duration="43000" />
+      <workItem from="1714564839503" duration="1823000" />
+      <workItem from="1714567191240" duration="807000" />
+      <workItem from="1714568687766" duration="1301000" />
+      <workItem from="1714588610746" duration="9065000" />
+      <workItem from="1714638096081" duration="2371000" />
+      <workItem from="1714682191345" duration="1592000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

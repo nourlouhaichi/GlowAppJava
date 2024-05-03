@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ObjDetailController" stylesheets="@progdetail.css">
+    <VBox layoutX="14.0" layoutY="14.0" spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+        <Label fx:id="objectifLabel" text="Objectif: " style="-fx-font-size: 18; -fx-font-weight: bold;" />
+        <Label fx:id="descriptionLabel" text="Description: " wrapText="true" style="-fx-font-size: 14;" />
+        <Label fx:id="weightLabel" text="Weight: " style="-fx-font-size: 14;" />
+        <Label fx:id="heightLabel" text="Height: " style="-fx-font-size: 14;" />
+        <ComboBox fx:id="languageComboBox" prefWidth="150">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Italian - it" />
+                    <String fx:value="French - fr" />
+                    <String fx:value="Spanish - es" />
+                    <!-- Add more languages here -->
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Button fx:id="translateButton" onAction="#handleTranslateAction" text="Translate" styleClass="button" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-font-weight: bold;" />
+    </VBox>
+</AnchorPane>

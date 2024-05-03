@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="editscene" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EditPublicationController">
+<AnchorPane fx:id="editscene" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EditPublicationController">
    <children>
       <Button layoutX="253.0" layoutY="320.0" mnemonicParsing="false" onAction="#editonclick" prefHeight="26.0" prefWidth="94.0" style="-fx-background-radius: 50;" text="Edit" textFill="#fcae47" />
 

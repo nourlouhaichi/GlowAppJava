@@ -3,11 +3,13 @@ package Services;
 import Entities.Comment;
 import Entities.Publication;
 import Entities.User;
+import Entities.Programme;
 
 import java.sql.SQLException;
 import java.util.List;
 public interface IServices <T>{
-    public void ajouter(T t) throws SQLException;
+
+    void ajouter(User user) throws SQLException;
 
     public void modifier(T t) throws SQLException;
 
