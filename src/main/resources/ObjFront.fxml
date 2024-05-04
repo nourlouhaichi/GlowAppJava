@@ -53,7 +53,7 @@
                             <Insets bottom="2.0" />
                         </padding>
                     </Button>
-                    <Button maxHeight="-Infinity" maxWidth="-Infinity" onAction="#ProgsFront" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="52.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Progs" textFill="black">
+                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ProgsFront" prefHeight="18.0" prefWidth="52.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Progs" textFill="black">
                         <HBox.margin>
                             <Insets left="80.0" />
                         </HBox.margin>
@@ -61,7 +61,7 @@
                             <Insets bottom="2.0" />
                         </padding>
                     </Button>
-                    <Button maxHeight="-Infinity" maxWidth="-Infinity" onAction="#ObjsFront" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="52.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Objs" textFill="black">
+                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ObjsFront" prefHeight="18.0" prefWidth="52.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Objs" textFill="black">
                         <HBox.margin>
                             <Insets left="80.0" />
                         </HBox.margin>
@@ -95,6 +95,7 @@
                                 <Insets />
                             </VBox.margin>
                         </HBox>
+                        <VBox spacing="10" />
                         <Pane prefHeight="57.0" prefWidth="435.0" VBox.vgrow="ALWAYS">
                             <VBox.margin>
                                 <Insets />
@@ -106,16 +107,21 @@
                             <children>
                                 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="335.0">
                                     <children>
-                                        <Label fx:id="LocationNameLabel" prefHeight="48.0" prefWidth="276.0" textFill="WHITE">
-                                            <font>
-                                                <Font name="Cambria" size="24.0" />
-                                            </font>
-                                        </Label>
+                                     <Label prefHeight="50.0" prefWidth="525.0" styleClass="section-label" text="           Water Intake" textAlignment="RIGHT">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
                                     </children>
                                     <VBox.margin>
                                         <Insets left="20.0" top="30.0" />
                                     </VBox.margin>
                                 </HBox>
+                               <Label fx:id="currentWaterIntakeLabel" prefHeight="91.0" prefWidth="286.0" text="Current Water Intake: 0 glasses">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
                                 <ImageView fx:id="locationimg" fitHeight="159.0" fitWidth="311.0" pickOnBounds="true" preserveRatio="true">
 
                                     <VBox.margin>
@@ -124,6 +130,7 @@
                                 </ImageView>
 
                                 <Separator prefHeight="0.0" prefWidth="118.0" />
+                               <Button onAction="#drinkWater" prefHeight="26.0" prefWidth="138.0" text="Drink Water" />
 
                                 <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                                     <VBox.margin>
@@ -133,18 +140,51 @@
 
                                     </children>
                                 </HBox>
-                                <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
-                                    <children>
 
-                                    </children></HBox>
-                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" styleClass="add-btn" stylesheets="@style.css" text="RESERVER" textFill="#828282">
+                                <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0" />
+                            </children>
+                            <styleClass>
+                                <String fx:value="chosen-fruit-card" />
+                                <String fx:value="shadow" />
+                            </styleClass>
+                        </VBox>
+                        <VBox fx:id="chosen" alignment="CENTER" prefHeight="535.0" prefWidth="100.0" style="-fx-background-color: #ffb524;" stylesheets="@style.css">
+                            <VBox.margin>
+                                <Insets left="50.0" right="50.0" />
+                            </VBox.margin>
+                            <children>
+                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="335.0">
+                                    <children>
+                                        <Label prefHeight="50.0" prefWidth="525.0" styleClass="section-label" text="             Calorie Intake" textAlignment="RIGHT">
+                                            <font>
+                                                <Font size="24.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
                                     <VBox.margin>
-                                        <Insets bottom="20.0" top="30.0" />
+                                        <Insets left="20.0" top="30.0" />
                                     </VBox.margin>
+                                </HBox>
+                                <Label fx:id="currentCalorieIntakeLabel" prefHeight="91.0" prefWidth="286.0" text="Current Calorie Intake: 0">
                                     <font>
-                                        <Font name="System Bold" size="18.0" />
+                                        <Font size="19.0" />
                                     </font>
-                                </Button>
+                                </Label>
+                                <Label fx:id="calorieIntakeGoalLabel" prefHeight="91.0" prefWidth="286.0" text="Calorie Intake Goal: 2500">
+                                    <font>
+                                        <Font size="19.0" />
+                                    </font>
+                                </Label>
+                                <Separator prefHeight="0.0" prefWidth="118.0" />
+                                <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
+                                    <VBox.margin>
+                                        <Insets top="20.0" />
+                                    </VBox.margin>
+                                    <children>
+                                        <Button onAction="#eatFood" text="Eat Food" />
+                                        <Button onAction="#checkAndResetCalorieIntake" text="Reset Calorie Intake" />
+                                    </children>
+                                </HBox>
                             </children>
                             <styleClass>
                                 <String fx:value="chosen-fruit-card" />
