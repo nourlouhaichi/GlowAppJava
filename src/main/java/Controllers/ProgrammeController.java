@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
@@ -33,6 +34,8 @@ import java.io.File;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import java.nio.charset.StandardCharsets;
+import org.controlsfx.control.Notifications;
+
 
 
 
@@ -260,6 +263,11 @@ public class ProgrammeController {
             loadProgrammeData();
             clearForm();
             showConfirmation("Programme added successfully.");
+            Notifications notifications = Notifications.create();
+            notifications.text("Program added successfully !");
+            notifications.title("Successful");
+            notifications.hideAfter(Duration.seconds(6));
+            notifications.show();
         } catch (Exception e) {
             showError(e.getMessage());
         }
@@ -285,6 +293,11 @@ public class ProgrammeController {
             loadProgrammeData();
             clearForm();
             showConfirmation("Programme updated successfully.");
+            Notifications notifications = Notifications.create();
+            notifications.text("Program updated successfully !");
+            notifications.title("Successful");
+            notifications.hideAfter(Duration.seconds(6));
+            notifications.show();
         } catch (Exception e) {
             showError(e.getMessage());
         }
@@ -300,6 +313,11 @@ public class ProgrammeController {
             loadProgrammeData();
             clearForm();
             showConfirmation("Programme deleted successfully.");
+            Notifications notifications = Notifications.create();
+            notifications.text("Program deleted successfully !");
+            notifications.title("Successful");
+            notifications.hideAfter(Duration.seconds(6));
+            notifications.show();
 
         } catch (Exception e) {
             showError(e.getMessage());

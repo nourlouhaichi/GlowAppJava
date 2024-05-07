@@ -14,8 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
+import org.controlsfx.control.Notifications;
 import org.w3c.dom.Text;
 
 import java.awt.*;
@@ -212,6 +214,11 @@ public class ObjectifController {
             loadObjectifData();
             clearForm();
             showConfirmation("Objectif added successfully.");
+            Notifications notifications = Notifications.create();
+            notifications.text("Objectif added successfully !");
+            notifications.title("Successful");
+            notifications.hideAfter(Duration.seconds(6));
+            notifications.show();
         } catch (Exception e) {
             showError(e.getMessage());
         }
@@ -234,6 +241,11 @@ public class ObjectifController {
             loadObjectifData();
             clearForm();
             showConfirmation("Objectif updated successfully.");
+            Notifications notifications = Notifications.create();
+            notifications.text("Objectif updated successfully !");
+            notifications.title("Successful");
+            notifications.hideAfter(Duration.seconds(6));
+            notifications.show();
         } catch (Exception e) {
             showError(e.getMessage());
         }
@@ -249,6 +261,11 @@ public class ObjectifController {
             loadObjectifData();
             clearForm();
             showConfirmation("Objectif deleted successfully.");
+            Notifications notifications = Notifications.create();
+            notifications.text("Objectif deleted successfully !");
+            notifications.title("Successful");
+            notifications.hideAfter(Duration.seconds(6));
+            notifications.show();
 
         } catch (Exception e) {
             showError(e.getMessage());
