@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ffcbf5d7-9344-4155-9cd9-5fc5f3c1b4e0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ObjectifController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ObjectifController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ProgrammeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ProgrammeController.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="Interface" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/pom.xml" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2fB8wfxNG9ldSpXLbHaLUUtYFX2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainFX.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.JavaProject [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.JavaProject [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.JavaProject [org.openjfx:javafx-maven-plugin:0.0.8:jlink].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.JavaProject [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;GestionProgramme&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tahan/OneDrive/Bureau/projetjava/GlowAppJava/GlowAppJava/src/main/resources/META-INF&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tahan\OneDrive\Bureau\projetjava\GlowAppJava\GlowAppJava\src\main\resources\META-INF" />
+      <recent name="C:\Users\blanc\Desktop\taha naat\projetjava\GlowAppJava\src\main\java\Controllers" />
+      <recent name="C:\Users\blanc\Desktop\taha naat\projetjava\GlowAppJava\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\blanc\Desktop\taha naat\projetjava\GlowAppJava\src\main\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MainFX" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Tests.MainFX" />
+      <module name="JavaProject" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\tahan\Downloads\openjfx-22.0.1_windows-x64_bin-sdk\javafx-sdk-22.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-corretto-21.0.2-4caba194b151-51586f01" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ffcbf5d7-9344-4155-9cd9-5fc5f3c1b4e0" name="Changes" comment="" />
+      <created>1713263350472</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713263350472</updated>
+      <workItem from="1714020580759" duration="170000" />
+      <workItem from="1714038093920" duration="1935000" />
+      <workItem from="1714040185973" duration="1160000" />
+      <workItem from="1714047266093" duration="68000" />
+      <workItem from="1714235261764" duration="12587000" />
+      <workItem from="1714253115288" duration="6218000" />
+      <workItem from="1714259665536" duration="496000" />
+      <workItem from="1714260513984" duration="174000" />
+      <workItem from="1714316490090" duration="154000" />
+      <workItem from="1714340060536" duration="2232000" />
+      <workItem from="1714430036365" duration="1889000" />
+      <workItem from="1714432145143" duration="2456000" />
+      <workItem from="1714479837518" duration="15245000" />
+      <workItem from="1714503255257" duration="1049000" />
+      <workItem from="1714512469144" duration="6493000" />
+      <workItem from="1714563759971" duration="14000" />
+      <workItem from="1714563894607" duration="21000" />
+      <workItem from="1714564183011" duration="43000" />
+      <workItem from="1714564839503" duration="1823000" />
+      <workItem from="1714567191240" duration="807000" />
+      <workItem from="1714568687766" duration="1301000" />
+      <workItem from="1714588610746" duration="9065000" />
+      <workItem from="1714638096081" duration="2371000" />
+      <workItem from="1714682191345" duration="1592000" />
+      <workItem from="1714830269853" duration="4431000" />
+      <workItem from="1715075504823" duration="1196000" />
+      <workItem from="1715082748483" duration="1918000" />
+      <workItem from="1715084877451" duration="654000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
