@@ -147,6 +147,7 @@ public class ProduitFrontController {
         }
     }
 
+
     private void updateChosenLocation(Produit location) {
         Label locationNameLabel = (Label) chosenFruitCard.lookup("#LocationNameLabel");
         Label locationPriceLabel = (Label) chosenFruitCard.lookup("#LocationPriceLabel");
@@ -284,5 +285,65 @@ public class ProduitFrontController {
             }
         }
 
+    }
+
+    @FXML
+    void publicationButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Front/ListPublications.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void programButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProgFront.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void objectiveButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ObjFront.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

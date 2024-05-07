@@ -4,6 +4,7 @@ import Entities.Objectif;
 import Entities.Programme;
 import Services.ServiceObjectif;
 import Services.ServiceProgramme;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -228,6 +229,122 @@ public class ObjFrontController {
 
         if (currentWaterIntake >= waterIntakeGoal) {
             showAlert("Congratulations! You've reached your water intake goal for today!");
+        }
+    }
+
+    @FXML
+    void productButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Produitfront.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eventButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EventsClient.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void publicationButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Front/ListPublications.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void programButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProgFront.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void objectiveButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ObjFront.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void homeButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homeGUI.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     }

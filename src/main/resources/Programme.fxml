@@ -45,12 +45,12 @@
                                  <Font name="Arial" size="13.0" />
                               </font>
                            </Label>
-                           <Button fx:id="frontButton" layoutX="1040.0" layoutY="4.0" mnemonicParsing="false" onAction="#goFront" style="-fx-background-color: #81c408;" text="Front" textFill="WHITE">
+                           <Button fx:id="frontButton" layoutX="1040.0" layoutY="4.0" mnemonicParsing="false" onAction="#frontButtonOnAction" style="-fx-background-color: #81c408;" text="Front" textFill="WHITE">
                               <font>
                                  <Font name="Arial Rounded MT Bold" size="14.0" />
                               </font>
                            </Button>
-                           <Button fx:id="profileButton" layoutX="966.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #81c408;" text="Profile" textFill="WHITE">
+                           <Button fx:id="profileButton" layoutX="966.0" layoutY="4.0" mnemonicParsing="false" onAction="#profileButtonOnAction" style="-fx-background-color: #81c408;" text="Profile" textFill="WHITE">
                               <font>
                                  <Font name="Arial Rounded MT Bold" size="14.0" />
                               </font>
@@ -82,7 +82,7 @@
                               </font>
                            </Label>
                            <Line endX="69.0" layoutX="121.0" layoutY="199.0" startX="-100.0" stroke="#ffb524" />
-                           <Button fx:id="homeButton" layoutX="16.0" layoutY="228.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
+                           <Button fx:id="homeButton" layoutX="16.0" layoutY="228.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
                               <graphic>
 
                               </graphic>
@@ -90,29 +90,38 @@
                                  <Font name="Arial Rounded MT Bold" size="18.0" />
                               </font>
                            </Button>
-                           <Button fx:id="userButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Users">
+                           <Button fx:id="userButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" onAction="#userButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Users">
                               <graphic>
 
                               </graphic>
                            </Button>
-                           <Button layoutX="16.0" layoutY="299.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
+                           <Button fx:id="ProduitButton" layoutX="16.0" layoutY="299.0" mnemonicParsing="false" onAction="#ProduitButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
                               <graphic>
 
                               </graphic>
                            </Button>
-                           <Button layoutX="16.0" layoutY="335.0" mnemonicParsing="false" onAction="#Progsback" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Programs">
+                           <Button fx:id="CategorieButton" layoutX="16.0" layoutY="335.0" mnemonicParsing="false" onAction="#categorieButton" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Category Product">
                               <graphic>
 
                               </graphic>
-
                            </Button>
-                           <Button layoutX="16.0" layoutY="371.0" mnemonicParsing="false" onAction="#Objback" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Objectives">
+                           <Button fx:id="eventButton" layoutX="16.0" layoutY="370.0" mnemonicParsing="false" onAction="#eventButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Events">
+                              <graphic>
+
+                              </graphic>
+                           </Button>
+                           <Button fx:id="publicationButton" layoutX="16.0" layoutY="405.0" mnemonicParsing="false" onAction="#publicationButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Publications">
+                              <graphic>
+
+                              </graphic>
+                           </Button>
+                           <Button fx:id="programButton" layoutX="16.0" layoutY="440.0" mnemonicParsing="false" onAction="#programButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Programs">
                               <graphic>
 
                               </graphic>
                            </Button>
                            
-                           <Button fx:id="logoutButton" layoutX="9.0" layoutY="509.0" mnemonicParsing="false" stylesheets="@dashboardDesign.css">
+                           <Button fx:id="logoutButton" layoutX="9.0" layoutY="509.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" stylesheets="@dashboardDesign.css">
                               <graphic>
 
                               </graphic>
@@ -208,7 +217,7 @@
 
 
                                  <ImageView fx:id="imageView" fitHeight="150" fitWidth="200" layoutX="49.0" layoutY="331.0" preserveRatio="true" />
-                                 <Button fx:id="uploadImageButton" layoutX="685.0" layoutY="368.0" onAction="#uploadImage" style="-fx-background-color: #81c408;" text="Upload Image" textFill="WHITE">
+                                 <Button fx:id="uploadImageButton" layoutX="636.0" layoutY="369.0" onAction="#uploadImage" style="-fx-background-color: #81c408;" text="Upload Image" textFill="WHITE">
                                     <font>
                                        <Font name="Arial Rounded MT Bold" size="14.0" />
                                     </font>
@@ -247,12 +256,21 @@
                                        <Font name="Arial Rounded MT Bold" size="14.0" />
                                     </font>
                                  </Button>
-                                 <Button fx:id="generatePdfButton" layoutX="742.0" layoutY="21.0" onAction="#generatePDFReport" text="Generate PDF" />
                                  <TextField fx:id="searchTextField" layoutX="84.0" layoutY="20.0" prefHeight="29.0" prefWidth="162.0" promptText="Search..." style="-fx-border-color: #81c408;">
                                     <font>
                                        <Font name="Arial Rounded MT Bold" size="14.0" />
                                     </font>
                                  </TextField>
+                                    <Button fx:id="objectiveButton" layoutX="752.0" layoutY="367.0" mnemonicParsing="false" onAction="#objectiveButtonOnAction" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #ffb524;" text="Objectives" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="generatePdfButton" layoutX="725.0" layoutY="23.0" mnemonicParsing="false" onAction="#generatePDFReport" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ff3547;" text="PDF" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="14.0" />
+                                       </font>
+                                    </Button>
                               </children>
                            </AnchorPane>
                            <Line endX="-100.0" endY="170.0" layoutX="727.0" layoutY="349.0" startX="-100.0" stroke="#ffb524" />

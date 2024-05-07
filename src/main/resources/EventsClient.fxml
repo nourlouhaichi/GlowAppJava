@@ -23,7 +23,7 @@
                 <!-- Navigation bar -->
                 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0" prefWidth="822.0" styleClass="navbar" stylesheets="style.css" BorderPane.alignment="CENTER_RIGHT">
 
-                    <Button fx:id="homeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#homeButtonOnAction" prefHeight="18.0" prefWidth="52.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Home" textFill="black">
+                    <Button fx:id="homeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#homeButtonOnAction" prefHeight="18.0" prefWidth="43.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Home" textFill="black">
 
                         <HBox.margin>
                             <Insets left="200.0" right="-60.0" />
@@ -33,7 +33,7 @@
                         </padding>
                     </Button>
 
-                    <Button fx:id="eventButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#eventButtonOnAction" prefHeight="18.0" prefWidth="55.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Events" textFill="black">
+                    <Button fx:id="eventButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#eventButtonOnAction" prefHeight="18.0" prefWidth="38.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Events" textFill="black">
 
                         <HBox.margin>
                             <Insets left="150.0" right="-50.0" />
@@ -52,14 +52,30 @@
                             <Insets bottom="2.0" />
                         </padding>
                     </Button>
-               <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="52.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Rating" textFill="black">
-                  <HBox.margin>
-                     <Insets left="80.0" />
-                  </HBox.margin>
-                  <padding>
-                     <Insets bottom="2.0" />
-                  </padding>
-               </Button>
+                    <Button fx:id="publicationButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#publicationButtonOnAction" prefHeight="18.0" prefWidth="63.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Publications" textFill="black">
+                        <HBox.margin>
+                            <Insets left="80.0" />
+                        </HBox.margin>
+                        <padding>
+                            <Insets bottom="2.0" />
+                        </padding>
+                    </Button>
+                    <Button fx:id="programButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#programButtonOnAction" prefHeight="18.0" prefWidth="56.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="Programs" textFill="black">
+                        <HBox.margin>
+                            <Insets left="80.0" />
+                        </HBox.margin>
+                        <padding>
+                            <Insets bottom="2.0" />
+                        </padding>
+                    </Button>
+                    <Button fx:id="objectiveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#objectiveButtonOnAction" prefHeight="18.0" prefWidth="53.0" scaleX="2.0" scaleY="2.0" styleClass="nav-button" text="objectives" textFill="black">
+                        <HBox.margin>
+                            <Insets left="80.0" />
+                        </HBox.margin>
+                        <padding>
+                            <Insets bottom="2.0" />
+                        </padding>
+                    </Button>
                     <BorderPane.margin>
                         <Insets />
                     </BorderPane.margin>

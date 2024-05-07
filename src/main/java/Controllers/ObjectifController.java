@@ -2,8 +2,10 @@ package Controllers;
 
 import Entities.Objectif;
 import Services.ServiceObjectif;
+import Services.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,9 +13,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
@@ -29,6 +35,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ObjectifController {
@@ -50,6 +57,15 @@ public class ObjectifController {
     @FXML private TableColumn<Objectif, String> columnDescription;
     @FXML private TableColumn<Objectif, Float> columnWeight;
     @FXML private TableColumn<Objectif, Float> columnHeight;
+    @FXML
+    private Button userButton;
+    @FXML
+    private Button homeButton;
+    @FXML private Button logoutButton;
+    @FXML private Button frontButton;
+    @FXML private Label usernameLabel;
+    @FXML
+    private ImageView logoImageView;
 
     private ServiceObjectif serviceObjectif;
 
@@ -127,6 +143,15 @@ public class ObjectifController {
 
     @FXML
     public void initialize() {
+
+        Session session = Session.getInstance();
+        Map<String, Object> userSession = session.getUserSession();
+        usernameLabel.setText(userSession.get("email").toString());
+
+        File logoFile = new File("images/logoglowapp.png");
+        javafx.scene.image.Image logoImage = new Image(logoFile.toURI().toString());
+        logoImageView.setImage(logoImage);
+
        serviceObjectif = new ServiceObjectif();
 
         columnObjectif.setCellValueFactory(new PropertyValueFactory<>("objectifO"));
@@ -397,6 +422,209 @@ public class ObjectifController {
         }
 
 
+    }
+
+    public void logoutButtonOnAction(ActionEvent event) {
+        Session.getInstance().logout();
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        stage.close();
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/loginGUI.fxml"));
+            Stage loginStage = new Stage();
+            loginStage.initStyle(StageStyle.UNDECORATED);
+            loginStage.setScene(new Scene(root,520,400));
+            loginStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void frontButtonOnAction(ActionEvent event) {
+        Stage stage = (Stage) frontButton.getScene().getWindow();
+        stage.close();
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/homeGUI.fxml"));
+            Stage homeStage = new Stage();
+            homeStage.initStyle(StageStyle.UNDECORATED);
+            homeStage.setScene(new Scene(root,1024,576));
+            homeStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void userButtonOnAction(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/backUserGUI.fxml"));
+            Stage userStage = new Stage();
+            //userStage.initStyle(StageStyle.UNDECORATED);
+            userStage.setScene(new Scene(root,1100,600));
+            userStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage) userButton.getScene().getWindow();
+        stage.close();
+    }
+
+    public void profileButtonOnAction(ActionEvent event) {
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/profileGUI.fxml"));
+            Stage profileStage = new Stage();
+            profileStage.initStyle(StageStyle.UNDECORATED);
+            profileStage.setScene(new Scene(root,800,600));
+            profileStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void homeButtonOnAction(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/backHomeGUI.fxml"));
+            Stage homeStage = new Stage();
+            //homeStage.initStyle(StageStyle.UNDECORATED);
+            homeStage.setScene(new Scene(root,1100,600));
+            homeStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage) homeButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void ProduitButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListProduit.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void categorieButton(ActionEvent event) {
+
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListCateforieP.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void eventButtonOnAction(ActionEvent event) {
+
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Events.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void publicationButtonOnAction(ActionEvent event) {
+
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back/tableview.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void programButtonOnAction(ActionEvent event) {
+
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Programme.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void objectiveButtonOnAction(ActionEvent event) {
+
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Objectif.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
