@@ -12,21 +12,33 @@ public class Programme {
     private int place_dispo;
     private Date date_pro;
     private String imagePath;
+    private User user;
 
     private List<Objectif> Objectifs;
 
     public Programme() {
     }
 
-    public Programme(int id, String titre_pro, String plan_pro, int place_dispo, Date date_pro, String imagePath, List<Objectif> ojbectifs) {
+    public Programme(int id, String titre_pro, String plan_pro, int place_dispo, Date date_pro, String imagePath, User user, List<Objectif> objectifs) {
         this.id = id;
         this.titre_pro = titre_pro;
         this.plan_pro = plan_pro;
         this.place_dispo = place_dispo;
         this.date_pro = date_pro;
         this.imagePath = imagePath;
-        this.Objectifs = ojbectifs;
+        this.user = user;
+        Objectifs = objectifs;
     }
+
+//    public Programme(int id, String titre_pro, String plan_pro, int place_dispo, Date date_pro, String imagePath, List<Objectif> ojbectifs) {
+//        this.id = id;
+//        this.titre_pro = titre_pro;
+//        this.plan_pro = plan_pro;
+//        this.place_dispo = place_dispo;
+//        this.date_pro = date_pro;
+//        this.imagePath = imagePath;
+//        this.Objectifs = ojbectifs;
+//    }
 
     public List<Objectif> getOjbectifs() {
         return this.Objectifs;
@@ -50,6 +62,13 @@ public class Programme {
         this.imagePath = imagePath;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;

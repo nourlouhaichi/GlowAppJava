@@ -8,25 +8,30 @@ public class Objectif {
     private Float poid_o;
     private Float taille_o;
     private int programme_id;
+    private User user;
 
     private Programme programme;
 
-    public Objectif(int id, String objectif_o, String description_o, Float poid_o, Float taille_o, int programme_id) {
+//    public Objectif(int id, String objectif_o, String description_o, Float poid_o, Float taille_o, int programme_id) {
+//        this.id = id;
+//        this.objectif_o = objectif_o;
+//        this.description_o = description_o;
+//        this.poid_o = poid_o;
+//        this.taille_o = taille_o;
+//        this.programme_id = programme_id;
+//    }
+
+    public Objectif(int id, String objectif_o, String description_o, Float poid_o, Float taille_o, int programme_id, User user ) {
         this.id = id;
         this.objectif_o = objectif_o;
         this.description_o = description_o;
         this.poid_o = poid_o;
         this.taille_o = taille_o;
         this.programme_id = programme_id;
+        this.user = user;
     }
 
-    public int getProgramme_id() {
-        return programme_id;
-    }
 
-    public void setProgramme_id(int programme_id) {
-        this.programme_id = programme_id;
-    }
     public Objectif() {
         this.programme = new Programme();
     }
@@ -38,7 +43,21 @@ public class Objectif {
         this.poid_o = poido;
         this.taille_o = tailleo;
     }
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getProgramme_id() {
+        return programme_id;
+    }
+
+    public void setProgramme_id(int programme_id) {
+        this.programme_id = programme_id;
+    }
     public int getId() {
         return id;
     }
@@ -75,15 +94,17 @@ public class Objectif {
     }
 
 
-
     @Override
     public String toString() {
         return "Objectif{" +
                 "id=" + id +
-                ", objectifo='" + objectif_o + '\'' +
-                ", descriptiono='" + description_o + '\'' +
-                ", poido=" + poid_o +
-                ", tailleo=" + taille_o +
+                ", objectif_o='" + objectif_o + '\'' +
+                ", description_o='" + description_o + '\'' +
+                ", poid_o=" + poid_o +
+                ", taille_o=" + taille_o +
+                ", programme_id=" + programme_id +
+                ", user=" + user +
+                ", programme=" + programme +
                 '}';
     }
 }

@@ -1,8 +1,10 @@
 package Controllers;
-
+import Services.Session;
+import Entities.User;
 import Services.ServiceProgramme;
 import Entities.Programme;
 import Services.Session;
+import Services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -72,6 +74,7 @@ public class ProgrammeController {
     private Button homeButton;
     @FXML
     private ImageView logoImageView;
+    private final UserService userService = new UserService();
 
     @FXML
     public void uploadImage() {
@@ -278,8 +281,13 @@ public class ProgrammeController {
                     planproField.getText(),
                     Integer.parseInt(placedispoField.getText()),
                     Date.valueOf(dateproPicker.getValue()),
-                    defaultImagePath
-                    );
+                    tempImagePath
+            );
+            Session session = Session.getInstance();
+            Map<String, Object> userSession = session.getUserSession();
+            User us = new User();
+            us.setCin(userSession.get("cin").toString());
+            programme.setUser(us);
             serviceProgramme.ajouter(programme);
             loadProgrammeData();
             clearForm();
@@ -301,29 +309,35 @@ public class ProgrammeController {
         }
         try {
             Programme currentProgramme = programmeTableView.getSelectionModel().getSelectedItem();
-            String currentImagePath = (currentProgramme != null) ? currentProgramme.getImagePath() : null;
+            if (currentProgramme == null) {
+                showError("No programme selected.");
+                return;
+            }
+
+            String imagePathToUpdate = (tempImagePath != null && !tempImagePath.isEmpty()) ? tempImagePath : currentProgramme.getImagePath();
+
             Programme programme = new Programme(
-                    selectedProgramId,
+                    currentProgramme.getId(),
                     titreproField.getText(),
                     planproField.getText(),
                     Integer.parseInt(placedispoField.getText()),
                     java.sql.Date.valueOf(dateproPicker.getValue()),
-                    currentImagePath
+                    imagePathToUpdate
             );
             serviceProgramme.modifier(programme);
             loadProgrammeData();
             clearForm();
             showConfirmation("Programme updated successfully.");
             Notifications notifications = Notifications.create();
-            notifications.text("Program updated successfully !");
+            notifications.text("Program updated successfully!");
             notifications.title("Successful");
             notifications.hideAfter(Duration.seconds(6));
             notifications.show();
+            tempImagePath = null;
         } catch (Exception e) {
             showError(e.getMessage());
         }
     }
-
 
 
 

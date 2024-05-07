@@ -20,14 +20,14 @@ public class ServiceProgramme implements IServices<Programme> {
 
     @Override
     public void ajouter(Programme Programme) throws SQLException {
-        String sql = "INSERT INTO programme(titre_pro, plan_pro, place_dispo, date_pro, imagePath) VALUES (?, ? , ? , ?, ?)";
+        String sql = "INSERT INTO programme(titre_pro, plan_pro, place_dispo, date_pro, imagePath,user_cin) VALUES (?, ? , ? , ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, Programme.getTitrepro());
         statement.setString(2, Programme.getPlanpro());
         statement.setInt(3, Programme.getPlacedispo());
         statement.setDate(4, Programme.getDatepro());
         statement.setString(5, Programme.getImagePath());
-
+        statement.setInt(6, Integer.parseInt(Programme.getUser().getCin()));
         statement.executeUpdate();
         System.out.println("Program Added");
     }

@@ -11,13 +11,14 @@ public class ServiceObjectif implements IServices<Objectif>{
     public ServiceObjectif(){connection= MyDatabase.getInstance().getConnection();
     }
     @Override
-    public void ajouter(Objectif Objectif) throws SQLException {
-        String sql = "INSERT INTO Objectif(objectif_o, description_o, poid_o, taille_o) VALUES (?, ? , ? , ?)";
+    public void ajouter(Objectif objectif) throws SQLException {
+        String sql = "INSERT INTO Objectif(objectif_o, description_o, poid_o, taille_o, user_cin) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, Objectif.getObjectifO());
-        statement.setString(2, Objectif.getDescriptionO());
-        statement.setFloat(3, Objectif.getPoidO());
-        statement.setFloat(4, Objectif.getTailleO());
+        statement.setString(1, objectif.getObjectifO());
+        statement.setString(2, objectif.getDescriptionO());
+        statement.setFloat(3, objectif.getPoidO());
+        statement.setFloat(4, objectif.getTailleO());
+        statement.setInt(5, Integer.parseInt(objectif.getUser().getCin()));
         statement.executeUpdate();
         System.out.println("Objectif Added");
     }

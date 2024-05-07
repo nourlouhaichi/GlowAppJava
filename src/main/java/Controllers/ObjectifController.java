@@ -1,6 +1,7 @@
 package Controllers;
 
 import Entities.Objectif;
+import Entities.User;
 import Services.ServiceObjectif;
 import Services.Session;
 import javafx.collections.FXCollections;
@@ -235,6 +236,11 @@ public class ObjectifController {
                     Float.parseFloat(WeightField.getText()),
                     Float.parseFloat(HeightField.getText())
             );
+            Session session = Session.getInstance();
+            Map<String, Object> userSession = session.getUserSession();
+            User us = new User();
+            us.setCin(userSession.get("cin").toString());
+            objectif.setUser(us);
             serviceObjectif.ajouter(objectif);
             loadObjectifData();
             clearForm();

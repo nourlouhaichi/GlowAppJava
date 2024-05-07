@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.StringConverter;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -22,7 +24,7 @@ public class ProgDetailController {
     @FXML private Button translateButton;
     @FXML private TextField reservationPlacesField;
     @FXML private ComboBox<String> languageComboBox;
-
+    @FXML private ImageView programImageView;
     private ServiceProgramme serviceProgramme = new ServiceProgramme();
     private Programme programme;
     private String originalTitle;
@@ -58,16 +60,19 @@ public class ProgDetailController {
 
     public void setProg(Programme programme) {
         this.programme = programme;
-        originalTitle = programme.getTitrepro();
-        originalPlan = programme.getPlanpro();
-        originalPlaces = String.valueOf(programme.getPlacedispo());
-        originalDate = programme.getDatepro().toString();
-        titleLabel.setText(originalTitle);
-        planLabel.setText(originalPlan);
-        placeLabel.setText(originalPlaces);
-        dateLabel.setText(originalDate);
+        if (programme.getImagePath() != null && !programme.getImagePath().isEmpty()) {
+            Image image = new Image("file:///" + programme.getImagePath().replace("\\", "/"));
+            programImageView.setImage(image);
+            originalTitle = programme.getTitrepro();
+            originalPlan = programme.getPlanpro();
+            originalPlaces = String.valueOf(programme.getPlacedispo());
+            originalDate = programme.getDatepro().toString();
+            titleLabel.setText(originalTitle);
+            planLabel.setText(originalPlan);
+            placeLabel.setText(originalPlaces);
+            dateLabel.setText(originalDate);
+        }
     }
-
     @FXML
     private void handleTranslateAction() {
         String selectedLanguageCode = languageComboBox.getValue().split(" - ")[1];

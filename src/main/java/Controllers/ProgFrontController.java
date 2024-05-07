@@ -20,6 +20,9 @@ import java.util.List;
 import javafx.scene.control.TextField;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+
 
 
 
@@ -31,6 +34,8 @@ public class ProgFrontController {
     private TilePane cardContainer;
     @FXML
     private TextField searchField;
+    @FXML
+    private ImageView img;
 
     private ServiceProgramme serviceProgramme = new ServiceProgramme();
     private ObservableList<Node> originalProgCards;
@@ -107,13 +112,20 @@ public class ProgFrontController {
                 VBox card = new VBox(10);
                 card.setPadding(new Insets(10));
                 card.setStyle("-fx-border-color: black; -fx-border-width: 2;");
-
+                ImageView imageView = new ImageView();
+                if (prog.getImagePath() != null && !prog.getImagePath().isEmpty()) {
+                    Image image = new Image("file:///" + prog.getImagePath().replace("\\", "/"));
+                    imageView.setImage(image);
+                    imageView.setFitHeight(150);
+                    imageView.setFitWidth(200);
+                    imageView.setPreserveRatio(true);
+                }
                 Label titleLabel = new Label("title: " + prog.getTitrepro());
                 Label planLabel = new Label("plan: " + prog.getPlanpro());
                 Button detailsButton = new Button("View Details");
                 detailsButton.setOnAction(e -> showProgDetails(prog));
 
-                card.getChildren().addAll(titleLabel, planLabel, detailsButton);
+                card.getChildren().addAll(imageView, titleLabel, planLabel, detailsButton);
                 cardContainer.getChildren().add(card);
             }
         } catch (SQLException e) {
