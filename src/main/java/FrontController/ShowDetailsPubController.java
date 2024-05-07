@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -37,6 +38,9 @@ public class ShowDetailsPubController {
 
     @FXML
     private TextField newCommentField;
+
+    @FXML
+    private Label commentlabel;
 
 
 
@@ -88,10 +92,19 @@ public class ShowDetailsPubController {
             try {
                 Comment newComment = new Comment();
                 newComment.setPublication_id(selectedPublication.getId());
-                newComment.setContenue(commentContent);
+
+                // Get the dynamic user label text
+                String userLabel = "USER : ";
+
+                // Prepend the user label to the comment content
+                String fullComment = userLabel + commentContent;
+
+                newComment.setContenue(fullComment);
                 serviceComment.ajouter(newComment);
-                newCommentField.setText("");
-                loadComments();
+                newCommentField.setText(""); // Clear the text field after adding the comment
+                Label commentLabel = new Label(fullComment);
+                commentLabel.getStyleClass().add("comment-style");
+                commentsContainer.getChildren().add(commentLabel);
             } catch (SQLException e) {
                 e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error adding comment: " + e.getMessage());

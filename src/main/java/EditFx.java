@@ -16,7 +16,7 @@ public class EditFx extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         MyDatabase bd= MyDatabase.getInstance();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Objectif.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Front/front.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setTitle("Edit Publication");
