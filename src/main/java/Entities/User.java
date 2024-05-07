@@ -36,21 +36,6 @@ public class User {
         this.auth_code = auth_code;
     }
 
-    public User(String email, String roles, String password, String lastname, String firstname, String gender, Date datebirth, String phone, Timestamp created_at, Boolean is_banned, String profile_picture, Boolean is_verified, String auth_code) {
-        this.email = email;
-        this.roles = roles;
-        this.password = password;
-        this.lastname = lastname;
-        this.firstname = firstname;
-        this.gender = gender;
-        this.datebirth = datebirth;
-        this.phone = phone;
-        this.created_at = created_at;
-        this.is_banned = is_banned;
-        this.profile_picture = profile_picture;
-        this.is_verified = is_verified;
-        this.auth_code = auth_code;
-    }
 
     public User() {
 
@@ -77,7 +62,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-
         this.password = password;
     }
 
