@@ -1,6 +1,5 @@
 package Tests;
 
-import Utils.MyDatabase;
 
 public class main extends Object {
 
@@ -8,7 +7,7 @@ public class main extends Object {
 
 
 
-        MyDatabase bd = MyDatabase.getInstance();
-
     }
 }
+
+

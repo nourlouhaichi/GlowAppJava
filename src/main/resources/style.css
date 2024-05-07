@@ -74,8 +74,10 @@
 .nav-button:hover {
     -fx-background-color: #303F9F; /* Change hover color as desired */
 }
+
 .card {
     -fx-border-color: black;
     -fx-border-width: 2;
     -fx-padding: 10;
 }
+

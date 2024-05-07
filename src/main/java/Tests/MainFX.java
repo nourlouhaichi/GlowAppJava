@@ -6,25 +6,23 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javafx.stage.StageStyle;
+
 public class MainFX extends Application {
+
+
+
     @Override
-    public void start(Stage primaryStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Objectif.fxml"));
-            Parent root = loader.load();
+    public void start(Stage primaryStage)  throws  Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("/loginGUI.fxml"));
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setScene(new Scene(root,520,400));
+        primaryStage.show();
 
-            Scene scene = new Scene(root);
-            primaryStage.setTitle("GLOWAPP");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
+
     public static void main(String[] args) {
-
-
-
-        launch();
+        launch(args);
     }
 }
+
