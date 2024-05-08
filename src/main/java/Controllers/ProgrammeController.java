@@ -258,6 +258,7 @@ public class ProgrammeController {
         planproField.clear();
         placedispoField.clear();
         dateproPicker.setValue(null);
+        imageView.setImage(null);
         programmeTableView.getSelectionModel().clearSelection();
     }
 
