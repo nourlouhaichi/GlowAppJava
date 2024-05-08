@@ -90,7 +90,7 @@
                            <children>
                                       <TextField fx:id="searchField" layoutX="25.0" layoutY="11.0" prefWidth="200.0" />
                                       <Button layoutX="225.0" layoutY="11.0" onAction="#handleSearch" text="Search" />
-                               <Button layoutX="445.0" layoutY="14.0" mnemonicParsing="false" onAction="#addpub" prefHeight="26.0" prefWidth="130.0" text="Add Publication" style="-fx-background-color: #81c408;" ><font>
+                               <Button fx:id="addpubButton" layoutX="445.0" layoutY="14.0" mnemonicParsing="false" onAction="#addpub" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #81c408;" text="Add Publication"><font>
                                    <Font name="Arial Rounded MT Bold" size="14.0" />
                                </font></Button>
                            </children></Pane>

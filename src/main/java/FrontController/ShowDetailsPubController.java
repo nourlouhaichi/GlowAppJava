@@ -18,10 +18,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 import java.awt.Desktop;
 import java.net.URI;
-import java.util.Map;
 
 
 public class ShowDetailsPubController {
@@ -73,6 +72,16 @@ public class ShowDetailsPubController {
             loadComments();
         }
     }
+    private Set<String> bannedWords = new HashSet<>(Arrays.asList("pute", "fuck", "connard"));
+
+    private boolean containsBannedWords(String comment) {
+        for (String word : comment.split("\\s+")) { // Split by whitespace
+            if (bannedWords.contains(word.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
     private void loadComments() {
         if (selectedPublication != null) {
             try {
@@ -95,6 +104,9 @@ public class ShowDetailsPubController {
         String commentContent = newCommentField.getText().trim();
         if (commentContent.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Comment cannot be empty!");
+            alert.showAndWait();
+        } else if (containsBannedWords(commentContent)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Comment contains banned words!");
             alert.showAndWait();
         } else {
             try {

@@ -6,9 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="ffcbf5d7-9344-4155-9cd9-5fc5f3c1b4e0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/PublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/PublicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ListPublicationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ListPublicationsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ShowDetailsPubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ShowDetailsPubController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ShowPublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ShowPublicationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Tests/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tests/MainFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Front/ShowDetailsPub.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/ShowDetailsPub.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Front/ListPublications.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/ListPublications.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Front/Showpublication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/Showpublication.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

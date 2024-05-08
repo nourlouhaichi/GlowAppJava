@@ -3,6 +3,7 @@ package FrontController;
 import Entities.Publication;
 import Services.ServiceComment;
 import Services.ServicePublication;
+import Services.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class ShowPublicationController {
 
@@ -39,6 +41,9 @@ public class ShowPublicationController {
 
     ListPublicationsController listPublicationsController;
 
+    @FXML
+    private ImageView deletebutton;
+
     public void setSelectedPublication(Publication publication) {
         this.selectedPublication = publication;
     }
@@ -55,6 +60,13 @@ public class ShowPublicationController {
             ServiceComment serviceComment = new ServiceComment();
             int commentCount = serviceComment.getCommentCount(publication.getId());
             commentCountLabel.setText(String.valueOf(commentCount));
+            Session session = Session.getInstance();
+            Map<String, Object> userSession = session.getUserSession(); // Assuming you have a method to get the current logged-in user
+            String roles = userSession.get("roles").toString();
+            roles = roles.replace("[", "").replace("]", "").replace("\"", "");
+            if ("ROLE_USER".equals(roles)) {
+                deletebutton.setVisible(false);
+            }
         }
     }
 
