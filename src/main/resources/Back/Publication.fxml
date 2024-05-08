@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PublicationController">
    <children>
@@ -13,7 +14,15 @@
       <Label layoutX="171.0" layoutY="193.0" text="Content" />
       <TextField fx:id="typefx" layoutX="170.0" layoutY="154.0" />
       <TextField fx:id="contentfx" layoutX="171.0" layoutY="211.0" prefHeight="86.0" prefWidth="150.0" />
-      <Button fx:id="imageSelectButton" layoutX="203.0" layoutY="304.0" onAction="#selectImage" text="Select Image" />
-      <Button layoutX="165.0" layoutY="349.0" mnemonicParsing="false" onAction="#addpubonclick" prefHeight="26.0" prefWidth="158.0" text="ADD " />
+      <Button fx:id="imageSelectButton" layoutX="190.0" layoutY="310.0" onAction="#selectImage" style="-fx-background-color: #81c408;" text="Select Image">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="165.0" layoutY="349.0" mnemonicParsing="false" onAction="#addpubonclick" prefHeight="26.0" prefWidth="158.0" style="-fx-background-color: #81c408;" text="ADD ">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

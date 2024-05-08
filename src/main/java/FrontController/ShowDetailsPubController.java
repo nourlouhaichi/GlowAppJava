@@ -3,6 +3,7 @@ package FrontController;
 import Entities.Comment;
 import Entities.Publication;
 import Services.ServiceComment;
+import Services.Session;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 import java.awt.Desktop;
 import java.net.URI;
 
@@ -42,6 +43,9 @@ public class ShowDetailsPubController {
     @FXML
     private Label commentlabel;
 
+    @FXML
+    private Label type;
+
 
 
 
@@ -54,6 +58,9 @@ public class ShowDetailsPubController {
             titlefx.setText(selectedPublication.getTitrep());
             contentpbfx.setText(selectedPublication.getContentp());
             String imagePath = selectedPublication.getImage();
+            Session session = Session.getInstance();
+            Map<String, Object> userSession = session.getUserSession();
+            type.setText(userSession.get("firstname").toString() + " " + userSession.get("lastname").toString());
             if (imagePath != null && !imagePath.isEmpty()) {
                 try {
                     Image image = new Image(new FileInputStream(imagePath));
@@ -64,6 +71,16 @@ public class ShowDetailsPubController {
             }
             loadComments();
         }
+    }
+    private Set<String> bannedWords = new HashSet<>(Arrays.asList("pute", "fuck", "connard"));
+
+    private boolean containsBannedWords(String comment) {
+        for (String word : comment.split("\\s+")) { // Split by whitespace
+            if (bannedWords.contains(word.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
     }
     private void loadComments() {
         if (selectedPublication != null) {
@@ -88,16 +105,22 @@ public class ShowDetailsPubController {
         if (commentContent.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Comment cannot be empty!");
             alert.showAndWait();
+        } else if (containsBannedWords(commentContent)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Comment contains banned words!");
+            alert.showAndWait();
         } else {
             try {
                 Comment newComment = new Comment();
                 newComment.setPublication_id(selectedPublication.getId());
 
-                // Get the dynamic user label text
+                Session session = Session.getInstance();
+                Map<String, Object> userSession = session.getUserSession();
+                String firstname=userSession.get("firstname").toString();
+                String lastname=userSession.get("lastname").toString();
                 String userLabel = "USER : ";
 
                 // Prepend the user label to the comment content
-                String fullComment = userLabel + commentContent;
+                String fullComment = firstname + lastname + " : " + commentContent;
 
                 newComment.setContenue(fullComment);
                 serviceComment.ajouter(newComment);

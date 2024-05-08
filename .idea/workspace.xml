@@ -4,14 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ffcbf5d7-9344-4155-9cd9-5fc5f3c1b4e0" name="Changes" comment="">
+    <list default="true" id="87995c59-2329-4c1c-a157-896f8d7da8a9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProgramReport.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/ProgramReport.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/PublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/PublicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/backhomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/backhomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/tableviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/tableviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/CategorieProdListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/CategorieProdListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ListProduitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ListProduitController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ObjectifController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ObjectifController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Objectif.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Objectif.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Programme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Programme.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Services/ServiceObjectif.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Services/ServiceObjectif.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Services/ServiceProgramme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Services/ServiceProgramme.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Objectif.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Objectif.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ProgrammeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ProgrammeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/backHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/backHomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/backUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/backUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ListPublicationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ListPublicationsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ShowDetailsPubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ShowDetailsPubController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ShowPublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ShowPublicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/AddComment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/AddComment.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/EditComment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/EditComment.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/EditPublication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/EditPublication.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/Publication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/Publication.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/backhome.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/backhome.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/tableview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/tableview.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Front/ListPublications.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/ListPublications.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Front/ShowDetailsPub.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/ShowDetailsPub.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Front/Showpublication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/Showpublication.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,42 +71,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.MainFX.executor": "Debug",
-    "Maven.JavaProject [clean].executor": "Run",
-    "Maven.JavaProject [install].executor": "Run",
-    "Maven.JavaProject [org.openjfx:javafx-maven-plugin:0.0.8:jlink].executor": "Run",
     "Maven.JavaProject [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev",
-    "jdk.selected.JAVA_MODULE": "21",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/nourl/OneDrive/Bureau/integrationJava/GlowAppJava",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pathVariables",
-    "vue.rearranger.settings.migration": "true"
+    "git-widget-placeholder": "Merging dev",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\tahan\OneDrive\Bureau\projetjava\GlowAppJava\GlowAppJava\src\main\resources\META-INF" />
-      <recent name="C:\Users\blanc\Desktop\taha naat\projetjava\GlowAppJava\src\main\java\Controllers" />
-      <recent name="C:\Users\blanc\Desktop\taha naat\projetjava\GlowAppJava\src\main\resources" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\blanc\Desktop\taha naat\projetjava\GlowAppJava\src\main\resources" />
-    </key>
+    <key name="MoveFile.RECENT_KEYS" />
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>

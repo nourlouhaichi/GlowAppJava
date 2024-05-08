@@ -1,7 +1,9 @@
 package FrontController;
 
 import Entities.Publication;
+import Entities.User;
 import Services.ServicePublication;
+import Services.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 public class ListPublicationsController {
 
@@ -31,6 +37,9 @@ public class ListPublicationsController {
     private Button detailbutton;
     @FXML
     private TextField searchField;
+
+    @FXML
+    private Button  addpubButton;
 
     private final ServicePublication servicePublication = new ServicePublication();
 
@@ -51,6 +60,13 @@ public class ListPublicationsController {
                 controller.setSelectedPublication(publication);
                 controller.initialize(publication);
                 row.getChildren().add(publicationNode);
+                Session session = Session.getInstance();
+                Map<String, Object> userSession = session.getUserSession(); // Assuming you have a method to get the current logged-in user
+                String roles = userSession.get("roles").toString();
+                roles = roles.replace("[", "").replace("]", "").replace("\"", "");
+                if ("ROLE_USER".equals(roles)) {
+                    addpubButton.setVisible(false);
+                }
             }
         } catch (IOException | SQLException e) {
             e.printStackTrace();
@@ -89,7 +105,65 @@ public class ListPublicationsController {
             Parent root = FXMLLoader.load(getClass().getResource("/Back/Publication.fxml"));
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root, 400, 400));
+            newStage.setOnCloseRequest(event -> loadPublications());
             newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void homeonaction(ActionEvent actionEvent) {
+        try {
+
+            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homeGUI.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eventonaction(ActionEvent actionEvent) {
+        try {
+
+            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EventsClient.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void productonaction(ActionEvent actionEvent) {
+        try {
+
+            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProgFront.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void programonclick(ActionEvent actionEvent) {
+        try {
+
+            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProgFront.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

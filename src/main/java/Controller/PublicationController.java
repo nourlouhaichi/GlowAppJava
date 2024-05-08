@@ -20,7 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 public class PublicationController {
 
@@ -93,6 +94,11 @@ public class PublicationController {
             publication.setImage(getSelectedImagePath());
             //publication.setDatecrp(Date.from(datefx.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             Servicepublication.create(publication);
+            Notifications notifications = Notifications.create();
+            notifications.text("Publication added successfully !");
+            notifications.title("Successful");
+            notifications.hideAfter(Duration.seconds(6));
+            notifications.show();
         }
     }
     public void selectImage() {
