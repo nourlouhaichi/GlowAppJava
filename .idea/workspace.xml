@@ -6,18 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ffcbf5d7-9344-4155-9cd9-5fc5f3c1b4e0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/backhomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/backhomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/tableviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/tableviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/homeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/homeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ShowDetailsPubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ShowDetailsPubController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Tests/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tests/MainFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/AddComment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/AddComment.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/EditComment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/EditComment.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/EditPublication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/EditPublication.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/Publication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/Publication.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/backhome.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/backhome.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/tableview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/tableview.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Front/ListPublications.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/ListPublications.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/homeGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/homeGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Front/ShowDetailsPub.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/ShowDetailsPub.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

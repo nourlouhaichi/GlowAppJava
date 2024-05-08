@@ -3,6 +3,7 @@ package FrontController;
 import Entities.Comment;
 import Entities.Publication;
 import Services.ServiceComment;
+import Services.Session;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.awt.Desktop;
 import java.net.URI;
+import java.util.Map;
 
 
 public class ShowDetailsPubController {
@@ -42,6 +44,9 @@ public class ShowDetailsPubController {
     @FXML
     private Label commentlabel;
 
+    @FXML
+    private Label type;
+
 
 
 
@@ -54,6 +59,9 @@ public class ShowDetailsPubController {
             titlefx.setText(selectedPublication.getTitrep());
             contentpbfx.setText(selectedPublication.getContentp());
             String imagePath = selectedPublication.getImage();
+            Session session = Session.getInstance();
+            Map<String, Object> userSession = session.getUserSession();
+            type.setText(userSession.get("firstname").toString() + " " + userSession.get("lastname").toString());
             if (imagePath != null && !imagePath.isEmpty()) {
                 try {
                     Image image = new Image(new FileInputStream(imagePath));
@@ -93,11 +101,14 @@ public class ShowDetailsPubController {
                 Comment newComment = new Comment();
                 newComment.setPublication_id(selectedPublication.getId());
 
-                // Get the dynamic user label text
+                Session session = Session.getInstance();
+                Map<String, Object> userSession = session.getUserSession();
+                String firstname=userSession.get("firstname").toString();
+                String lastname=userSession.get("lastname").toString();
                 String userLabel = "USER : ";
 
                 // Prepend the user label to the comment content
-                String fullComment = userLabel + commentContent;
+                String fullComment = firstname + lastname + " : " + commentContent;
 
                 newComment.setContenue(fullComment);
                 serviceComment.ajouter(newComment);
