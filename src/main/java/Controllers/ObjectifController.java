@@ -1,8 +1,10 @@
 package Controllers;
 
 import Entities.Objectif;
+import Entities.Programme;
 import Entities.User;
 import Services.ServiceObjectif;
+import Services.ServiceProgramme;
 import Services.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javafx.util.StringConverter;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.controlsfx.control.Notifications;
@@ -65,8 +68,11 @@ public class ObjectifController {
     @FXML private Button logoutButton;
     @FXML private Button frontButton;
     @FXML private Label usernameLabel;
-    @FXML
-    private ImageView logoImageView;
+    @FXML private ImageView logoImageView;
+    @FXML private ComboBox<Programme> programComboBox;
+
+
+
 
     private ServiceObjectif serviceObjectif;
 
@@ -115,17 +121,42 @@ public class ObjectifController {
     }
 
 
+    private void loadProgramNames() {
+        try {
+            ServiceProgramme serviceProgramme = new ServiceProgramme();
+            List<Programme> programs = serviceProgramme.afficher();
+            ObservableList<Programme> programNames = FXCollections.observableArrayList(programs);
+            programComboBox.setItems(programNames);
+            programComboBox.setConverter(new StringConverter<Programme>() {
+                @Override
+                public String toString(Programme programme) {
+                    return programme.getTitrepro();
+                }
+
+                @Override
+                public Programme fromString(String string) {
+                    return programComboBox.getItems().stream()
+                            .filter(ap -> ap.getTitrepro().equals(string))
+                            .findFirst().orElse(null);
+                }
+            });
+
+        } catch (SQLException e) {
+            showError("Error loading programs: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
 
 
     private String convertObjectifListToHtml(List<Objectif> objectifList) {
         StringBuilder htmlBuilder = new StringBuilder();
 
-        // Begin HTML
         htmlBuilder.append("<html><body>");
         htmlBuilder.append("<h1>Objectives Report</h1>");
         htmlBuilder.append("<table border='1'><tr><th>Objectif</th><th>Description</th><th>Weight</th><th>Height</th></tr>");
 
-        // Add rows for each Programme
         for (Objectif obj : objectifList) {
             htmlBuilder.append("<tr>");
             htmlBuilder.append("<td>").append(obj.getObjectifO()).append("</td>");
@@ -135,16 +166,12 @@ public class ObjectifController {
             htmlBuilder.append("</tr>");
         }
 
-        // End HTML
         htmlBuilder.append("</table></body></html>");
 
         return htmlBuilder.toString();
     }
-
-
     @FXML
     public void initialize() {
-
         Session session = Session.getInstance();
         Map<String, Object> userSession = session.getUserSession();
         usernameLabel.setText(userSession.get("email").toString());
@@ -153,7 +180,7 @@ public class ObjectifController {
         javafx.scene.image.Image logoImage = new Image(logoFile.toURI().toString());
         logoImageView.setImage(logoImage);
 
-       serviceObjectif = new ServiceObjectif();
+        serviceObjectif = new ServiceObjectif();
 
         columnObjectif.setCellValueFactory(new PropertyValueFactory<>("objectifO"));
         columnDescription.setCellValueFactory(new PropertyValueFactory<>("descriptionO"));
@@ -161,6 +188,7 @@ public class ObjectifController {
         columnHeight.setCellValueFactory(new PropertyValueFactory<>("tailleO"));
 
         loadObjectifData();
+        loadProgramNames();
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.isEmpty()) {
                 loadObjectifData();
@@ -169,6 +197,35 @@ public class ObjectifController {
             }
         });
     }
+
+//
+//    @FXML
+//    public void initialize() {
+//
+//        Session session = Session.getInstance();
+//        Map<String, Object> userSession = session.getUserSession();
+//        usernameLabel.setText(userSession.get("email").toString());
+//
+//        File logoFile = new File("images/logoglowapp.png");
+//        javafx.scene.image.Image logoImage = new Image(logoFile.toURI().toString());
+//        logoImageView.setImage(logoImage);
+//
+//       serviceObjectif = new ServiceObjectif();
+//
+//        columnObjectif.setCellValueFactory(new PropertyValueFactory<>("objectifO"));
+//        columnDescription.setCellValueFactory(new PropertyValueFactory<>("descriptionO"));
+//        columnWeight.setCellValueFactory(new PropertyValueFactory<>("poidO"));
+//        columnHeight.setCellValueFactory(new PropertyValueFactory<>("tailleO"));
+//
+//        loadObjectifData();
+//        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+//            if (newValue.isEmpty()) {
+//                loadObjectifData();
+//            } else {
+//                searchObjectifData();
+//            }
+//        });
+//    }
 
 
 
@@ -206,9 +263,6 @@ public class ObjectifController {
         ObjectifTableView.getSelectionModel().clearSelection();
     }
 
-//
-
-
     @FXML
     public void handleObjectifSelection() {
         Objectif selectedObjectif = ObjectifTableView.getSelectionModel().getSelectedItem();
@@ -218,10 +272,37 @@ public class ObjectifController {
             DescriptionField.setText(selectedObjectif.getDescriptionO());
             WeightField.setText(String.valueOf(selectedObjectif.getPoidO()));
             HeightField.setText(String.valueOf(selectedObjectif.getTailleO()));
+
+            // Check if the programComboBox has the correct item and select it
+            Programme associatedProgramme = findProgrammeById(selectedObjectif.getProgramme_id());
+            if (associatedProgramme != null) {
+                programComboBox.getSelectionModel().select(associatedProgramme);
+            } else {
+            }
         }
     }
 
+    private Programme findProgrammeById(int programmeId) {
+        return programComboBox.getItems().stream()
+                .filter(programme -> programme.getId() == programmeId)
+                .findFirst()
+                .orElse(null);
+    }
 
+
+
+
+//    @FXML
+//    public void handleObjectifSelection() {
+//        Objectif selectedObjectif = ObjectifTableView.getSelectionModel().getSelectedItem();
+//        if (selectedObjectif != null) {
+//            selectedObjectifId = selectedObjectif.getId();
+//            ObjectifField.setText(selectedObjectif.getObjectifO());
+//            DescriptionField.setText(selectedObjectif.getDescriptionO());
+//            WeightField.setText(String.valueOf(selectedObjectif.getPoidO()));
+//            HeightField.setText(String.valueOf(selectedObjectif.getTailleO()));
+//        }
+//    }
 
     @FXML
     public void addObjectif() {
@@ -229,31 +310,74 @@ public class ObjectifController {
             return;
         }
         try {
+            Programme selectedProgram = programComboBox.getSelectionModel().getSelectedItem();
+            if (selectedProgram == null) {
+                showError("Please select a program.");
+                return;
+            }
+
+            Session session = Session.getInstance();
+            Map<String, Object> userSession = session.getUserSession();
+            User user = new User();
+            user.setCin(userSession.get("cin").toString());
+
             Objectif objectif = new Objectif(
                     0,
                     ObjectifField.getText(),
                     DescriptionField.getText(),
                     Float.parseFloat(WeightField.getText()),
-                    Float.parseFloat(HeightField.getText())
+                    Float.parseFloat(HeightField.getText()),
+                    selectedProgram.getId(),  // Ensure this ID is set correctly
+                    user
             );
-            Session session = Session.getInstance();
-            Map<String, Object> userSession = session.getUserSession();
-            User us = new User();
-            us.setCin(userSession.get("cin").toString());
-            objectif.setUser(us);
+
             serviceObjectif.ajouter(objectif);
             loadObjectifData();
             clearForm();
             showConfirmation("Objectif added successfully.");
-            Notifications notifications = Notifications.create();
-            notifications.text("Objectif added successfully !");
-            notifications.title("Successful");
-            notifications.hideAfter(Duration.seconds(6));
-            notifications.show();
+            Notifications.create()
+                    .text("Objectif added successfully!")
+                    .title("Successful")
+                    .hideAfter(Duration.seconds(6))
+                    .show();
         } catch (Exception e) {
             showError(e.getMessage());
         }
     }
+
+
+
+//    @FXML
+//    public void addObjectif() {
+//        if (!validateObjectif() || !validateDescription() || !validateWeight() || !validateHeight()) {
+//            return;
+//        }
+//        try {
+//            Objectif objectif = new Objectif(
+//                    0,
+//                    ObjectifField.getText(),
+//                    DescriptionField.getText(),
+//                    Float.parseFloat(WeightField.getText()),
+//                    Float.parseFloat(HeightField.getText())
+//            );
+//            Session session = Session.getInstance();
+//            Map<String, Object> userSession = session.getUserSession();
+//            User us = new User();
+//            us.setCin(userSession.get("cin").toString());
+//            objectif.setUser(us);
+//            serviceObjectif.ajouter(objectif);
+//            loadObjectifData();
+//            clearForm();
+//            showConfirmation("Objectif added successfully.");
+//            Notifications notifications = Notifications.create();
+//            notifications.text("Objectif added successfully !");
+//            notifications.title("Successful");
+//            notifications.hideAfter(Duration.seconds(6));
+//            notifications.show();
+//        } catch (Exception e) {
+//            showError(e.getMessage());
+//        }
+//    }
 
     @FXML
     public void updateObjectif() {
@@ -261,12 +385,19 @@ public class ObjectifController {
             return;
         }
         try {
+            Programme selectedProgram = programComboBox.getSelectionModel().getSelectedItem();
+            if (selectedProgram == null) {
+                showError("Please select a program.");
+                return;
+            }
+
             Objectif objectif = new Objectif(
                     selectedObjectifId,
                     ObjectifField.getText(),
                     DescriptionField.getText(),
                     Float.parseFloat(WeightField.getText()),
-                    Float.parseFloat(HeightField.getText())
+                    Float.parseFloat(HeightField.getText()),
+                    selectedProgram.getId()
             );
             serviceObjectif.modifier(objectif);
             loadObjectifData();

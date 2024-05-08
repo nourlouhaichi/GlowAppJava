@@ -46,16 +46,39 @@ public class ServiceProgramme implements IServices<Programme> {
         preparedStatement.executeUpdate();
         System.out.println("Program modified");
     }
-
-
     @Override
     public void supprimer(int id) throws SQLException {
-        String req = "DELETE FROM programme WHERE id=?";
-        PreparedStatement preparedStatement = connection.prepareStatement(req);
-        preparedStatement.setInt(1, id);
-        preparedStatement.executeUpdate();
-        System.out.println("Program deleted");
+        try {
+            deleteObjectivesByProgramId(id);
+
+            String req = "DELETE FROM programme WHERE id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            System.out.println("Program deleted");
+        } catch (SQLException e) {
+            System.err.println("Error deleting program: " + e.getMessage());
+        }
     }
+
+    private void deleteObjectivesByProgramId(int programId) throws SQLException {
+        String req = "DELETE FROM Objectif WHERE programme_id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(req);
+        preparedStatement.setInt(1, programId);
+        preparedStatement.executeUpdate();
+        System.out.println("Related objectives deleted");
+    }
+
+
+
+//    @Override
+//    public void supprimer(int id) throws SQLException {
+//        String req = "DELETE FROM programme WHERE id=?";
+//        PreparedStatement preparedStatement = connection.prepareStatement(req);
+//        preparedStatement.setInt(1, id);
+//        preparedStatement.executeUpdate();
+//        System.out.println("Program deleted");
+//    }
 
     @Override
     public List<Programme> afficher() throws SQLException {
@@ -110,7 +133,6 @@ public class ServiceProgramme implements IServices<Programme> {
         try (
                 PreparedStatement statement = connection.prepareStatement(sql)
         ) {
-            // Using LIKE with wildcards to search for titles or plans containing the query
             statement.setString(1, "%" + query + "%");
             statement.setString(2, "%" + query + "%");
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -119,7 +141,6 @@ public class ServiceProgramme implements IServices<Programme> {
                     prog.setId(resultSet.getInt("id"));
                     prog.setTitrepro(resultSet.getString("titre_pro"));
                     prog.setPlanpro(resultSet.getString("plan_pro"));
-                    // Set other attributes if necessary
                     searchResults.add(prog);
                 }
             }
