@@ -105,6 +105,7 @@ public class ListPublicationsController {
             Parent root = FXMLLoader.load(getClass().getResource("/Back/Publication.fxml"));
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root, 400, 400));
+            newStage.setOnCloseRequest(event -> loadPublications());
             newStage.show();
         } catch (IOException e) {
             e.printStackTrace();
