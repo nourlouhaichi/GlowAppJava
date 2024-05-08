@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="card" prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontController.ShowPublicationController">
+    <children>
+      <ImageView fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteonclick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Users/ASUS/Desktop/61918.png" />
+         </image>
+         <VBox.margin>
+            <Insets left="180.0" />
+         </VBox.margin>
+      </ImageView>
+        <ImageView fx:id="imagefx" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="titlefx" text="Label">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+      <ImageView fitHeight="22.0" fitWidth="19.0" onMouseClicked="#showdetails" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Users/ASUS/Desktop/eyeball-icon-png-eye-icon-1.png" />
+         </image>
+         <VBox.margin>
+            <Insets left="180.0" />
+         </VBox.margin>
+      </ImageView>
+        <Label fx:id="contentfx" prefHeight="43.0" prefWidth="425.0" text="Label" />
+      <Label fx:id="commentCountLabel" text="Label">
+         <VBox.margin>
+            <Insets left="80.0" />
+         </VBox.margin>
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../Users/ASUS/Desktop/Notice-Free-PNG-Image.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+    </children>
+</VBox>

@@ -315,4 +315,46 @@ public class ReservationController {
 
     }
 
+    @FXML
+    void publicationButtonOnAction(ActionEvent event) {
+
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back/tableview.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void programButtonOnAction(ActionEvent event) {
+
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Programme.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -174,4 +174,12 @@ public class CategorieService implements IServices<CategorieProd>{
     }
 
 
+
+    @Override
+    public void supprimer(int id) throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'supprimer'");
+    }
+
+
 }

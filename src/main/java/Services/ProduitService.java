@@ -207,4 +207,11 @@ public class ProduitService implements IServices<Produit> {
     }
 
 
+    @Override
+    public void supprimer(int id) throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'supprimer'");
+    }
+
+
 }

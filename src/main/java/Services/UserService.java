@@ -298,4 +298,10 @@ public class UserService implements IServices<User> {
         return userEvolutionDataMap;
     }
 
+    @Override
+    public void supprimer(int id) throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'supprimer'");
+    }
+
 }

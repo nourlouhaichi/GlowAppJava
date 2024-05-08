@@ -13,12 +13,12 @@
    <top>
       <AnchorPane prefHeight="68.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="logoutButton" layoutX="913.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #ffb524;" text="Logout" textFill="WHITE">
+            <Button fx:id="logoutButton" layoutX="913.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="40.0" prefWidth="91.0" style="-fx-background-color: #ffb524;" text="Logout" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="profileButton" layoutX="817.0" layoutY="14.0" mnemonicParsing="false" onAction="#profileButtonOnAction" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #ffb524;" text="Profile" textFill="WHITE">
+            <Button fx:id="profileButton" layoutX="817.0" layoutY="14.0" mnemonicParsing="false" onAction="#profileButtonOnAction" prefHeight="40.0" prefWidth="91.0" style="-fx-background-color: #ffb524;" text="Profile" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
@@ -40,12 +40,27 @@
                </image>
             </ImageView>
             <Label fx:id="userLabel" layoutY="330.0" prefHeight="176.0" prefWidth="1024.0" />
-            <Button fx:id="shopButton" layoutX="63.0" layoutY="398.0" mnemonicParsing="false" onAction="#shopButtonOnAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #81c408;" text="Shop" textFill="WHITE">
+            <Button fx:id="shopButton" layoutX="14.0" layoutY="398.0" mnemonicParsing="false" onAction="#shopButtonOnAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #81c408;" text="Shop" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="eventButton" layoutX="289.0" layoutY="398.0" mnemonicParsing="false" onAction="#eventButtonOnAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #81c408;" text="Events" textFill="WHITE">
+            <Button fx:id="eventButton" layoutX="216.0" layoutY="398.0" mnemonicParsing="false" onAction="#eventButtonOnAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #81c408;" text="Events" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="publicationButton" layoutX="422.0" layoutY="398.0" mnemonicParsing="false" onAction="#publicationButtonOnAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #81c408;" text="Publications" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="programButton" layoutX="830.0" layoutY="398.0" mnemonicParsing="false" onAction="#programButtonOnAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #81c408;" text="Programs" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="objectiveButton" layoutX="625.0" layoutY="398.0" mnemonicParsing="false" onAction="#objectiveButtonOnAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #81c408;" text="Objectives" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
