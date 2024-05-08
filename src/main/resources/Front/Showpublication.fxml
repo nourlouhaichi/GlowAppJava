@@ -9,7 +9,7 @@
 
 <VBox fx:id="card" prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontController.ShowPublicationController">
     <children>
-      <ImageView fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteonclick" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="deletebutton" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteonclick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../../Users/ASUS/Desktop/61918.png" />
          </image>
