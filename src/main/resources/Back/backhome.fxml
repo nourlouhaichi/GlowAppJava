@@ -67,7 +67,7 @@
                                             </font>
                                         </Label>
                                         <Line endX="69.0" layoutX="121.0" layoutY="199.0" startX="-100.0" stroke="#ffb524" />
-                                        <Button fx:id="homeButton" layoutX="16.0" layoutY="228.0" mnemonicParsing="false" onAction="#homeonaction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
+                                        <Button fx:id="homeButton" layoutX="16.0" layoutY="228.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
                                             <graphic>
 
                                             </graphic>
@@ -75,26 +75,37 @@
                                                 <Font name="Arial Rounded MT Bold" size="18.0" />
                                             </font>
                                         </Button>
-                                        <Button fx:id="userButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" onAction="#useronaction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Users">
+                                        <Button fx:id="userButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" onAction="#userButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Users">
                                             <graphic>
 
                                             </graphic>
                                         </Button>
-                                        <Button fx:id="PublicationButton" layoutX="16.0" layoutY="340.0" mnemonicParsing="false" onAction="#PublicationButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Publications">
+                                        <Button fx:id="ProduitButton" layoutX="16.0" layoutY="299.0" mnemonicParsing="false" onAction="#ProduitButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
+                                            <graphic>
+
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="eventButton" layoutX="16.0" layoutY="370.0" mnemonicParsing="false" onAction="#eventButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Events">
+                                            <graphic>
+
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="publicationButton" layoutX="16.0" layoutY="405.0" mnemonicParsing="false" onAction="#publicationButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Publications">
+                                            <graphic>
+
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="programButton" layoutX="16.0" layoutY="440.0" mnemonicParsing="false" onAction="#programButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Programs">
                                             <graphic>
 
                                             </graphic>
                                         </Button>
 
-                                        <Button layoutX="16.0" layoutY="299.0" mnemonicParsing="false" onAction="#productonaction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
+                                        <Button fx:id="logoutButton" layoutX="9.0" layoutY="509.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" stylesheets="@dashboardDesign.css">
                                             <graphic>
 
                                             </graphic>
-                                        </Button>
-                                        <Button fx:id="logoutButton" layoutX="9.0" layoutY="509.0" mnemonicParsing="false" stylesheets="@dashboardDesign.css">
-                                            <graphic>
 
-                                            </graphic>
                                             <styleClass>
                                                 <String fx:value="logout" />
                                                 <String fx:value="shadow" />
