@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -23,6 +24,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
@@ -413,6 +415,54 @@ public class backhomeController {
             }
         } else {
             System.out.println("No publication selected.");
+        }
+    }
+
+    public void productonaction(ActionEvent actionEvent) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListProduit.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void useronaction(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/backUserGUI.fxml"));
+            Stage userStage = new Stage();
+            //userStage.initStyle(StageStyle.UNDECORATED);
+            userStage.setScene(new Scene(root,1100,600));
+            userStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage) userButton.getScene().getWindow();
+        stage.close();
+    }
+
+    public void homeonaction(ActionEvent actionEvent) {
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/homeGUI.fxml"));
+            Stage homeStage = new Stage();
+            homeStage.initStyle(StageStyle.UNDECORATED);
+            homeStage.setScene(new Scene(root,1024,576));
+            homeStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

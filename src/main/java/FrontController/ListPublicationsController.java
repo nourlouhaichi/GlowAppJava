@@ -112,6 +112,62 @@ public class ListPublicationsController {
         }
 
     }
+
+    public void homeonaction(ActionEvent actionEvent) {
+        try {
+
+            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homeGUI.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eventonaction(ActionEvent actionEvent) {
+        try {
+
+            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EventsClient.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void productonaction(ActionEvent actionEvent) {
+        try {
+
+            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProgFront.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void programonclick(ActionEvent actionEvent) {
+        try {
+
+            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProgFront.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
