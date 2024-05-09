@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -35,7 +35,7 @@
                                                 <Font name="Arial Rounded MT Bold" size="14.0" />
                                             </font>
                                         </Button>
-                                        <Button fx:id="profileButton" layoutX="966.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: #81c408;" text="Profile" textFill="WHITE">
+                                        <Button fx:id="profileButton" layoutX="966.0" layoutY="4.0" mnemonicParsing="false" onAction="#profilaction" style="-fx-background-color: #81c408;" text="Profile" textFill="WHITE">
                                             <font>
                                                 <Font name="Arial Rounded MT Bold" size="14.0" />
                                             </font>
@@ -67,7 +67,7 @@
                                             </font>
                                         </Label>
                                         <Line endX="69.0" layoutX="121.0" layoutY="199.0" startX="-100.0" stroke="#ffb524" />
-                                        <Button fx:id="homeButton" layoutX="16.0" layoutY="228.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
+                                        <Button fx:id="homeButton" layoutX="16.0" layoutY="228.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
                                             <graphic>
 
                                             </graphic>
@@ -75,26 +75,42 @@
                                                 <Font name="Arial Rounded MT Bold" size="18.0" />
                                             </font>
                                         </Button>
-                                        <Button fx:id="userButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Users">
+                                        <Button fx:id="userButton" layoutX="16.0" layoutY="263.0" mnemonicParsing="false" onAction="#userButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Users">
                                             <graphic>
 
                                             </graphic>
                                         </Button>
-                                        <Button fx:id="PublicationButton" layoutX="16.0" layoutY="340.0" mnemonicParsing="false" onAction="#PublicationButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Publications">
+                                        <Button fx:id="ProduitButton" layoutX="16.0" layoutY="299.0" mnemonicParsing="false" onAction="#ProduitButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
+                                            <graphic>
+
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="CategorieButton" layoutX="16.0" layoutY="335.0" mnemonicParsing="false" onAction="#categorieButton" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Category Product">
+                                            <graphic>
+
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="eventButton" layoutX="16.0" layoutY="370.0" mnemonicParsing="false" onAction="#eventButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Events">
+                                            <graphic>
+
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="publicationButton" layoutX="16.0" layoutY="405.0" mnemonicParsing="false" onAction="#publicationButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Publications">
+                                            <graphic>
+
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="programButton" layoutX="16.0" layoutY="440.0" mnemonicParsing="false" onAction="#programButtonOnAction" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Programs">
                                             <graphic>
 
                                             </graphic>
                                         </Button>
 
-                                        <Button layoutX="16.0" layoutY="299.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Products">
+                                        <Button fx:id="logoutButton" layoutX="9.0" layoutY="509.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" stylesheets="@dashboardDesign.css">
                                             <graphic>
 
                                             </graphic>
-                                        </Button>
-                                        <Button fx:id="logoutButton" layoutX="9.0" layoutY="509.0" mnemonicParsing="false" stylesheets="@dashboardDesign.css">
-                                            <graphic>
 
-                                            </graphic>
                                             <styleClass>
                                                 <String fx:value="logout" />
                                                 <String fx:value="shadow" />
@@ -115,74 +131,57 @@
                             <children>
                                 <AnchorPane fx:id="home_form" layoutX="63.0" layoutY="87.0" prefHeight="555.0" prefWidth="889.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
-                                        <AnchorPane layoutX="13.0" layoutY="17.0" prefHeight="521.0" prefWidth="863.0" stylesheets="@dashboardDesign.css">
+                                        <AnchorPane layoutX="13.0" layoutY="17.0" prefHeight="530.0" prefWidth="863.0" stylesheets="@dashboardDesign.css">
                                             <styleClass>
                                                 <String fx:value="white-bg" />
                                                 <String fx:value="shadow" />
                                             </styleClass>
-                                            <children>
-                                                <AnchorPane prefHeight="155.0" prefWidth="863.0" stylesheets="@dashboardDesign.css">
-                                                    <styleClass>
-                                                        <String fx:value="white-bg" />
-                                                        <String fx:value="shadow" />
-                                                    </styleClass>
-                                                    <children>
-                                                        <AnchorPane layoutX="14.0" layoutY="10.0" prefHeight="136.0" prefWidth="254.0" styleClass="card" stylesheets="@dashboardDesign.css">
-                                                            <children>
 
-                                                                <Label layoutX="77.0" layoutY="92.0" text="Total Employees" textFill="WHITE">
-                                                                    <font>
-                                                                        <Font name="Tahoma" size="17.0" />
-                                                                    </font>
-                                                                </Label>
-                                                                <Label fx:id="home_totalEmployees" alignment="CENTER_RIGHT" layoutX="87.0" layoutY="14.0" prefHeight="21.0" prefWidth="148.0" text="0" textFill="WHITE">
-                                                                    <font>
-                                                                        <Font name="Arial" size="25.0" />
-                                                                    </font>
-                                                                </Label>
-                                                            </children>
-                                                        </AnchorPane>
-                                                        <AnchorPane layoutX="305.0" layoutY="10.0" prefHeight="136.0" prefWidth="254.0" styleClass="card" stylesheets="@dashboardDesign.css">
-                                                            <children>
-
-                                                                <Label layoutX="77.0" layoutY="97.0" text="Total Presents" textFill="WHITE">
-                                                                    <font>
-                                                                        <Font name="Tahoma" size="17.0" />
-                                                                    </font>
-                                                                </Label>
-                                                                <Label fx:id="home_totalPresents" alignment="CENTER_RIGHT" layoutX="87.0" layoutY="19.0" prefHeight="21.0" prefWidth="148.0" text="0" textFill="WHITE">
-                                                                    <font>
-                                                                        <Font name="Arial" size="25.0" />
-                                                                    </font>
-                                                                </Label>
-                                                            </children>
-                                                        </AnchorPane>
-                                                        <AnchorPane layoutX="595.0" layoutY="10.0" prefHeight="136.0" prefWidth="254.0" styleClass="card" stylesheets="@dashboardDesign.css">
-                                                            <children>
-
-                                                                <Label layoutX="60.0" layoutY="97.0" text="Total Inactive Employees" textFill="WHITE">
-                                                                    <font>
-                                                                        <Font name="Tahoma" size="16.0" />
-                                                                    </font>
-                                                                </Label>
-                                                                <Label fx:id="home_totalInactiveEm" alignment="CENTER_RIGHT" layoutX="90.0" layoutY="19.0" prefHeight="21.0" prefWidth="148.0" text="0" textFill="WHITE">
-                                                                    <font>
-                                                                        <Font name="Arial" size="25.0" />
-                                                                    </font>
-                                                                </Label>
-                                                            </children>
-                                                        </AnchorPane>
-                                                    </children>
-                                                </AnchorPane>
-                                                <BarChart fx:id="home_chart" layoutX="87.0" layoutY="204.0" prefHeight="281.0" prefWidth="690.0" title="Employees Data Chart">
-                                                    <xAxis>
-                                                        <CategoryAxis side="BOTTOM" />
-                                                    </xAxis>
-                                                    <yAxis>
-                                                        <NumberAxis side="LEFT" />
-                                                    </yAxis>
-                                                </BarChart>
-                                            </children>
+                                            <TableView fx:id="pubtable" layoutX="11.0" layoutY="71.0" prefHeight="375.0" prefWidth="794.0" stylesheets="dashboardDesign.css">
+                                                <columns>
+                                                    <TableColumn fx:id="idcol" prefWidth="111.20001220703125" text="ID" />
+                                                    <TableColumn fx:id="titlecol" minWidth="4.00006103515625" prefWidth="140.79998779296875" text="TITLE" />
+                                                    <TableColumn fx:id="typecol" minWidth="4.00006103515625" prefWidth="140.79998779296875" text="TYPE" />
+                                                    <TableColumn fx:id="contentcol" minWidth="4.00006103515625" prefWidth="140.79998779296875" text="CONTENT" />
+                                                    <TableColumn fx:id="imagecol" minWidth="4.00006103515625" prefWidth="258.0" text="ACTION" />
+                                                </columns>
+                                            </TableView>
+                                            <Label layoutX="304.0" layoutY="15.0" prefHeight="50.0" prefWidth="212.0" text="PUBLICATION DETAILS" textAlignment="CENTER">
+                                                <font>
+                                                    <Font name="Marlett" size="20.0" />
+                                                </font>
+                                            </Label>
+                                            <TextField fx:id="search" layoutX="20.0" layoutY="28.0" promptText="Search" />
+                                            <Button fx:id="generatePdfButton" layoutX="186.0" layoutY="31.0" mnemonicParsing="false" onAction="#generatePDFReport" prefHeight="18.0" prefWidth="55.0" style="-fx-background-color: #0882c4;" text="PDF">
+                                                <font>
+                                                    <Font name="Arial Rounded MT Bold" size="10.0" />
+                                                </font>
+                                            </Button>
+                                            <Button layoutX="29.0" layoutY="459.0" mnemonicParsing="false" onAction="#addcommentonclick" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #81c408;" text="ADD COMMENT">
+                                                <font>
+                                                    <Font name="Arial Rounded MT Bold" size="10.0" />
+                                                </font>
+                                            </Button>
+                                            <Button layoutX="492.0" layoutY="457.0" mnemonicParsing="false" onAction="#viewcommentonclick" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #0882c4;" text="VIEW COMMENT">
+                                                <font>
+                                                    <Font name="Arial Rounded MT Bold" size="10.0" />
+                                                </font>
+                                            </Button>
+                                            <Button layoutX="653.0" layoutY="457.0" mnemonicParsing="false" onAction="#addpubonclick" prefHeight="26.0" prefWidth="132.0" style="-fx-background-color: #81c408;" text="ADD PUBLICATION">
+                                                <font>
+                                                    <Font name="Arial Rounded MT Bold" size="10.0" />
+                                                </font>
+                                            </Button>
+                                            <Button layoutX="326.0" layoutY="458.0" mnemonicParsing="false" onAction="#deletepubonclick" prefHeight="27.0" prefWidth="129.0" style="-fx-background-color: #ff3409;" text="DELETE PUBLICATION">
+                                                <font>
+                                                    <Font name="Arial Rounded MT Bold" size="10.0" />
+                                                </font>
+                                            </Button>
+                                            <Button layoutX="182.0" layoutY="459.0" mnemonicParsing="false" onAction="#editpubonclick" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #f49619;" text="EDIT PUBLICATION">
+                                                <font>
+                                                    <Font name="Arial Rounded MT Bold" size="10.0" />
+                                                </font>
+                                            </Button>
                                         </AnchorPane>
                                     </children>
                                 </AnchorPane>

@@ -3,6 +3,7 @@ package Controller;
 import Entities.Comment;
 import Entities.Publication;
 import Services.ServiceComment;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -62,7 +63,7 @@ public class CommenttableviewController {
         }
     }
 
-    public void editonclick(MouseEvent mouseEvent) throws IOException, SQLException {
+    public void editonclick(ActionEvent mouseEvent) throws IOException, SQLException {
         Comment selectedcomment = commtab.getSelectionModel().getSelectedItem();
         if (selectedcomment != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back/EditComment.fxml"));
@@ -77,7 +78,7 @@ public class CommenttableviewController {
         }
     }
 
-    public void deleteonclick(MouseEvent mouseEvent) throws SQLException {
+    public void deleteonclick(ActionEvent mouseEvent) throws SQLException {
         Comment selectedComment = commtab.getSelectionModel().getSelectedItem();
         if (selectedComment != null) {
             commtab.getItems().remove(selectedComment);

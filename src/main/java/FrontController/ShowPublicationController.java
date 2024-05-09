@@ -3,6 +3,7 @@ package FrontController;
 import Entities.Publication;
 import Services.ServiceComment;
 import Services.ServicePublication;
+import Services.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +16,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class ShowPublicationController {
 
@@ -39,6 +42,10 @@ public class ShowPublicationController {
 
     ListPublicationsController listPublicationsController;
 
+    @FXML
+    private Button deletebutton;
+
+
     public void setSelectedPublication(Publication publication) {
         this.selectedPublication = publication;
     }
@@ -55,11 +62,18 @@ public class ShowPublicationController {
             ServiceComment serviceComment = new ServiceComment();
             int commentCount = serviceComment.getCommentCount(publication.getId());
             commentCountLabel.setText(String.valueOf(commentCount));
+            Session session = Session.getInstance();
+            Map<String, Object> userSession = session.getUserSession(); // Assuming you have a method to get the current logged-in user
+            String roles = userSession.get("roles").toString();
+            roles = roles.replace("[", "").replace("]", "").replace("\"", "");
+            if ("ROLE_USER".equals(roles)) {
+                deletebutton.setVisible(false);
+            }
         }
     }
 
 
-    public void showdetails(MouseEvent mouseEvent) {
+    public void showdetails(ActionEvent mouseEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Front/ShowDetailsPub.fxml"));
             Parent root = loader.load();
@@ -73,7 +87,7 @@ public class ShowPublicationController {
         }
     }
 
-    public void deleteonclick(MouseEvent mouseEvent) throws SQLException {
+    public void deleteonclick(ActionEvent mouseEvent) throws SQLException {
 
         servicePublication.supprimer(selectedPublication);
         listPublicationsController.loadPublications();

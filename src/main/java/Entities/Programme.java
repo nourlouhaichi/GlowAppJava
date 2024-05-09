@@ -3,6 +3,7 @@ package Entities;
 import java.util.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 public class Programme {
@@ -39,7 +40,18 @@ public class Programme {
 //        this.imagePath = imagePath;
 //        this.Objectifs = ojbectifs;
 //    }
+@Override
+public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Programme)) return false;
+    Programme programme = (Programme) o;
+    return id == programme.id;
+}
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
     public List<Objectif> getOjbectifs() {
         return this.Objectifs;
     }

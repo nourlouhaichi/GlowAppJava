@@ -103,40 +103,12 @@ public class tableviewController {
 
     public void deleteonclick(javafx.scene.input.MouseEvent mouseEvent) {
         // Get the selected publication
-        Publication selectedPublication = pubtable.getSelectionModel().getSelectedItem();
 
-        // Check if a publication is selected
-        if (selectedPublication != null) {
-            try {
-                // Remove the selected publication from the TableView
-                pubtable.getItems().remove(selectedPublication);
-
-                // Delete the selected publication from the database
-                ServicePublication servicePublication = new ServicePublication();
-                servicePublication.supprimer(selectedPublication);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("No publication selected.");
-        }
     }
 
 
     public void editonclick(MouseEvent mouseEvent) throws IOException {
-        Publication selectedPublication = pubtable.getSelectionModel().getSelectedItem();
-        if (selectedPublication != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back/EditPublication.fxml"));
-            Parent root = loader.load();
-            EditPublicationController controller = loader.getController();
-            controller.initData(selectedPublication);
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.show();
-            newStage.setOnCloseRequest(event -> updateTableView());
-        } else {
-            System.out.println("No publication selected.");
-        }}
+        }
     private void updateTableView() {
         ServicePublication servicePublication = new ServicePublication();
         ObservableList<Publication> items = FXCollections.observableArrayList(); // Create a new ObservableList
@@ -159,46 +131,14 @@ public class tableviewController {
     }
 
     public void addonclick(MouseEvent mouseEvent) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Back/Publication.fxml"));
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root, 400, 400));
-            newStage.show();
-            newStage.setOnCloseRequest(event -> updateTableView());
 
-        } catch (IOException e) {
-            e.printStackTrace();
-    }
 
 }
 
-    public void commetonclick(MouseEvent mouseEvent) {  Publication selectedPublication = pubtable.getSelectionModel().getSelectedItem();
-        if (selectedPublication != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back/Commenttableview.fxml"));
-            Parent root = null;
-            try {
-                root = loader.load();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            CommenttableviewController controller = loader.getController();
-            controller.setSelectedPublication(selectedPublication);
-            controller.initialize();
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.show();
-        } else {
-            System.out.println("No publication selected.");
-        }
+    public void commetonclick(MouseEvent mouseEvent) {
     }
 
-    public void addcomm(MouseEvent mouseEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back/AddComment.fxml"));
-        Parent root = loader.load();
-        Stage newStage = new Stage();
-        newStage.setScene(new Scene(root));
-        newStage.show();
-    }
+
     public void searchFilter() {
         // Get the text from the search filter TextField
         String searchText = search.getText().toLowerCase();
@@ -272,4 +212,5 @@ public class tableviewController {
     }
 
 
-    }
+
+}
