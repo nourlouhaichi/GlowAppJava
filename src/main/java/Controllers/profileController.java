@@ -25,7 +25,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import Entities.User;
 import javax.swing.*;
-import de.svws_nrw.ext.jbcrypt.BCrypt;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class profileController implements Initializable {
 
@@ -177,13 +177,13 @@ public class profileController implements Initializable {
             user.setFirstname(firstnameTextField.getText());
             user.setEmail(emailTextField.getText());
             user.setPhone(phoneTextField.getText());
-            user.setPassword(BCrypt.hashpw(newPasswordTextField.getText(), BCrypt.gensalt(13)));
+            user.setPassword(BCrypt.withDefaults().hashToString(13,newPasswordTextField.getText().toCharArray()));
 
             session.getUserSession().put("lastname", lastnameTextField.getText());
             session.getUserSession().put("firstname", firstnameTextField.getText());
             session.getUserSession().put("email", emailTextField.getText());
             session.getUserSession().put("phone", phoneTextField.getText());
-            session.getUserSession().put("password", BCrypt.hashpw(newPasswordTextField.getText(), BCrypt.gensalt()));
+            session.getUserSession().put("password", BCrypt.withDefaults().hashToString(13,newPasswordTextField.getText().toCharArray()));
             if (url != null) {
                 session.getUserSession().put("profile_picture",url);
                 user.setProfile_picture(url);
