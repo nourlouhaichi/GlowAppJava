@@ -137,7 +137,7 @@ public class loginController implements Initializable {
                             </div>
                         </body>
                         </html>
-                """);
+                """,resultSet.getString("email"));
 
                 } else {
                     loginMessageLabel.setText("User not found!");

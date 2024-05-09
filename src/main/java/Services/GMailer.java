@@ -88,7 +88,7 @@ public class GMailer {
         }
     }*/
 
-    public void sendHtmlMail(String subject, String htmlContent) throws Exception {
+    /*public void sendHtmlMail(String subject, String htmlContent) throws Exception {
         Properties props = new Properties();
         Session session = Session.getDefaultInstance(props, null);
         MimeMessage email = new MimeMessage(session);
@@ -117,6 +117,38 @@ public class GMailer {
                 throw e;
             }
         }
+    }*/
+
+    public void sendHtmlMail(String subject, String htmlContent, String recipientEmail) throws Exception {
+        Properties props = new Properties();
+        Session session = Session.getDefaultInstance(props, null);
+        MimeMessage email = new MimeMessage(session);
+        email.setFrom(new InternetAddress(TEST_EMAIL));
+        email.addRecipient(TO, new InternetAddress(recipientEmail)); // Change recipientEmail to the email address of the specific recipient
+        email.setSubject(subject);
+
+        email.setContent(htmlContent, "text/html; charset=utf-8");
+
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        email.writeTo(buffer);
+        byte[] rawMessageBytes = buffer.toByteArray();
+        String encodedEmail = Base64.encodeBase64URLSafeString(rawMessageBytes);
+        Message msg = new Message();
+        msg.setRaw(encodedEmail);
+
+        try {
+            msg = service.users().messages().send("me", msg).execute();
+            System.out.println("Message id: " + msg.getId());
+            System.out.println(msg.toPrettyString());
+        } catch (GoogleJsonResponseException e) {
+            GoogleJsonError error = e.getDetails();
+            if (error.getCode() == 403) {
+                System.err.println("Unable to send message: " + e.getDetails());
+            } else {
+                throw e;
+            }
+        }
     }
+
 
 }
