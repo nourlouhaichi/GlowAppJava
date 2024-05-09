@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,7 +43,8 @@ public class ShowPublicationController {
     ListPublicationsController listPublicationsController;
 
     @FXML
-    private ImageView deletebutton;
+    private Button deletebutton;
+
 
     public void setSelectedPublication(Publication publication) {
         this.selectedPublication = publication;
@@ -71,7 +73,7 @@ public class ShowPublicationController {
     }
 
 
-    public void showdetails(MouseEvent mouseEvent) {
+    public void showdetails(ActionEvent mouseEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Front/ShowDetailsPub.fxml"));
             Parent root = loader.load();
@@ -85,7 +87,7 @@ public class ShowPublicationController {
         }
     }
 
-    public void deleteonclick(MouseEvent mouseEvent) throws SQLException {
+    public void deleteonclick(ActionEvent mouseEvent) throws SQLException {
 
         servicePublication.supprimer(selectedPublication);
         listPublicationsController.loadPublications();

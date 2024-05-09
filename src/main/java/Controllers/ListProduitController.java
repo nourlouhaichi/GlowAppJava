@@ -31,6 +31,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 
 
@@ -40,11 +44,11 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.*;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -475,80 +479,176 @@ public class ListProduitController {
         // Remove any characters that are not supported by the font's encoding
         return input.replaceAll("[^\\x20-\\x7E]", ""); // Keep only printable ASCII characters
     }
+    public void generatePDFButton(ActionEvent event) {
 
-    private void generatePDF(List<Produit> produits) {
         try {
-            // Create a new PDF document
-            PDDocument document = new PDDocument();
-            PDPage page = new PDPage();
-            document.addPage(page);
-
-            // Initialize the content stream of the page
-            PDPageContentStream contentStream = new PDPageContentStream(document, page);
-
-            // Add table of products
-            addTableOfProducts(document, contentStream, produits);
-
-
-
-            // Close the content stream
-            contentStream.close();
-
-            // Save the PDF document
-            File file = new File("Products.pdf");
-            document.save(file);
-            document.close();
-
-            // Open the PDF document with the default application
-            Desktop.getDesktop().open(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void addTableOfProducts(PDDocument document, PDPageContentStream contentStream, List<Produit> produits) throws IOException {
-        // Define table parameters
-        float margin = 50;
-        float yStart = 700; // Adjust as needed
-        float yPosition = yStart;
-        float rowHeight = 20f;
-        float tableMargin = 10;
-
-        // Define column widths
-        float[] columnWidths = {0.2f, 0.3f, 0.3f, 0.2f}; // Adjust these as needed
-        float tableWidth = 500; // Adjust as needed
-
-        // Begin the Content stream
-        contentStream.beginText();
-        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
-        contentStream.newLineAtOffset(margin, yPosition);
-
-        // Add header row
-        addTableHeader(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths);
-        yPosition -= rowHeight;
-
-        // Add product details
-        contentStream.setFont(PDType1Font.HELVETICA, 12);
-        for (Produit produit : produits) {
-            yPosition -= rowHeight;
-            if (yPosition <= margin) {
-                // New page needed if content exceeds current page
-                contentStream.endText();
-                contentStream.close();
-                PDPage page = new PDPage();
-                document.addPage(page);
-                contentStream = new PDPageContentStream(document, page);
-                contentStream.beginText();
-                contentStream.newLineAtOffset(margin, yStart);
-                yPosition = yStart;
-                addTableHeader(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths);
-                yPosition -= rowHeight;
+            // Load the logo image
+            InputStream logoStream = getClass().getResourceAsStream("/image/logoApp.png");
+            if (logoStream == null) {
+                System.out.println("Logo image not found!");
+                return;
             }
-            addTableRow(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths, produit);
+            BufferedImage logoImage = ImageIO.read(logoStream);
+
+            // Convert BufferedImage to byte array
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(logoImage, "png", baos);
+            byte[] logoBytes = baos.toByteArray();
+
+            // Create a new PDF document
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("Produits.pdf"));
+            document.open();
+
+            // Add the logo image to the document
+            com.itextpdf.text.Image logo = com.itextpdf.text.Image.getInstance(logoBytes);
+            logo.scaleToFit(125, 125); // Resize the logo as needed
+            logo.setAlignment(Element.ALIGN_LEFT);
+            document.add(logo);
+
+            // Add spacing between logo and title
+            document.add(new Paragraph("\n"));
+
+            // Title of the document
+            com.itextpdf.text.Paragraph title = new com.itextpdf.text.Paragraph("Listes des produits");
+            title.setAlignment(com.itextpdf.text.Paragraph.ALIGN_CENTER);
+            title.setSpacingAfter(10f);
+            document.add(title);
+
+            // Create a table to display the data
+            PdfPTable table = new PdfPTable(4); // 4 columns for the attributes of the products
+
+            // Add column headers to the table
+            PdfPCell[] headers = new PdfPCell[]{
+                    new PdfPCell(new com.itextpdf.text.Paragraph("Name")),
+                    new PdfPCell(new com.itextpdf.text.Paragraph("Price")),
+                    new PdfPCell(new com.itextpdf.text.Paragraph("Quantity")),
+                    new PdfPCell(new com.itextpdf.text.Paragraph("Category"))
+            };
+
+            // Color the column headers in green
+
+
+            // Color the column headers
+            BaseColor greenColor = new BaseColor(0, 128, 0); // Green color
+            for (PdfPCell cell : headers) {
+                cell.setBackgroundColor(greenColor);
+                table.addCell(cell);
+            }
+
+            // Get the list of products from the service
+            ProduitService produitService = new ProduitService();
+            List<Produit> produits = produitService.getAllProduits();
+
+            // Add product data to the table
+            for (Produit produit : produits) {
+                table.addCell(new PdfPCell(new com.itextpdf.text.Paragraph(produit.getName())));
+                table.addCell(new PdfPCell(new com.itextpdf.text.Paragraph(String.valueOf(produit.getPrice()))));
+                table.addCell(new PdfPCell(new com.itextpdf.text.Paragraph(String.valueOf(produit.getQuantity()))));
+                table.addCell(new PdfPCell(new com.itextpdf.text.Paragraph(produit.getCategorie().getNom_ca())));
+            }
+
+            // Add the table of products to the document
+            document.add(table);
+
+            // Show a success alert
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Success");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("The list of products has been generated successfully!");
+            successAlert.show();
+
+            document.close(); // Close the PDF document
+            // Ouvrir le document PDF avec l'application par défaut
+
+            File file = new File("Produits.pdf");
+
+            Desktop.getDesktop().open(file);
+
+        } catch (com.itextpdf.text.DocumentException | IOException | SQLException e) {
+            e.printStackTrace();
+            // Show an error alert in case of an error
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("An error occurred while generating the products report!");
+            errorAlert.show();
         }
-        // End the content stream
-        contentStream.endText();
     }
+
+//    private void generatePDF(List<Produit> produits) {
+//        try {
+//            // Create a new PDF document
+//            PDDocument document = new PDDocument();
+//            PDPage page = new PDPage();
+//            document.addPage(page);
+//
+//            // Initialize the content stream of the page
+//            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+//
+//            // Add table of products
+//            addTableOfProducts(document, contentStream, produits);
+//
+//
+//
+//            // Close the content stream
+//            contentStream.close();
+//
+//            // Save the PDF document
+//            File file = new File("Products.pdf");
+//            document.save(file);
+//            document.close();
+//
+//            // Open the PDF document with the default application
+//            Desktop.getDesktop().open(file);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    private void addTableOfProducts(PDDocument document, PDPageContentStream contentStream, List<Produit> produits) throws IOException {
+//        // Define table parameters
+//        float margin = 50;
+//        float yStart = 700; // Adjust as needed
+//        float yPosition = yStart;
+//        float rowHeight = 20f;
+//        float tableMargin = 10;
+//
+//        // Define column widths
+//        float[] columnWidths = {0.2f, 0.3f, 0.3f, 0.2f}; // Adjust these as needed
+//        float tableWidth = 500; // Adjust as needed
+//
+//        // Begin the Content stream
+//        contentStream.beginText();
+//        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+//        contentStream.newLineAtOffset(margin, yPosition);
+//
+//        // Add header row
+//        addTableHeader(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths);
+//        yPosition -= rowHeight;
+//
+//        // Add product details
+//        contentStream.setFont(PDType1Font.HELVETICA, 12);
+//        for (Produit produit : produits) {
+//            yPosition -= rowHeight;
+//            if (yPosition <= margin) {
+//                // New page needed if content exceeds current page
+//                contentStream.endText();
+//                contentStream.close();
+//                PDPage page = new PDPage();
+//                document.addPage(page);
+//                contentStream = new PDPageContentStream(document, page);
+//                contentStream.beginText();
+//                contentStream.newLineAtOffset(margin, yStart);
+//                yPosition = yStart;
+//                addTableHeader(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths);
+//                yPosition -= rowHeight;
+//            }
+//            addTableRow(contentStream, margin, yPosition, tableWidth, rowHeight, columnWidths, produit);
+//        }
+//        // End the content stream
+//        contentStream.endText();
+//    }
 
     private void addTableHeader(PDPageContentStream contentStream, float xStart, float yStart, float tableWidth, float rowHeight, float[] columnWidths) throws IOException {
         float xPosition = xStart;
@@ -583,16 +683,16 @@ public class ListProduitController {
     }
     // Add an action method to handle the PDF generation button click
 
-    public void generatePDFButton(ActionEvent event) {
-        // Ensure produits list is populated
-        if (produits == null) {
-            // Populate produits list if not already populated
-            populateProduits();
-        }
-
-        // Call generatePDF method with the produits list
-        generatePDF(produits);
-    }
+//    public void generatePDFButton(ActionEvent event) {
+//        // Ensure produits list is populated
+//        if (produits == null) {
+//            // Populate produits list if not already populated
+//            populateProduits();
+//        }
+//
+//        // Call generatePDF method with the produits list
+//        generatePDF(produits);
+//    }
 
     public void logoutButtonOnAction(ActionEvent event) {
         Session.getInstance().logout();

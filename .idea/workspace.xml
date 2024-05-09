@@ -7,30 +7,17 @@
     <list default="true" id="87995c59-2329-4c1c-a157-896f8d7da8a9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProgramReport.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/ProgramReport.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reservation.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Reservation.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/PublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/PublicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/backhomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/backhomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/tableviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/tableviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/CategorieProdListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/CategorieProdListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/products.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ListProduitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ListProduitController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ObjectifController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ObjectifController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ProgrammeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ProgrammeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ReservationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/backHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/backHomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/backUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/backUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/UpdateProduitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UpdateProduitController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ListPublicationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ListPublicationsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ShowDetailsPubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ShowDetailsPubController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ShowPublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ShowPublicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/AddComment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/AddComment.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/EditComment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/EditComment.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/EditPublication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/EditPublication.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/Publication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/Publication.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/backhome.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/backhome.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/tableview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/tableview.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Services/ProduitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Services/ProduitService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Front/ListPublications.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/ListPublications.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Front/ShowDetailsPub.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/ShowDetailsPub.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Front/Showpublication.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/Showpublication.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/update_produit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/update_produit.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,8 +59,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Maven.JavaProject [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
-    "git-widget-placeholder": "Merging dev",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -100,7 +93,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ffcbf5d7-9344-4155-9cd9-5fc5f3c1b4e0" name="Changes" comment="" />
+      <changelist id="87995c59-2329-4c1c-a157-896f8d7da8a9" name="Changes" comment="" />
       <created>1713263350472</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -142,6 +135,8 @@
       <workItem from="1715129276816" duration="625000" />
       <workItem from="1715179006273" duration="102000" />
       <workItem from="1715187512288" duration="7196000" />
+      <workItem from="1715201135980" duration="141000" />
+      <workItem from="1715208082075" duration="8424000" />
     </task>
     <servers />
   </component>

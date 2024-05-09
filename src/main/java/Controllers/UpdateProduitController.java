@@ -3,6 +3,7 @@ package Controllers;
 import Entities.CategorieProd;
 import Entities.Produit;
 import Services.CategorieService;
+import Services.EventServices;
 import Services.ProduitService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -102,75 +103,68 @@ public class UpdateProduitController {
     @FXML
     void UpdateProduitButtonOnAction(ActionEvent event) {
         // Check if any of the fields are empty
-        if (namePTextField.getText().isEmpty() || descriptiontextfield.getText().isEmpty()
-                || pricePTextField.getText().isEmpty() || quantitytextfield.getText().isEmpty() || categoryComboBox.getValue() == null) {
-            // Display an alert informing the user that all fields are required
+        if (namePTextField.getText().isEmpty() || descriptiontextfield.getText().isEmpty() ||
+                pricePTextField.getText().isEmpty() || quantitytextfield.getText().isEmpty() || categoryComboBox.getValue() == null) {
             showAlert(Alert.AlertType.ERROR, "Error", "All fields are required!");
-            return; // Exit the method without updating the product
+            return;
         }
 
-        // Check if the price is a valid number
+        // Validate price
+        double price;
         try {
-            double price = Double.parseDouble(pricePTextField.getText());
+            price = Double.parseDouble(pricePTextField.getText());
             if (price <= 0) {
-                throw new NumberFormatException();
+                showAlert(Alert.AlertType.ERROR, "Error", "Price must be a positive number!");
+                return;
             }
         } catch (NumberFormatException e) {
-            // Display an alert informing the user that the price must be a positive number
-            showAlert(Alert.AlertType.ERROR, "Error", "Price must be a positive number!");
-            return; // Exit the method without updating the product
+            showAlert(Alert.AlertType.ERROR, "Error", "Invalid price format!");
+            return;
         }
 
-        // Check if the quantity is a valid integer
+        // Validate quantity
+        int quantity;
         try {
-            int quantity = Integer.parseInt(quantitytextfield.getText());
+            quantity = Integer.parseInt(quantitytextfield.getText());
             if (quantity <= 0) {
-                throw new NumberFormatException();
+                showAlert(Alert.AlertType.ERROR, "Error", "Quantity must be a positive integer!");
+                return;
             }
         } catch (NumberFormatException e) {
-            // Display an alert informing the user that the quantity must be a positive integer
-            showAlert(Alert.AlertType.ERROR, "Error", "Quantity must be a positive integer!");
-            return; // Exit the method without updating the product
+            showAlert(Alert.AlertType.ERROR, "Error", "Invalid quantity format!");
+            return;
         }
 
         // Update the product information
         selectedProduit.setName(namePTextField.getText());
         selectedProduit.setDescription(descriptiontextfield.getText());
+        selectedProduit.setPrice(price);
+        selectedProduit.setQuantity(quantity);
 
-        // Check if an image is selected
+        // Handle the image path if a new one was selected
         String imagePath = getSelectedImagePath();
         if (imagePath != null && !imagePath.isEmpty()) {
             selectedProduit.setImage(imagePath);
         }
-        selectedProduit.setImage(getSelectedImagePath());
-        selectedProduit.setPrice(Double.parseDouble(pricePTextField.getText()));
-        selectedProduit.setQuantity(Integer.parseInt(quantitytextfield.getText()));
 
-        // Update the category information (if applicable)
+        // Update the category information
         CategorieService categorieService = new CategorieService();
         try {
             CategorieProd selectedCategory = categorieService.getCategoryByTitle(categoryComboBox.getValue());
             selectedProduit.setCategorie(selectedCategory);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle the exception appropriately
-        }
 
-        try {
             // Call the update method to update the product
             ProduitService produitService = new ProduitService();
             produitService.update(selectedProduit);
 
-            // Show a success message to the user
             showAlert(Alert.AlertType.INFORMATION, "Success", "Product updated successfully!");
-            // Close the window
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle the exception appropriately
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to update product: " + e.getMessage());
         }
     }
+
 
     private void showAlert(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
@@ -187,21 +181,32 @@ public class UpdateProduitController {
 
     }
 
-    public void selectImage() {
+    private String getPhotoPath() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose an image");
+        fileChooser.setTitle("Select Photo");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
-        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        File selectedFile = fileChooser.showOpenDialog(main_form.getScene().getWindow());
         if (selectedFile != null) {
-            selectedImagePath = selectedFile.toURI().getPath(); // Store the selected image path without the file:\ prefix
+            return selectedFile.toURI().toString(); // Return URI for compatibility
+        } else {
+            return null;
         }
-        System.out.println("Selected Image Path: " + selectedImagePath);
     }
+
     @FXML
-    void selectImage(ActionEvent event) {
-        selectImage(); // Call the selectImage method
+    void updatePhoto(ActionEvent event) {
+        String photoPath = getPhotoPath();
+        if (photoPath != null) { // Check if a new photo was chosen
+            selectedProduit.setImage(photoPath);
+            ProduitService produitService = new ProduitService();
+            try {
+                produitService.update(selectedProduit); // Save changes
+            } catch (SQLException e) {
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to update product photo!");
+            }
+        }
     }
     public String getSelectedImagePath() {
         return selectedImagePath;
