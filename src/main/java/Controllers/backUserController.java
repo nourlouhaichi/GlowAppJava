@@ -28,7 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.Node;
 
-import de.svws_nrw.ext.jbcrypt.BCrypt;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import javax.swing.*;
 import java.io.File;
 import java.net.URL;
@@ -436,7 +436,7 @@ public class backUserController implements Initializable {
         User user = new User(
                 emailTextField.getText(),
                 jsonRoles,
-                BCrypt.hashpw(passwordTextField.getText(), BCrypt.gensalt(13)),
+                BCrypt.withDefaults().hashToString(13, passwordTextField.getText().toCharArray()),
                 cinTextField.getText(),
                 lastnameTextField.getText(),
                 firstnameTextField.getText(),
