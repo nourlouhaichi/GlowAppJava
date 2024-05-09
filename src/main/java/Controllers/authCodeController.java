@@ -42,6 +42,7 @@ public class authCodeController implements Initializable {
                 UserService us = new UserService();
                 try {
                     us.verifyUser(cinLabel.getText(),code);
+
                     try {
                         GMailer mail = new GMailer();
                         mail.sendHtmlMail("Welcome To GlowApp", """
@@ -87,7 +88,7 @@ public class authCodeController implements Initializable {
                                        </div>
                                    </body>
                                    </html>
-                                    """);
+                                    """,us.getUser(cinLabel.getText()).getEmail());
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -176,7 +177,7 @@ public class authCodeController implements Initializable {
                             </div>
                         </body>
                         </html>
-                """);
+                """,user.getEmail());
 
         } catch (Exception e) {
             throw new RuntimeException(e);

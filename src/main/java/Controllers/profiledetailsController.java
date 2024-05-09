@@ -120,7 +120,7 @@ public class profiledetailsController implements Initializable {
                         </div>
                     </body>
                     </html>
-                    """);
+                    """,emailTextField.getText());
 
                 } catch (Exception e) {
                     throw new RuntimeException(e);
