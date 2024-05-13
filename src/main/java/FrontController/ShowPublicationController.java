@@ -84,11 +84,18 @@ public class ShowPublicationController {
             e.printStackTrace();
         }
     }
+    public void updatePublicationListAfterDeletion() {
+        listPublicationsController.loadPublications();
+    }
 
     public void deleteonclick(MouseEvent mouseEvent) throws SQLException {
 
         servicePublication.supprimer(selectedPublication);
-        listPublicationsController.loadPublications();
+        if (listPublicationsController != null) {
+            listPublicationsController.loadPublications();
+        } else {
+            System.out.println("listPublicationsController is null");
+        }
 
     }
 }

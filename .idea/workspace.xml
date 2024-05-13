@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ffcbf5d7-9344-4155-9cd9-5fc5f3c1b4e0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/backhomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/backhomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ListPublicationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ListPublicationsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FrontController/ShowPublicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FrontController/ShowPublicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Services/ServicePublication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Services/ServicePublication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Back/AddComment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Back/AddComment.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Front/ListPublications.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Front/ListPublications.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -140,6 +144,8 @@
       <workItem from="1715084877451" duration="654000" />
       <workItem from="1715103107975" duration="36000" />
       <workItem from="1715103158139" duration="455000" />
+      <workItem from="1715212363655" duration="599000" />
+      <workItem from="1715511772797" duration="2332000" />
     </task>
     <servers />
   </component>

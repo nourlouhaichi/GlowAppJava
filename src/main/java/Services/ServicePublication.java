@@ -88,7 +88,7 @@ public class ServicePublication implements IServicePub<Publication> {
                 publication.setTitrep(rs.getString("titre_p"));
                 publication.setTypep(rs.getString("type_p"));
                 publication.setContentp(rs.getString("contenue_p"));
-                publication.setImage(rs.getString("image"));
+                publication.setImage(rs.getString("image_name"));
                 publications.add(publication);
             }
         }
@@ -136,7 +136,7 @@ public class ServicePublication implements IServicePub<Publication> {
     }
 
     public void create(Publication publication) throws SQLException {
-        String req = "INSERT INTO publication(titre_p, type_p, contenue_p, image) VALUES (?, ?, ?, ?)";
+        String req = "INSERT INTO publication(titre_p, type_p, contenue_p, image_name) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(req, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, publication.getTitrep());
             ps.setString(2, publication.getTypep());
@@ -168,11 +168,11 @@ public class ServicePublication implements IServicePub<Publication> {
                 publication.setTitrep(rs.getString("titre_p"));
                 publication.setTypep(rs.getString("type_p"));
                 publication.setContentp(rs.getString("contenue_p"));
-                publication.setImage(rs.getString("image"));
+                publication.setImage(rs.getString("image_name"));
                 filteredPublications.add(publication);
             }
             rs.close();
         }
         return filteredPublications;
     }
-}
+}git

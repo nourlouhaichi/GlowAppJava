@@ -117,7 +117,7 @@ public class ListPublicationsController {
         try {
 
             Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homeGUI.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
@@ -168,8 +168,43 @@ public class ListPublicationsController {
             e.printStackTrace();
         }
     }
-}
+    public void publicationButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Front/ListPublications.fxml"));
+            Parent root = loader.load();
 
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void objectiveButtonOnAction(ActionEvent event) {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ObjFront.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage1.close();
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 
 
 
