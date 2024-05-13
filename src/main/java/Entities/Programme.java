@@ -12,7 +12,7 @@ public class Programme {
     private String plan_pro;
     private int place_dispo;
     private Date date_pro;
-    private String imagePath;
+    private String image;
     private User user;
 
     private List<Objectif> Objectifs;
@@ -26,7 +26,7 @@ public class Programme {
         this.plan_pro = plan_pro;
         this.place_dispo = place_dispo;
         this.date_pro = date_pro;
-        this.imagePath = imagePath;
+        this.image = imagePath;
         this.user = user;
         Objectifs = objectifs;
     }
@@ -71,7 +71,7 @@ public boolean equals(Object o) {
         this.plan_pro = planpro;
         this.place_dispo = placedispo;
         this.date_pro = datepro;
-        this.imagePath = imagePath;
+        this.image = imagePath;
     }
 
     public User getUser() {
@@ -123,11 +123,11 @@ public boolean equals(Object o) {
     }
 
     public String getImagePath() {
-        return imagePath;
+        return image;
     }
 
     public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+        this.image = imagePath;
     }
 
     @Override
@@ -138,7 +138,7 @@ public boolean equals(Object o) {
                 ", plan_pro='" + plan_pro + '\'' +
                 ", place_dispo=" + place_dispo +
                 ", date_pro=" + date_pro +
-                ", imagePath='" + imagePath + '\'' +
+                ", image='" + image + '\'' +
                 ", Objectifs=" + Objectifs +
                 '}';
     }

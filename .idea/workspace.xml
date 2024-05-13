@@ -4,6 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="87995c59-2329-4c1c-a157-896f8d7da8a9" name="Changes" comment="" />
+=======
     <list default="true" id="87995c59-2329-4c1c-a157-896f8d7da8a9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/authCodeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/authCodeController.java" afterDir="false" />
@@ -13,6 +16,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/Services/GMailer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Services/GMailer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tokens/StoredCredential" beforeDir="false" afterPath="$PROJECT_DIR$/tokens/StoredCredential" afterDir="false" />
     </list>
+>>>>>>> ceef78724ea72fc3f21b470db147eb3f7c4464f8
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,6 +56,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.MainFX.executor&quot;: &quot;Run&quot;,
     &quot;Maven.JavaProject [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -135,10 +140,17 @@
       <workItem from="1715201135980" duration="141000" />
       <workItem from="1715208082075" duration="9043000" />
       <workItem from="1715217355809" duration="744000" />
+<<<<<<< HEAD
+      <workItem from="1715243821987" duration="3001000" />
+      <workItem from="1715276483242" duration="606000" />
+      <workItem from="1715604213183" duration="32000" />
+      <workItem from="1715605084721" duration="21000" />
+=======
       <workItem from="1715274589974" duration="1512000" />
       <workItem from="1715276123627" duration="98000" />
       <workItem from="1715278675416" duration="402000" />
       <workItem from="1715279171639" duration="1477000" />
+>>>>>>> ceef78724ea72fc3f21b470db147eb3f7c4464f8
     </task>
     <servers />
   </component>

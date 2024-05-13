@@ -20,7 +20,7 @@ public class ServiceProgramme implements IServices<Programme> {
 
     @Override
     public void ajouter(Programme Programme) throws SQLException {
-        String sql = "INSERT INTO programme(titre_pro, plan_pro, place_dispo, date_pro, imagePath,user_cin) VALUES (?, ? , ? , ?, ?, ?)";
+        String sql = "INSERT INTO programme(titre_pro, plan_pro, place_dispo, date_pro, image,user_cin) VALUES (?, ? , ? , ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, Programme.getTitrepro());
         statement.setString(2, Programme.getPlanpro());
@@ -35,7 +35,7 @@ public class ServiceProgramme implements IServices<Programme> {
 
     @Override
     public void modifier(Programme Programme) throws SQLException {
-        String req = "UPDATE programme SET titre_pro=?, plan_pro=?,place_dispo=?,date_pro=?, imagePath=? WHERE id=?";
+        String req = "UPDATE programme SET titre_pro=?, plan_pro=?,place_dispo=?,date_pro=?, image=? WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(req);
         preparedStatement.setString(1, Programme.getTitrepro());
         preparedStatement.setString(2, Programme.getPlanpro());
@@ -83,7 +83,7 @@ public class ServiceProgramme implements IServices<Programme> {
     @Override
     public List<Programme> afficher() throws SQLException {
         List<Programme> programmes = new ArrayList<>();
-        String query = "SELECT id, titre_pro, plan_pro, place_dispo, date_pro , imagePath FROM programme";
+        String query = "SELECT id, titre_pro, plan_pro, place_dispo, date_pro , image FROM programme";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -93,7 +93,7 @@ public class ServiceProgramme implements IServices<Programme> {
                         rs.getString("plan_pro"),
                         rs.getInt("place_dispo"),
                         rs.getDate("date_pro"),
-                        rs.getString("imagePath")
+                        rs.getString("image")
                 );
                 List<Objectif> objectifs = getObjectifListByProgID(programme.getId());
                 programme.setObjectifs(objectifs);
