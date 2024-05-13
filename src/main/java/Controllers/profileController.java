@@ -25,7 +25,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import Entities.User;
 import javax.swing.*;
-import de.svws_nrw.ext.jbcrypt.BCrypt;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class profileController implements Initializable {
 
@@ -65,36 +65,45 @@ public class profileController implements Initializable {
         Session session = Session.getInstance();
         Map<String, Object> userSession = session.getUserSession();
 
-        profilePicture.setFitWidth(200);
-        profilePicture.setFitHeight(200);
-
-        File pictureFile = new File("images/" + userSession.get("profile_picture").toString());
-        Image profilePictureImage = new Image(pictureFile.toURI().toString());
-        profilePicture.setImage(profilePictureImage);
+        UserService us = new UserService();
+        try {
+            User user = us.getUser(userSession.get("cin").toString());
 
 
-        usernameLabel.setText(userSession.get("firstname") + " " + userSession.get("lastname"));
+            profilePicture.setFitWidth(200);
+            profilePicture.setFitHeight(200);
 
-        cinTextField.setText(userSession.get("cin").toString());
-        cinTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
-        cinTextField.setDisable(true);
+            File pictureFile = new File("uploads/user/" + user.getProfile_picture());
+            Image profilePictureImage = new Image(pictureFile.toURI().toString());
+            profilePicture.setImage(profilePictureImage);
 
-        lastnameTextField.setText(userSession.get("lastname").toString());
-        lastnameTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
 
-        firstnameTextField.setText(userSession.get("firstname").toString());
-        firstnameTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
+            usernameLabel.setText(userSession.get("firstname") + " " + user.getFirstname());
 
-        roleLabel.setText(userSession.get("roles").toString());
+            cinTextField.setText(user.getCin());
+            cinTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
+            cinTextField.setDisable(true);
 
-        createdAtLabel.setText(userSession.get("created_at").toString());
+            lastnameTextField.setText(user.getLastname());
+            lastnameTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
 
-        emailTextField.setText(userSession.get("email").toString());
-        emailTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
-        emailTextField.setDisable(true);
+            firstnameTextField.setText(user.getFirstname());
+            firstnameTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
 
-        phoneTextField.setText(userSession.get("phone").toString());
-        phoneTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
+            roleLabel.setText(user.getRoles());
+
+            createdAtLabel.setText(user.getCreated_at().toString());
+
+            emailTextField.setText(user.getEmail());
+            emailTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
+            emailTextField.setDisable(true);
+
+            phoneTextField.setText(user.getPhone());
+            phoneTextField.setStyle("-fx-text-fill: #808080; -fx-border-color: #ffb524;");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -177,13 +186,13 @@ public class profileController implements Initializable {
             user.setFirstname(firstnameTextField.getText());
             user.setEmail(emailTextField.getText());
             user.setPhone(phoneTextField.getText());
-            user.setPassword(BCrypt.hashpw(newPasswordTextField.getText(), BCrypt.gensalt(13)));
+            user.setPassword(BCrypt.withDefaults().hashToString(13,newPasswordTextField.getText().toCharArray()));
 
             session.getUserSession().put("lastname", lastnameTextField.getText());
             session.getUserSession().put("firstname", firstnameTextField.getText());
             session.getUserSession().put("email", emailTextField.getText());
             session.getUserSession().put("phone", phoneTextField.getText());
-            session.getUserSession().put("password", BCrypt.hashpw(newPasswordTextField.getText(), BCrypt.gensalt()));
+            session.getUserSession().put("password", BCrypt.withDefaults().hashToString(13,newPasswordTextField.getText().toCharArray()));
             if (url != null) {
                 session.getUserSession().put("profile_picture",url);
                 user.setProfile_picture(url);

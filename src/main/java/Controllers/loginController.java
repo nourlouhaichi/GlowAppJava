@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 import java.net.URL;
 import java.io.File;
 import Utils.MyDatabase;
-import de.svws_nrw.ext.jbcrypt.BCrypt;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import Services.Session;
 
 
@@ -84,7 +84,7 @@ public class loginController implements Initializable {
                 if (resultSet.next()) {
                     String username = resultSet.getString("lastname") + " " + resultSet.getString("firstname");
                     UserService us = new UserService();
-                    us.resetPassword(emailTextField.getText(),BCrypt.hashpw(code, BCrypt.gensalt(13)));
+                    us.resetPassword(emailTextField.getText(),BCrypt.withDefaults().hashToString(13,code.toCharArray()));
                     GMailer mail = new GMailer();
                     mail.sendHtmlMail("New Password", """
                 <!DOCTYPE html>
@@ -137,7 +137,7 @@ public class loginController implements Initializable {
                             </div>
                         </body>
                         </html>
-                """);
+                """,resultSet.getString("email"));
 
                 } else {
                     loginMessageLabel.setText("User not found!");
@@ -178,7 +178,7 @@ public class loginController implements Initializable {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 String hashedPassword = resultSet.getString("password");
-                if (BCrypt.checkpw(enterPasswordTextField.getText(), hashedPassword)) {
+                if (BCrypt.verifyer().verify(enterPasswordTextField.getText().toCharArray(), hashedPassword).verified) {
 
                     session.getUserSession().put("cin", resultSet.getString("cin"));
                     session.getUserSession().put("email",resultSet.getString("email"));

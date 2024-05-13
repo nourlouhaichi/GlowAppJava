@@ -1,6 +1,7 @@
 package Controllers;
 
 import Utils.MyDatabase;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,7 +22,7 @@ import java.io.File;
 import java.sql.Timestamp;
 import Services.UserService;
 import Entities.User;
-import de.svws_nrw.ext.jbcrypt.BCrypt;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
 import java.time.LocalDate;
@@ -179,7 +180,7 @@ public class registerController implements Initializable {
         User user = new User(
                 emailTextField.getText(),
                 jsonRoles,
-                BCrypt.hashpw(passwordTextField.getText(), BCrypt.gensalt(13)),
+                BCrypt.withDefaults().hashToString(13, passwordTextField.getText().toCharArray()),
                 cinTextField.getText(),
                 lastnameTextField.getText(),
                 firstnameTextField.getText(),
