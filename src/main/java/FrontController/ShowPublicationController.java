@@ -90,7 +90,11 @@ public class ShowPublicationController {
     public void deleteonclick(ActionEvent mouseEvent) throws SQLException {
 
         servicePublication.supprimer(selectedPublication);
-        listPublicationsController.loadPublications();
+        if (listPublicationsController != null) {
+            listPublicationsController.loadPublications();
+        } else {
+            System.out.println("listPublicationsController is null");
+        }
 
     }
 }
